@@ -1,0 +1,258 @@
+/* 공통 스타일 */
+.w_form_input, .w_form_textarea, .w_form_file {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* input 및 textarea 포커스 효과 */
+  .w_form_input:focus, .w_form_textarea:focus, .w_form_file:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  /* textarea 추가 스타일 */
+  .w_form_textarea {
+    min-height: 150px;
+    resize: vertical;
+  }
+  
+  /* 파일 업로드 스타일 */
+  .w_form_file {
+    cursor: pointer;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+  }
+  
+  .w_form_file::-webkit-file-upload-button {
+    padding: 8px 12px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .w_form_file::-webkit-file-upload-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* 전송 버튼 스타일 */
+  .w_btn_submit {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .w_btn_submit:hover {
+    background-color: #0056b3;
+  }
+  .cal_info_wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.cal_info_wrap button {
+    padding: 8px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.cal_info_wrap button:hover {
+    background: #0056b3;
+}
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.calendar th, .calendar td {
+    width: 14%;
+    height: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+.calendar .day:hover {
+    background-color: #f0f0f0;
+}
+.calendar .selected {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+.empty {
+    background: #f9f9f9;
+}
+.reservation {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+.reservation ul {
+    list-style: none;
+    padding: 0;
+}
+.reservation li {
+    padding: 5px;
+    background: #e3f2fd;
+    margin: 5px 0;
+    border-radius: 4px;
+}
+.dropzone {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.file-preview {
+  margin-top: 10px;
+}
+
+.file-item {
+  background-color: #f8f8f8;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+/* ✅ 현재 날짜 이전의 토요일 (파란색) */
+.react-datepicker__day.saturday {
+  color: blue !important;
+}
+
+/* ✅ 현재 날짜 이전의 일요일 (빨간색) */
+.react-datepicker__day.sunday {
+  color: red !important;
+}
+
+/* ✅ 현재 날짜 이후의 토요일 (연한 파란색 #A0C4FF) */
+.react-datepicker__day.future.saturday {
+  color: #A0C4FF !important;
+}
+
+/* ✅ 현재 날짜 이후의 일요일 (연한 빨간색 #FFADAD) */
+.react-datepicker__day.future.sunday {
+  color: #FFADAD !important;
+}
+
+
+
+/* ✅ 전체 달력 너비를 350px로 설정 */
+.custom-calendar {
+  width: 333px !important;
+  max-width: 333px;
+}
+
+/* ✅ 연도 선택과 월 선택 select 스타일 적용 */
+.react-datepicker__year-select,
+.react-datepicker__month-select {
+  padding: 7px !important;
+  font-size: 25px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  background-color: white !important;
+  cursor: pointer;
+}
+
+/* ✅ 연도 선택과 월 선택 버튼 스타일 */
+.react-datepicker__year-read-view,
+.react-datepicker__month-read-view {
+  font-size: 15px !important;
+  padding: 7px 50px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 6px !important;
+  background-color: white !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center; /* 세로 중앙 정렬 */
+  position: relative;
+}
+
+/* ✅ 연도/월 선택 컨테이너 */
+.react-datepicker__header__dropdown {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; /* 연도와 월 선택 버튼 간격 */
+  position: relative;
+}
+
+/* ✅ 연도 선택과 월 선택 버튼 옆 화살표 세로 중앙 정렬 */
+.react-datepicker__year-read-view::after,
+.react-datepicker__month-read-view::after {
+  content: "▼"; /* 화살표 아이콘 */
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  right: 10px; /* 오른쪽 여백 */
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ✅ 요일(월~일) 컨텐츠 100%로 설정 */
+.react-datepicker__day-names {
+  display: flex;
+  justify-content: space-between;
+}
+
+.react-datepicker__day-name {
+  flex: 1;
+  text-align: center;
+  font-size: 15px; /* ✅ 요일 폰트 크기 */
+}
+
+/* ✅ 날짜(일~말일) 폰트 크기 및 레이아웃 수정 */
+.react-datepicker__week {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.react-datepicker__day {
+  font-size: 15px !important; /* ✅ 날짜 폰트 크기 */
+  width: 40px !important;
+  height: 40px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+/* ✅ 네비게이션(이전/다음 버튼) 크기 */
+.react-datepicker__navigation {
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* ✅ 현재 월이 아닌 날짜 숨기기 
+.react-datepicker__day--outside-month {
+  visibility: hidden;
+}*/
+
+/* ✅ 현재 월이 아닌 날짜 (연한 회색 #D3D3D3) */
+.react-datepicker__day--outside-month {
+  color: #D3D3D3 !important;
+}

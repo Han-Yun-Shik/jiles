@@ -6,13 +6,14 @@ import Link from "next/link";
 import UserMenu from "@/components/UserMenu";
 
 
-export default function Home() {
+export default function Jiless() {
 
   return (
     <div>
       <UserMenu />
 
-      <div className="jil_biz_hdr">제주인재육성 장학사업</div>
+      <div className="jil_biz_hdr">제주인재육성 장학금 신청</div>
+
       <div className="jil_biz_wrap">
         <div className="jil_biz_area">
           <div className="jil_content_div">사업목적 및 방향</div>
@@ -52,7 +53,9 @@ export default function Home() {
             <li className="jil_content_li">2024년 제주청년해외연수 운영 (미국, 20명 대상)</li>
           </ul>
           <div className="jil_biz_btn_area mt-5">
-            <Link href="/wuser/jiless" className="jil_biz_btn_lk">제주인재육성 장학금 신청</Link>
+            <Link href="/wuser/jilessform" className="jil_biz_btn_lk_sc">성취장학금</Link>&nbsp;
+            <Link href="/wuser/jilesjform" className="jil_biz_btn_lk_sc">재능장학금</Link>&nbsp;
+            <Link href="/wuser/jileshform" className="jil_biz_btn_lk_sc">희망장학금</Link>
           </div>
         </div>
       </div>
