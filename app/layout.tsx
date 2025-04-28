@@ -1,7 +1,15 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Noto_Sans_KR } from "next/font/google"; // ✨ 추가
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./globals.css";
+
+const notoSansKR = Noto_Sans_KR({
+  subsets: ["latin"], 
+  weight: ["100", "300", "400", "500", "700", "900"],
+  variable: "--font-noto",
+});
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

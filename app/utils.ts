@@ -10,6 +10,7 @@ export const REGDATE_STR = (dateStr: string): string => {
 export const WR_STATE_ARR: { [key: number]: string } = {
     1: "접수",
     2: "완료",
+    3: "임시저장",
 };
 export const WR_GENDER_ARR: { [key: string]: string } = {
     "M": "남",
