@@ -33,6 +33,8 @@ interface JilesData {
     wr_cate: string;
     wr_name: string;
     wr_birth: string;
+    wr_phone: string;
+    wr_email: string;
     wr_post: string;
     wr_address: string;
     wr_detailaddress: string;
@@ -69,6 +71,8 @@ export default function Slist() {
         wr_birthy: '',
         wr_birthm: '',
         wr_birthd: '',
+        wr_phone: '',
+        wr_email: '',
         wr_post: '',
         wr_address: '',
         wr_detailaddress: '',
@@ -151,20 +155,6 @@ export default function Slist() {
         fetchData();
     }, []);
 
-    // useEffect(() => {
-    //     if (formData.wr_birth) {
-    //         const [year, month, day] = formData.wr_birth.split('-');
-    //         if (year && month && day) {
-    //             setFormData(prev => ({
-    //                 ...prev,
-    //                 wr_birthy: year,
-    //                 wr_birthm: month,
-    //                 wr_birthd: day,
-    //             }));
-    //         }
-    //     }
-    // }, [formData.wr_birth]);
-
     useEffect(() => {
         // 모든 영역 숨기기
         document.getElementById("scate1_area")?.classList.add("hidden");
@@ -224,6 +214,10 @@ export default function Slist() {
             newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
         }
 
+        if (name === "wr_phone") {
+            newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+        }
+
         setFormData((prev) => ({
             ...prev,
             [name]: newValue,
@@ -232,26 +226,6 @@ export default function Slist() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        // 장학구분별 필수 파일 체크
-        // if (formData.wr_cate === "scate1" && aafiles1.length === 0) {
-        //     alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다.");
-        //     return;
-        // }
-        // if (formData.wr_cate === "scate1" && aafiles2.length === 0) {
-        //     alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다.");
-        //     return;
-        // }
-
-        // if (formData.wr_cate === "scate2" && abfiles1.length === 0) {
-        //     alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다.");
-        //     return;
-        // }
-
-        // if (formData.wr_cate === "scate3" && acfiles1.length === 0) {
-        //     alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다.");
-        //     return;
-        // }
 
         const data = new FormData();
         data.append("wr_year", formData.wr_year);
@@ -262,6 +236,8 @@ export default function Slist() {
         } else {
             data.append("wr_birth", ""); // 또는 생략
         }
+        data.append("wr_phone", formData.wr_phone);
+        data.append("wr_email", formData.wr_email);
         data.append("wr_post", formData.wr_post);
         data.append("wr_address", formData.wr_address);
         data.append("wr_detailaddress", formData.wr_detailaddress);
@@ -464,7 +440,13 @@ export default function Slist() {
                                     <input type="text" name="wr_address" value={formData.wr_address || ''} className="jil_form_input jil_w_per_100  mt-2" onChange={handleChange} placeholder="도로명 주소" readOnly />
                                     <input type="text" name="wr_detailaddress" value={formData.wr_detailaddress || ''} className="jil_form_input jil_w_per_100  mt-2" onChange={handleChange} placeholder="상세주소" />
                                 </div>
-                                
+
+                                <div className="jil_form_field_subject">전화번호</div>
+                                <div><input type="text" name="wr_phone" value={formData.wr_phone || ''} className="jil_form_input jil_w_450" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" /></div>
+
+                                <div className="jil_form_field_subject">이메일</div>
+                                <div><input type="text" name="wr_email" value={formData.wr_email || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
+
                                 <div className="jil_form_field_subject">학교</div>
                                 <div>
                                     <input type="text" name="wr_schoolcode" value={formData.wr_schoolcode || ''} className="jil_form_input jil_w_120" onChange={handleChange} placeholder="학교코드드" /><br />
