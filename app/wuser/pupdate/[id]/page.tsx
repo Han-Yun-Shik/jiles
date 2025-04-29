@@ -233,13 +233,8 @@ export default function Pupdate() {
         const { name, value } = e.target;
         let newValue = value;
 
-        // 전화번호 입력 시 숫자만 허용
-        if (name === "wr_ptel") {
-            newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
-        }
-
-        if (name === "wr_phone") {
-            newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+        if (name === "wr_phone" || name === "wr_ptel") {
+            newValue = value.replace(/\D/g, ""); // 숫자만 허용
         }
 
         setFormData((prev) => ({

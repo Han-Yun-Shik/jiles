@@ -49,6 +49,7 @@ export default function Jilessform() {
     wr_bank_nm: "",
     wr_bank_num: "",
     wr_average: "",
+    wr_gubun: "",
   });
   const [agreed, setAgreed] = useState(false)
   const [daumPostLoaded, setDaumPostLoaded] = useState(false);
@@ -65,22 +66,69 @@ export default function Jilessform() {
   //--### 대학 신입생 첨부파일(scate1) s ###--//
   const [aafiles1, setAafiles1] = useState<File[]>([]);// [필수] 개인정보
   const [aafiles2, setAafiles2] = useState<File[]>([]);// [필수] 주민등록초본 1부(본인)
+  const [aafiles3, setAafiles3] = useState<File[]>([]);// [필수] 주민등록초본 1부(부모)
+  const [aafiles4, setAafiles4] = useState<File[]>([]);// [필수] 가족관계증명서 1부
+  const [aafiles5, setAafiles5] = useState<File[]>([]);// [필수] 재학증명서 1부
+  const [aafiles6, setAafiles6] = useState<File[]>([]);// [필수] 성적증명서 1부(2025학년도 대학수학능력시험 성적표) 
+  const [aafiles7, setAafiles7] = useState<File[]>([]);// [필수] 등록금 납부 영수증 1부(2025학년도 1학기)
+  const [aafiles8, setAafiles8] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부 
 
   const aauploader1 = useFileUploader(setAafiles1);
   const aauploader2 = useFileUploader(setAafiles2);
+  const aauploader3 = useFileUploader(setAafiles3);
+  const aauploader4 = useFileUploader(setAafiles4);
+  const aauploader5 = useFileUploader(setAafiles5);
+  const aauploader6 = useFileUploader(setAafiles6);
+  const aauploader7 = useFileUploader(setAafiles7);
+  const aauploader8 = useFileUploader(setAafiles8);
   //--### 대학 신입생 첨부파일(scate1) e ###--//
 
   //--### 대학 재학생 첨부파일(scate2) s ###--//
   const [abfiles1, setAbfiles1] = useState<File[]>([]);// [필수] 개인정보
-  const [abfiles9, setAbfiles9] = useState<File[]>([]);// [선택] 대학 학적부
+  const [abfiles2, setAbfiles2] = useState<File[]>([]);// [필수] 주민등록초본 1부(본인)
+  const [abfiles3, setAbfiles3] = useState<File[]>([]);// [필수] 주민등록초본 1부(부모)
+  const [abfiles4, setAbfiles4] = useState<File[]>([]);// [필수] 가족관계증명서 1부
+  const [abfiles5, setAbfiles5] = useState<File[]>([]);// [필수] 재학증명서 1부
+  const [abfiles6, setAbfiles6] = useState<File[]>([]);// [필수] 성적증명서 1부(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서) 
+  const [abfiles7, setAbfiles7] = useState<File[]>([]);// [필수] 등록금 납부 영수증 1부(2025학년도 1학기) 
+  const [abfiles8, setAbfiles8] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부
+  const [abfiles9, setAbfiles9] = useState<File[]>([]);// [선택] 대학 학적부 1부(2024학년도 군복무 휴학자)
 
   const abuploader1 = useFileUploader(setAbfiles1);
+  const abuploader2 = useFileUploader(setAbfiles2);
+  const abuploader3 = useFileUploader(setAbfiles3);
+  const abuploader4 = useFileUploader(setAbfiles4);
+  const abuploader5 = useFileUploader(setAbfiles5);
+  const abuploader6 = useFileUploader(setAbfiles6);
+  const abuploader7 = useFileUploader(setAbfiles7);
+  const abuploader8 = useFileUploader(setAbfiles8);
   const abuploader9 = useFileUploader(setAbfiles9);
   //--### 대학 재학생 첨부파일(scate2) e ###--//
 
   //--### 대학원 석사재학생 첨부파일(scate3) s ###--//
   const [acfiles1, setAcfiles1] = useState<File[]>([]);// [필수] 개인정보
+  const [acfiles2, setAcfiles2] = useState<File[]>([]);// [필수] 주민등록초본 1부(본인)
+  const [acfiles3, setAcfiles3] = useState<File[]>([]);// [필수] 주민등록초본 1부(부모)
+  const [acfiles4, setAcfiles4] = useState<File[]>([]);// [필수] 가족관계증명서 1부
+  const [acfiles5, setAcfiles5] = useState<File[]>([]);// [필수] 재학증명서 1부
+  const [acfiles6, setAcfiles6] = useState<File[]>([]);// [필수] 성적증명서 1부(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서) 
+  const [acfiles7, setAcfiles7] = useState<File[]>([]);// [필수] 등록금 납부 영수증 1부(2025학년도 1학기) 
+  const [acfiles8, setAcfiles8] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부
+  const [acfiles9, setAcfiles9] = useState<File[]>([]);// [필수] 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) *파일첨부 칸 옆에 연구실적표 서식 다운로드 필요
+  const [acfiles10, setAcfiles10] = useState<File[]>([]);// [필수] 연구실적 증빙서류(갯수 제한 없음 셀추가 가능 기능 필요) 
+  const [acfiles11, setAcfiles11] = useState<File[]>([]);// [선택] 대학 학적부 1부(2024학년도 군복무 휴학 이력자)
+
   const acuploader1 = useFileUploader(setAcfiles1);
+  const acuploader2 = useFileUploader(setAcfiles2);
+  const acuploader3 = useFileUploader(setAcfiles3);
+  const acuploader4 = useFileUploader(setAcfiles4);
+  const acuploader5 = useFileUploader(setAcfiles5);
+  const acuploader6 = useFileUploader(setAcfiles6);
+  const acuploader7 = useFileUploader(setAcfiles7);
+  const acuploader8 = useFileUploader(setAcfiles8);
+  const acuploader9 = useFileUploader(setAcfiles9);
+  const acuploader10 = useFileUploader(setAcfiles10);
+  const acuploader11 = useFileUploader(setAcfiles11);
   //--### 대학원 석사재학생 첨부파일(scate3) e ###--//
   //--#################### 파일첨부 State s ####################--//
 
@@ -147,14 +195,8 @@ export default function Jilessform() {
     const { name, value } = e.target;
     let newValue = value;
 
-    // 전화번호 입력 시 숫자만 허용
-    if (name === "wr_phone") {
-      newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
-    }
-
-    // 전화번호 입력 시 숫자만 허용
-    if (name === "wr_ptel") {
-      newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+    if (name === "wr_phone" || name === "wr_ptel") {
+      newValue = value.replace(/\D/g, ""); // 숫자만 허용
     }
 
     setFormData((prev) => ({
@@ -167,24 +209,40 @@ export default function Jilessform() {
     e.preventDefault();
 
     // 장학구분별 필수 파일 체크
-    if (formData.wr_cate === "scate1" && aafiles1.length === 0) {
-      alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다.");
-      return;
-    }
-    if (formData.wr_cate === "scate1" && aafiles2.length === 0) {
-      alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다.");
-      return;
-    }
+    //--### 대학 신입생 첨부파일(scate1) s ###--//
+    if (formData.wr_cate === "scate1" && aafiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles7.length === 0) { alert("대학 신입생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate1" && aafiles8.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    //--### 대학 신입생 첨부파일(scate1) e ###--//
 
-    if (formData.wr_cate === "scate2" && abfiles1.length === 0) {
-      alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다.");
-      return;
-    }
+    //--### 대학 재학생 첨부파일(scate2) s ###--//
+    if (formData.wr_cate === "scate2" && abfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles7.length === 0) { alert("대학 재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate2" && abfiles8.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    //--### 대학 재학생 첨부파일(scate2) e ###--//
 
-    if (formData.wr_cate === "scate3" && acfiles1.length === 0) {
-      alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다.");
-      return;
-    }
+    //--### 석사재학생 첨부파일(scate3) s ###--//
+    if (formData.wr_cate === "scate3" && acfiles1.length === 0) { alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles2.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles3.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles4.length === 0) { alert("대학원 석사재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles5.length === 0) { alert("대학원 석사재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles6.length === 0) { alert("대학원 석사재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles7.length === 0) { alert("대학원 석사재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles8.length === 0) { alert("대학원 석사재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles9.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적표 1부 파일을 첨부해야 합니다."); return; }
+    if (formData.wr_cate === "scate3" && acfiles10.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적 증빙서류 파일을 첨부해야 합니다."); return; }
+    //--### 석사재학생 첨부파일(scate3) e ###--//
 
     const data = new FormData();
     data.append("wr_cate", formData.wr_cate);
@@ -205,6 +263,7 @@ export default function Jilessform() {
     data.append("wr_bank_nm", formData.wr_bank_nm);
     data.append("wr_bank_num", formData.wr_bank_num);
     data.append("wr_average", formData.wr_average);
+    data.append("wr_gubun", formData.wr_gubun);
 
     // 🔥 버튼에 따라 wr_state 결정
     if (saveMode === "temp") {
@@ -216,15 +275,38 @@ export default function Jilessform() {
     //--### 대학 신입생 첨부파일(scate1) s ###--//
     aafiles1.forEach((file) => data.append("aafiles1", file));// [필수] 개인정보
     aafiles2.forEach((file) => data.append("aafiles2", file));// [필수] 주민등록초본 1부(본인)
+    aafiles3.forEach((file) => data.append("aafiles3", file));// [필수] 주민등록초본 1부(부모)
+    aafiles4.forEach((file) => data.append("aafiles4", file));// [필수] 가족관계증명서 1부
+    aafiles5.forEach((file) => data.append("aafiles5", file));// [필수] 재학증명서 1부
+    aafiles6.forEach((file) => data.append("aafiles6", file));// [필수] 성적증명서 1부
+    aafiles7.forEach((file) => data.append("aafiles7", file));// [필수] 등록금 납부 영수증 1부
+    aafiles8.forEach((file) => data.append("aafiles8", file));// [필수] 본인명의 통장사본 1부
     //--### 대학 신입생 첨부파일(scate1) e ###--//
 
     //--### 대학 재학생 첨부파일(scate2) s ###--//
     abfiles1.forEach((file) => data.append("abfiles1", file));// [필수] 개인정보
+    abfiles2.forEach((file) => data.append("abfiles2", file));// [필수] 주민등록초본 1부(본인)
+    abfiles3.forEach((file) => data.append("abfiles3", file));// [필수] 주민등록초본 1부(부모)
+    abfiles4.forEach((file) => data.append("abfiles4", file));// [필수] 가족관계증명서 1부
+    abfiles5.forEach((file) => data.append("abfiles5", file));// [필수] 재학증명서 1부
+    abfiles6.forEach((file) => data.append("abfiles6", file));// [필수] 성적증명서 1부
+    abfiles7.forEach((file) => data.append("abfiles7", file));// [필수] 등록금 납부 영수증 1부
+    abfiles8.forEach((file) => data.append("abfiles8", file));// [필수] 본인명의 통장사본 1부
     abfiles9.forEach((file) => data.append("abfiles9", file));// [선택] 대학 학적부
     //--### 대학 재학생 첨부파일(scate2) e ###--//
 
     //--### 대학원 석사재학생 첨부파일(scate3) s ###--//
     acfiles1.forEach((file) => data.append("acfiles1", file));// [필수] 개인정보
+    acfiles2.forEach((file) => data.append("acfiles2", file));// [필수] 주민등록초본 1부(본인)
+    acfiles3.forEach((file) => data.append("acfiles3", file));// [필수] 주민등록초본 1부(부모)
+    acfiles4.forEach((file) => data.append("acfiles4", file));// [필수] 가족관계증명서 1부
+    acfiles5.forEach((file) => data.append("acfiles5", file));// [필수] 재학증명서 1부
+    acfiles6.forEach((file) => data.append("acfiles6", file));// [필수] 성적증명서 1부
+    acfiles7.forEach((file) => data.append("acfiles7", file));// [필수] 등록금 납부 영수증 1부
+    acfiles8.forEach((file) => data.append("acfiles8", file));// [필수] 본인명의 통장사본 1부
+    acfiles9.forEach((file) => data.append("acfiles9", file));// [필수] 연구실적표 1부
+    acfiles10.forEach((file) => data.append("acfiles10", file));// [필수] 연구실적 증빙서류
+    acfiles11.forEach((file) => data.append("acfiles11", file));// [선택] 대학 학적부 1부
     //--### 대학원 석사재학생 첨부파일(scate3) e ###--//
 
     try {
@@ -292,6 +374,7 @@ export default function Jilessform() {
 
 
           <form onSubmit={handleSubmit}>
+            <input type="hidden" name="wr_gubun" defaultValue="gubuns" />
             <div className="flex justify-center p-4">
               <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>
@@ -598,7 +681,7 @@ export default function Jilessform() {
                     />
                   </div>
 
-                  {/* 주민등록초본 */}
+                  {/* 주민등록초본 - 본인 */}
                   <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부 (본인)</label>
                   <div className="md:col-span-3">
                     <FileUploader
@@ -606,6 +689,78 @@ export default function Jilessform() {
                       getInputProps={aauploader2.getInputProps}
                       isDragActive={aauploader2.isDragActive}
                       files={aafiles2}
+                      required={formData.wr_cate === "scate1"}
+                    />
+                  </div>
+
+                  {/* 주민등록초본 - 부모 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부 (부모)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={aauploader3.getRootProps}
+                      getInputProps={aauploader3.getInputProps}
+                      isDragActive={aauploader3.isDragActive}
+                      files={aafiles3}
+                      required={formData.wr_cate === "scate1"}
+                    />
+                  </div>
+
+                  {/* 가족관계증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 가족관계증명서 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={aauploader4.getRootProps}
+                      getInputProps={aauploader4.getInputProps}
+                      isDragActive={aauploader4.isDragActive}
+                      files={aafiles4}
+                      required={formData.wr_cate === "scate1"}
+                    />
+                  </div>
+
+                  {/* 재학증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 재학증명서 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={aauploader5.getRootProps}
+                      getInputProps={aauploader5.getInputProps}
+                      isDragActive={aauploader5.isDragActive}
+                      files={aafiles5}
+                      required={formData.wr_cate === "scate1"}
+                    />
+                  </div>
+
+                  {/* 성적증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(해당 학학년도 대학수학능력시험 성적표) </label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={aauploader6.getRootProps}
+                      getInputProps={aauploader6.getInputProps}
+                      isDragActive={aauploader6.isDragActive}
+                      files={aafiles6}
+                      required={formData.wr_cate === "scate1"}
+                    />
+                  </div>
+
+                  {/* 등록금 납부 영수증 1부(2025학년도 1학기) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 등록금 납부 영수증 1부(해당 학년도 1학기) </label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={aauploader7.getRootProps}
+                      getInputProps={aauploader7.getInputProps}
+                      isDragActive={aauploader7.isDragActive}
+                      files={aafiles7}
+                      required={formData.wr_cate === "scate1"}
+                    />
+                  </div>
+
+                  {/* 본인명의 통장사본 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 본인명의 통장사본 1부 </label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={aauploader8.getRootProps}
+                      getInputProps={aauploader8.getInputProps}
+                      isDragActive={aauploader8.isDragActive}
+                      files={aafiles8}
                       required={formData.wr_cate === "scate1"}
                     />
                   </div>
@@ -630,6 +785,90 @@ export default function Jilessform() {
                       getInputProps={abuploader1.getInputProps}
                       isDragActive={abuploader1.isDragActive}
                       files={abfiles1}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 주민등록초본 1부(본인) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(본인)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader2.getRootProps}
+                      getInputProps={abuploader2.getInputProps}
+                      isDragActive={abuploader2.isDragActive}
+                      files={abfiles2}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 주민등록초본 1부(부모) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(부모)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader3.getRootProps}
+                      getInputProps={abuploader3.getInputProps}
+                      isDragActive={abuploader3.isDragActive}
+                      files={abfiles3}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 가족관계증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 가족관계증명서 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader4.getRootProps}
+                      getInputProps={abuploader4.getInputProps}
+                      isDragActive={abuploader4.isDragActive}
+                      files={abfiles4}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 재학증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 재학증명서 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader5.getRootProps}
+                      getInputProps={abuploader5.getInputProps}
+                      isDragActive={abuploader5.isDragActive}
+                      files={abfiles5}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 성적증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader6.getRootProps}
+                      getInputProps={abuploader6.getInputProps}
+                      isDragActive={abuploader6.isDragActive}
+                      files={abfiles6}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 등록금 납부 영수증 1부(2025학년도 1학기) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 등록금 납부 영수증 1부<br />(해당 학년도 1학기)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader7.getRootProps}
+                      getInputProps={abuploader7.getInputProps}
+                      isDragActive={abuploader7.isDragActive}
+                      files={abfiles7}
+                      required={formData.wr_cate === "scate2"}
+                    />
+                  </div>
+
+                  {/* 본인명의 통장사본 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 본인명의 통장사본 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={abuploader8.getRootProps}
+                      getInputProps={abuploader8.getInputProps}
+                      isDragActive={abuploader8.isDragActive}
+                      files={abfiles8}
                       required={formData.wr_cate === "scate2"}
                     />
                   </div>
@@ -666,6 +905,125 @@ export default function Jilessform() {
                       isDragActive={acuploader1.isDragActive}
                       files={acfiles1}
                       required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 주민등록초본 1부(본인) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(본인)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader2.getRootProps}
+                      getInputProps={acuploader2.getInputProps}
+                      isDragActive={acuploader2.isDragActive}
+                      files={acfiles2}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 주민등록초본 1부(부모) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(부모)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader3.getRootProps}
+                      getInputProps={acuploader3.getInputProps}
+                      isDragActive={acuploader3.isDragActive}
+                      files={acfiles3}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 가족관계증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 가족관계증명서 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader4.getRootProps}
+                      getInputProps={acuploader4.getInputProps}
+                      isDragActive={acuploader4.isDragActive}
+                      files={acfiles4}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 재학증명서 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 재학증명서 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader5.getRootProps}
+                      getInputProps={acuploader5.getInputProps}
+                      isDragActive={acuploader5.isDragActive}
+                      files={acfiles5}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 성적증명서 1부(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader6.getRootProps}
+                      getInputProps={acuploader6.getInputProps}
+                      isDragActive={acuploader6.isDragActive}
+                      files={acfiles6}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 등록금 납부 영수증 1부(2025학년도 1학기) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 등록금 납부 영수증 1부<br />(해당 학년도 1학기)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader7.getRootProps}
+                      getInputProps={acuploader7.getInputProps}
+                      isDragActive={acuploader7.isDragActive}
+                      files={acfiles7}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 본인명의 통장사본 1부 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 본인명의 통장사본 1부</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader8.getRootProps}
+                      getInputProps={acuploader8.getInputProps}
+                      isDragActive={acuploader8.isDragActive}
+                      files={acfiles8}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader9.getRootProps}
+                      getInputProps={acuploader9.getInputProps}
+                      isDragActive={acuploader9.isDragActive}
+                      files={acfiles9}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* 연구실적 증빙서류 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 연구실적 증빙서류</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader10.getRootProps}
+                      getInputProps={acuploader10.getInputProps}
+                      isDragActive={acuploader10.isDragActive}
+                      files={acfiles10}
+                      required={formData.wr_cate === "scate3"}
+                    />
+                  </div>
+
+                  {/* [선택] 대학 학적부 1부(2024학년도 군복무 휴학 이력자) */}
+                  <label className="text-sm font-medium text-gray-700">[선택] 대학 학적부 1부<br />(해당 학년도 군복무 휴학 이력자)</label>
+                  <div className="md:col-span-3">
+                    <FileUploader
+                      getRootProps={acuploader11.getRootProps}
+                      getInputProps={acuploader11.getInputProps}
+                      isDragActive={acuploader11.isDragActive}
+                      files={acfiles11}
                     />
                   </div>
 
