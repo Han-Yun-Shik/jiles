@@ -405,7 +405,7 @@ export default function Jilessform() {
                       name="wr_detailaddress"
                       value={formData.wr_detailaddress}
                       placeholder="상세주소"
-                      className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                      className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
                       onChange={handleChange}
                     />
                   </div>
@@ -467,7 +467,7 @@ export default function Jilessform() {
                       value={formData.wr_schooladdr}
                       onChange={handleChange}
                       placeholder="학교 주소"
-                      className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                      className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
                     />
 
                     {showModal && (
@@ -572,7 +572,7 @@ export default function Jilessform() {
 
                   <label className="text-sm font-medium text-gray-700">전화번호</label>
                   <div className="md:col-span-3">
-                    <input type="text" name="wr_ptel" className="jil_form_input jil_w_450" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" />
+                    <input type="text" name="wr_ptel" className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" />
                   </div>
 
                 </div>
