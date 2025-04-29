@@ -7,6 +7,25 @@ export const REGDATE_STR = (dateStr: string): string => {
 
     return `${year}-${month}-${day}`;
 };
+
+export const REGDATE_YMD_STR = (dateStr: string): string => {
+    if (!dateStr) return "";
+
+    // dateStr이 '2025-04-28 09:52:37'처럼 생겼으면
+    if (dateStr.includes('-')) {
+        return dateStr.substring(0, 10); // 앞의 yyyy-MM-dd 부분만 잘라서 반환
+    }
+
+    // dateStr이 '20250428095237'처럼 생겼으면
+    if (dateStr.length >= 8) {
+        const year = dateStr.substring(0, 4);
+        const month = dateStr.substring(4, 6);
+        const day = dateStr.substring(6, 8);
+        return `${year}-${month}-${day}`;
+    }
+
+    return "";
+};
 export const WR_STATE_ARR: { [key: number]: string } = {
     1: "접수",
     2: "완료",

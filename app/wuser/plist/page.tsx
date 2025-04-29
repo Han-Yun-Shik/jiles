@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { REGDATE_STR, WR_STATE_ARR, WR_SCATE_ARR } from "@/app/utils";
+import { REGDATE_YMD_STR, WR_STATE_ARR, WR_SCATE_ARR } from "@/app/utils";
 import UserMenu from "@/components/UserMenu";
 import UserIcon from '@/components/icons/UserIcon';
 
@@ -109,7 +109,7 @@ export default function Plist() {
                                             {WR_STATE_ARR[item.wr_state]}
                                         </button>
                                     </td>
-                                    <td className="py-3 px-2">{REGDATE_STR(item.wr_regdate)}</td>
+                                    <td className="py-3 px-2">{REGDATE_YMD_STR(item.wr_regdate)}</td>
                                     <td className="py-3 px-2 space-x-2">
                                         <Link
                                             href={`/wuser/pupdate/${item.wr_code}`}

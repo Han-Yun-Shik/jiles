@@ -3,7 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { REGDATE_STR, WR_STATE_ARR, WR_SCATE_ARR } from "@/app/utils";
+import { REGDATE_YMD_STR, WR_STATE_ARR, WR_SCATE_ARR } from "@/app/utils";
 import { useSearchParams, useRouter } from "next/navigation";
 import Pagination from "@/components/Pagination"; // 추가
 
@@ -251,7 +251,7 @@ export default function Slist() {
                   <td style={{ textAlign: "center" }}>{item.wr_major}</td>
                   <td style={{ textAlign: "center" }}>{item.wr_ptel}</td>
                   <td style={{ textAlign: "center" }}><button className="jil_state_btn">{WR_STATE_ARR[item.wr_state]}</button></td>
-                  <td style={{ textAlign: "center" }}>{REGDATE_STR(item.wr_regdate)}</td>
+                  <td style={{ textAlign: "center" }}>{REGDATE_YMD_STR(item.wr_regdate)}</td>
                   <td style={{ textAlign: "center" }}>
                     <Link href={`/wadm/supdate/${item.wr_code}`} className="btn btn-sm btn-primary mx-1">수정/보기</Link>
                     <button onClick={() => handleDelete(item.wr_code)} className="btn btn-sm btn-danger">삭제</button>

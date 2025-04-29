@@ -205,17 +205,12 @@ export default function Slist() {
     }, []);
 
 
-    const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         let newValue = value;
 
-        // 전화번호 입력 시 숫자만 허용
-        if (name === "wr_ptel") {
-            newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
-        }
-
-        if (name === "wr_phone") {
-            newValue = value.replace(/\D/g, ""); // 숫자가 아닌 문자 제거
+        if (name === "wr_phone" || name === "wr_ptel") {
+            newValue = value.replace(/\D/g, ""); // 숫자만 허용
         }
 
         setFormData((prev) => ({
@@ -252,6 +247,7 @@ export default function Slist() {
         data.append("wr_bank_num", formData.wr_bank_num);
         data.append("wr_average", formData.wr_average);
         data.append("wr_state", String(formData.wr_state)); // 문자열로 변환
+        data.append("wr_regdate", formData.wr_regdate);
 
         //--### 대학 신입생 첨부파일(scate1) s ###--//
         aafiles1.forEach((file) => data.append("aafiles1", file));// [필수] 개인정보
@@ -376,6 +372,9 @@ export default function Slist() {
                                         ))}
                                     </select>
                                 </div>
+
+                                <div className="jil_form_field_subject">등록일</div>
+                                <div><input type="text" name="wr_regdate" value={formData.wr_regdate || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
                             </div>
                         </div>
 

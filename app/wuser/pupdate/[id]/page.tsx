@@ -275,6 +275,7 @@ export default function Pupdate() {
         data.append("wr_bank_nm", formData.wr_bank_nm);
         data.append("wr_bank_num", formData.wr_bank_num);
         data.append("wr_average", formData.wr_average);
+        data.append("wr_regdate", formData.wr_regdate);
 
         // 🔥 버튼에 따라 wr_state 결정
         if (saveMode === "temp") {
@@ -383,7 +384,8 @@ export default function Pupdate() {
 
 
                     <form onSubmit={handleSubmit}>
-                        <input type="hidden" name="wr_year" value={formData.wr_year} />
+                        <input type="hidden" name="wr_year" defaultValue={formData.wr_year} />
+                        <input type="hidden" name="wr_regdate" defaultValue={formData.wr_regdate} />
                         <div className="flex justify-center p-4">
                             <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
                                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>
