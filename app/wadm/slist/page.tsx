@@ -144,8 +144,8 @@ export default function Slist() {
               <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">미지급 선택</button>
               <button onClick={handleSearch} className="btn btn-secondary btn-sm jil_adm_mr_2">검색</button>
               <button onClick={handleReset} className="btn btn-secondary btn-sm jil_adm_mr_2">초기화</button>
-              <button className="btn btn-secondary btn-sm jil_adm_mr_2">엑셀파일 다운로드</button>
-              <Link href="/wadm/swrite" className="btn btn-secondary btn-sm">신청서 등록</Link>
+              {/* <button className="btn btn-secondary btn-sm jil_adm_mr_2">엑셀파일 다운로드</button> */}
+              {/* <Link href="/wadm/swrite" className="btn btn-secondary btn-sm">신청서 등록</Link> */}
             </div>
           </div>
 
