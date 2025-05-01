@@ -20,6 +20,7 @@ interface JilesData {
     wr_major: string;
     wr_state: number;
     wr_regdate: string;
+    wr_gubun: string;
 }
 
 
@@ -112,11 +113,20 @@ export default function Plist() {
                                     <td className="py-3 px-2">{REGDATE_YMD_STR(item.wr_regdate)}</td>
                                     <td className="py-3 px-2 space-x-2">
                                         <Link
-                                            href={`/wuser/pupdate/${item.wr_code}`}
+                                            href={
+                                                item.wr_gubun === "gubuns"
+                                                    ? `/wuser/pupdate/${item.wr_code}`
+                                                    : item.wr_gubun === "gubunj"
+                                                        ? `/wuser/pjupdate/${item.wr_code}`
+                                                        : item.wr_gubun === "gubunh"
+                                                            ? `/wuser/phupdate/${item.wr_code}`
+                                                            : "#"
+                                            }
                                             className="inline-block bg-gray-600 hover:bg-gray-700 text-white text-xs py-1 px-3 rounded"
                                         >
                                             수정
                                         </Link>
+
                                     </td>
                                 </tr>
                             ))}
