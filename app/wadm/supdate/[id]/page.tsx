@@ -99,6 +99,16 @@ export default function Slist() {
     const [months, setMonths] = useState<string[]>([]);
     const [days, setDays] = useState<string[]>([]);
 
+    //--##### Search arg s #####--//
+    const searchParams = useSearchParams();
+    const wyear = searchParams.get("wyear") || "";
+    const wcate = searchParams.get("wcate") || "";
+    const wname = searchParams.get("wname") || "";
+    const wstate = searchParams.get("wstate") || "";
+    const currentPage = searchParams.get("currentPage") || "1";
+    const backToListUrl = `/wadm/slist?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
+    //--##### Search arg e #####--//
+
     //--#################### 파일첨부 State s ####################--//
     //--### 대학 신입생 첨부파일(scate1) s ###--//
     const [aafiles1, setAafiles1] = useState<File[]>([]);// [필수] 개인정보
@@ -203,23 +213,23 @@ export default function Slist() {
         document.getElementById("scate1_area")?.classList.add("hidden");
         document.getElementById("scate2_area")?.classList.add("hidden");
         document.getElementById("scate3_area")?.classList.add("hidden");
-    
+
         document.getElementById("wr_average_scate1")?.classList.add("hidden");
         document.getElementById("wr_average_scate2")?.classList.add("hidden");
         document.getElementById("wr_average_scate3")?.classList.add("hidden");
-    
+
         // 선택된 영역만 보이게 설정
         if (formData.wr_cate === "scate1") {
-          document.getElementById("scate1_area")?.classList.remove("hidden");
-          document.getElementById("wr_average_scate1")?.classList.remove("hidden");
+            document.getElementById("scate1_area")?.classList.remove("hidden");
+            document.getElementById("wr_average_scate1")?.classList.remove("hidden");
         } else if (formData.wr_cate === "scate2") {
-          document.getElementById("scate2_area")?.classList.remove("hidden");
-          document.getElementById("wr_average_scate2")?.classList.remove("hidden");
+            document.getElementById("scate2_area")?.classList.remove("hidden");
+            document.getElementById("wr_average_scate2")?.classList.remove("hidden");
         } else if (formData.wr_cate === "scate3") {
-          document.getElementById("scate3_area")?.classList.remove("hidden");
-          document.getElementById("wr_average_scate3")?.classList.remove("hidden");
+            document.getElementById("scate3_area")?.classList.remove("hidden");
+            document.getElementById("wr_average_scate3")?.classList.remove("hidden");
         }
-      }, [formData.wr_cate]);
+    }, [formData.wr_cate]);
 
     // ✅ 스크립트 동적 로딩
     useEffect(() => {
@@ -343,7 +353,7 @@ export default function Slist() {
                 },
             });
             setMessage(response.data.message);
-            router.push("/wadm/slist");
+            router.push(backToListUrl);
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
@@ -400,8 +410,9 @@ export default function Slist() {
                         <div className="jil_adm_c_hdr_right">
                             <button onClick={handleSubmit} className="btn btn-secondary btn-sm jil_adm_mr_2">수정</button>&nbsp;
                             <button onClick={() => downloadAllFiles(`${id}`)} className="btn btn-secondary btn-sm jil_adm_mr_2">파일전체다운로드</button>&nbsp;
-                            <Link href="/wadm/slist" className="btn btn-secondary btn-sm">목록</Link>
-
+                            <button type="button" onClick={() => router.push(backToListUrl)} className="btn btn-secondary btn-sm">
+                                목록
+                            </button>
                         </div>
                     </div>
 

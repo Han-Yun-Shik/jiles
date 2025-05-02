@@ -99,6 +99,16 @@ export default function Sjupdate() {
     const [months, setMonths] = useState<string[]>([]);
     const [days, setDays] = useState<string[]>([]);
 
+    //--##### Search arg s #####--//
+    const searchParams = useSearchParams();
+    const wyear = searchParams.get("wyear") || "";
+    const wcate = searchParams.get("wcate") || "";
+    const wname = searchParams.get("wname") || "";
+    const wstate = searchParams.get("wstate") || "";
+    const currentPage = searchParams.get("currentPage") || "1";
+    const backToListUrl = `/wadm/sjlist?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
+    //--##### Search arg e #####--//
+
     //--#################### 파일첨부 State s ####################--//
     //--### 도내 고교생 첨부파일(jcate1) s ###--//
     const [jafiles1, setJafiles1] = useState<File[]>([]);// [필수] 개인정보
@@ -296,7 +306,7 @@ export default function Sjupdate() {
                 },
             });
             setMessage(response.data.message);
-            router.push("/wadm/sjlist");
+            router.push(backToListUrl);
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
@@ -353,8 +363,9 @@ export default function Sjupdate() {
                         <div className="jil_adm_c_hdr_right">
                             <button onClick={handleSubmit} className="btn btn-secondary btn-sm jil_adm_mr_2">수정</button>&nbsp;
                             <button onClick={() => downloadAllFiles(`${id}`)} className="btn btn-secondary btn-sm jil_adm_mr_2">파일전체다운로드</button>&nbsp;
-                            <Link href="/wadm/sjlist" className="btn btn-secondary btn-sm">목록</Link>
-
+                            <button type="button" onClick={() => router.push(backToListUrl)} className="btn btn-secondary btn-sm">
+                                목록
+                            </button>
                         </div>
                     </div>
 

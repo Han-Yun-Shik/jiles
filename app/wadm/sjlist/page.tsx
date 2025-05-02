@@ -253,7 +253,21 @@ export default function Sjlist() {
                   <td style={{ textAlign: "center" }}><button className="jil_state_btn">{WR_STATE_ARR[item.wr_state]}</button></td>
                   <td style={{ textAlign: "center" }}>{REGDATE_YMD_STR(item.wr_regdate)}</td>
                   <td style={{ textAlign: "center" }}>
-                    <Link href={`/wadm/sjupdate/${item.wr_code}`} className="btn btn-sm btn-primary mx-1">수정/보기</Link>
+                    <Link
+                      href={{
+                        pathname: `/wadm/sjupdate/${item.wr_code}`,
+                        query: {
+                          wyear,
+                          wcate,
+                          wname,
+                          wstate,
+                          currentPage: currentPage.toString(),
+                        },
+                      }}
+                      className="btn btn-sm btn-primary mx-1"
+                    >
+                      수정
+                    </Link>
                     <button onClick={() => handleDelete(item.wr_code)} className="btn btn-sm btn-danger">삭제</button>
                   </td>
                 </tr>
