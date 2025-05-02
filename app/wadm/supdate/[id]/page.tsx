@@ -203,16 +203,23 @@ export default function Slist() {
         document.getElementById("scate1_area")?.classList.add("hidden");
         document.getElementById("scate2_area")?.classList.add("hidden");
         document.getElementById("scate3_area")?.classList.add("hidden");
-
+    
+        document.getElementById("wr_average_scate1")?.classList.add("hidden");
+        document.getElementById("wr_average_scate2")?.classList.add("hidden");
+        document.getElementById("wr_average_scate3")?.classList.add("hidden");
+    
         // 선택된 영역만 보이게 설정
         if (formData.wr_cate === "scate1") {
-            document.getElementById("scate1_area")?.classList.remove("hidden");
+          document.getElementById("scate1_area")?.classList.remove("hidden");
+          document.getElementById("wr_average_scate1")?.classList.remove("hidden");
         } else if (formData.wr_cate === "scate2") {
-            document.getElementById("scate2_area")?.classList.remove("hidden");
+          document.getElementById("scate2_area")?.classList.remove("hidden");
+          document.getElementById("wr_average_scate2")?.classList.remove("hidden");
         } else if (formData.wr_cate === "scate3") {
-            document.getElementById("scate3_area")?.classList.remove("hidden");
+          document.getElementById("scate3_area")?.classList.remove("hidden");
+          document.getElementById("wr_average_scate3")?.classList.remove("hidden");
         }
-    }, [formData.wr_cate]);
+      }, [formData.wr_cate]);
 
     // ✅ 스크립트 동적 로딩
     useEffect(() => {
@@ -399,715 +406,910 @@ export default function Slist() {
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="jil_adm_form_area">
-                            <div className="jil_adm_form_title">■ 장학구분</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">년도</div>
-                                <div><input type="text" name="wr_year" value={formData.wr_year || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
+                        <div className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">장학구분</h4>
 
-                                <div className="jil_form_field_subject">장학분야</div>
-                                <div>
-                                    <select
-                                        name="wr_cate"
-                                        value={formData.wr_cate || ''}
-                                        className="jil_form_select jil_w_450"
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">장학구분 선택</option>
-                                        {Object.entries(WR_SCATE_ARR).map(([key, label]) => (
-                                            <option key={key} value={key}>
-                                                {label}
-                                            </option>
-                                        ))}
-                                    </select>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                                    <label className="text-sm font-medium text-gray-700">년도</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_year" value={formData.wr_year || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                                    </div>
+                                    <label className="text-sm font-medium text-gray-700">장학분야</label>
+                                    <div className="md:col-span-3">
+                                        <select
+                                            name="wr_cate"
+                                            value={formData.wr_cate}
+                                            onChange={handleChange}
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">장학구분 선택</option>
+                                            {Object.entries(WR_SCATE_ARR).map(([key, label]) => (
+                                                <option key={key} value={key}>
+                                                    {label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <label className="text-sm font-medium text-gray-700">진행상태</label>
+                                    <div className="md:col-span-3">
+                                        <select
+                                            name="wr_state"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                            value={formData.wr_state || 1}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="">진행상태 선택</option>
+                                            {Object.entries(WR_STATE_ARR).map(([key, label]) => (
+                                                <option key={key} value={key}>
+                                                    {label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <label className="text-sm font-medium text-gray-700">등록일</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_regdate" value={formData.wr_regdate || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                                    </div>
+
                                 </div>
-
-                                <div className="jil_form_field_subject">진행상태</div>
-                                <div>
-                                    <select
-                                        name="wr_state"
-                                        className="jil_form_select jil_w_450"
-                                        value={formData.wr_state || 1}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">진행상태 선택</option>
-                                        {Object.entries(WR_STATE_ARR).map(([key, label]) => (
-                                            <option key={key} value={key}>
-                                                {label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="jil_form_field_subject">등록일</div>
-                                <div><input type="text" name="wr_regdate" value={formData.wr_regdate || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
                             </div>
                         </div>
 
-                        <div className="jil_adm_form_area mt-2">
-                            <div className="jil_adm_form_title">■ 학생정보</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">신청자 성명</div>
-                                <div><input type="text" name="wr_name" value={formData.wr_name || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
+                        <div className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">학생정보</h4>
 
-                                <div className="jil_form_field_subject">신청자 생년월일</div>
-                                <div style={{ position: "relative" }}>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
 
-                                    <select
-                                        name="wr_birthy"
-                                        className="jil_form_select jil_w_120"
-                                        value={formData.wr_birthy || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">년도 선택</option>
-                                        {years.map(year => (
-                                            <option key={year} value={year}>
-                                                {year}년
-                                            </option>
-                                        ))}
-                                    </select>&nbsp;
-
-                                    <select
-                                        name="wr_birthm"
-                                        className="jil_form_select jil_w_120"
-                                        value={formData.wr_birthm || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">월 선택</option>
-                                        {months.map(month => (
-                                            <option key={month} value={month}>
-                                                {month}월
-                                            </option>
-                                        ))}
-                                    </select>&nbsp;
-
-                                    <select
-                                        name="wr_birthd"
-                                        className="jil_form_select jil_w_120"
-                                        value={formData.wr_birthd || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">일 선택</option>
-                                        {days.map(day => (
-                                            <option key={day} value={day}>
-                                                {day}일
-                                            </option>
-                                        ))}
-                                    </select>
-
-                                </div>
-
-                                <div className="jil_form_field_subject">주소</div>
-                                <div>
-                                    <input type="text" name="wr_post" value={formData.wr_post || ''} className="jil_form_input jil_w_120" onChange={handleChange} placeholder="우편번호" readOnly />&nbsp;
-                                    <input type="button" value="주소검색" onClick={handleAddressSearch} className="jil_state_btn" />
-                                    <br />
-                                    <input type="text" name="wr_address" value={formData.wr_address || ''} className="jil_form_input jil_w_per_100  mt-2" onChange={handleChange} placeholder="도로명 주소" readOnly />
-                                    <input type="text" name="wr_detailaddress" value={formData.wr_detailaddress || ''} className="jil_form_input jil_w_per_100  mt-2" onChange={handleChange} placeholder="상세주소" />
-                                </div>
-
-                                <div className="jil_form_field_subject">전화번호</div>
-                                <div><input type="text" name="wr_phone" value={formData.wr_phone || ''} className="jil_form_input jil_w_450" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" /></div>
-
-                                <div className="jil_form_field_subject">이메일</div>
-                                <div><input type="text" name="wr_email" value={formData.wr_email || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">학교</div>
-                                <div>
-                                    <input type="text" name="wr_schoolcode" value={formData.wr_schoolcode || ''} className="jil_form_input jil_w_120" onChange={handleChange} placeholder="학교코드드" /><br />
-                                    <input type="text" name="wr_school" value={formData.wr_school || ''} className="jil_form_input jil_w_450" onChange={handleChange} placeholder="학교명" style={{ marginTop: "2px" }} /> &nbsp;
-                                    <input type="button" value="학교검색" onClick={() => setShowModal(true)} className="jil_state_btn" />
-                                    <input type="text" name="wr_schooladdr" value={formData.wr_schooladdr || ''} className="jil_form_input jil_w_per_100" onChange={handleChange} placeholder="학교주소" style={{ marginTop: "2px" }} />
-
-                                    {showModal && (
-                                        <SchoolSearchModal
-                                            onSelect={handleSelectSchool}
-                                            onClose={() => setShowModal(false)}
+                                    {/* 신청자 성명 */}
+                                    <label className="text-sm font-medium text-gray-700">신청자 성명</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_name"
+                                            value={formData.wr_name}
+                                            onChange={handleChange}
+                                            placeholder="성명 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500"
                                         />
-                                    )}
+                                    </div>
+
+                                    {/* 생년월일 */}
+                                    <label className="text-sm font-medium text-gray-700">생년월일</label>
+                                    <div className="flex gap-2 md:col-span-3">
+                                        <select
+                                            name="wr_birthy"
+                                            value={formData.wr_birthy}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">년도</option>
+                                            {years.map((year) => (
+                                                <option key={year} value={year}>{year}년</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            name="wr_birthm"
+                                            value={formData.wr_birthm}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">월</option>
+                                            {months.map((month) => (
+                                                <option key={month} value={month}>{month}월</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            name="wr_birthd"
+                                            value={formData.wr_birthd}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">일</option>
+                                            {days.map((day) => (
+                                                <option key={day} value={day}>{day}일</option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    {/* 주소 */}
+                                    <label className="text-sm font-medium text-gray-700">주소</label>
+                                    <div className="md:col-span-3 space-y-2">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                name="wr_post"
+                                                value={formData.wr_post}
+                                                placeholder="우편번호"
+                                                readOnly
+                                                className="w-36 border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                            />
+                                            <button type="button" onClick={handleAddressSearch} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
+                                                주소검색
+                                            </button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="wr_address"
+                                            value={formData.wr_address}
+                                            placeholder="도로명 주소"
+                                            readOnly
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            name="wr_detailaddress"
+                                            value={formData.wr_detailaddress}
+                                            placeholder="상세주소"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+
+                                    {/* 전화번호 */}
+                                    <label className="text-sm font-medium text-gray-700">전화번호</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_phone"
+                                            value={formData.wr_phone}
+                                            onChange={handleChange}
+                                            maxLength={11}
+                                            placeholder="'-' 없이 숫자만 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 이메일 */}
+                                    <label className="text-sm font-medium text-gray-700">이메일</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="email"
+                                            name="wr_email"
+                                            value={formData.wr_email}
+                                            onChange={handleChange}
+                                            placeholder="이메일 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 학교 코드 및 명칭 */}
+                                    <label className="text-sm font-medium text-gray-700">학교</label>
+                                    <div className="md:col-span-3 space-y-2">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                name="wr_schoolcode"
+                                                value={formData.wr_schoolcode}
+                                                onChange={handleChange}
+                                                placeholder="학교 코드"
+                                                className="w-36 border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                            />
+                                            <button type="button" onClick={() => setShowModal(true)} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
+                                                학교검색
+                                            </button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="wr_school"
+                                            value={formData.wr_school}
+                                            onChange={handleChange}
+                                            placeholder="학교명"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            name="wr_schooladdr"
+                                            value={formData.wr_schooladdr}
+                                            onChange={handleChange}
+                                            placeholder="학교 주소"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
+                                        />
+
+                                        {showModal && (
+                                            <SchoolSearchModal
+                                                onSelect={handleSelectSchool}
+                                                onClose={() => setShowModal(false)}
+                                            />
+                                        )}
+                                    </div>
+
+                                    {/* 학년 */}
+                                    <label className="text-sm font-medium text-gray-700">학년</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_grade"
+                                            value={formData.wr_grade}
+                                            onChange={handleChange}
+                                            placeholder="학년 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 전공 */}
+                                    <label className="text-sm font-medium text-gray-700">전공</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_major"
+                                            value={formData.wr_major}
+                                            onChange={handleChange}
+                                            placeholder="전공 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 장학재단 고객번호 */}
+                                    <label className="text-sm font-medium text-gray-700">장학재단 고객번호</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_jang_num"
+                                            value={formData.wr_jang_num}
+                                            onChange={handleChange}
+                                            placeholder="장학재단 고객번호"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 본인명의 은행명 */}
+                                    <label className="text-sm font-medium text-gray-700">은행명</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_bank_nm"
+                                            value={formData.wr_bank_nm}
+                                            onChange={handleChange}
+                                            placeholder="은행명 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 본인명의 계좌번호 */}
+                                    <label className="text-sm font-medium text-gray-700">계좌번호</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_bank_num"
+                                            value={formData.wr_bank_num}
+                                            onChange={handleChange}
+                                            placeholder="계좌번호 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 평균성적 */}
+                                    <label className="text-sm font-medium text-gray-700">평균성적</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_average"
+                                            value={formData.wr_average}
+                                            onChange={handleChange}
+                                            placeholder="평균 성적 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                        {/* 필요시 조건부 안내문구 추가 */}
+                                        <div id="wr_average_scate1" className="jil_color_red">2과목 평균최고점수</div>
+                                        <div id="wr_average_scate2" className="jil_color_red">학점 4.5 만점 기준 전과목 평균점수</div>
+                                        <div id="wr_average_scate3" className="jil_color_red">학점 4.5 만점 기준 전과목 평균점수</div>
+
+                                    </div>
                                 </div>
-
-                                <div className="jil_form_field_subject">학년</div>
-                                <div><input type="text" name="wr_grade" value={formData.wr_grade || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">전공</div>
-                                <div><input type="text" name="wr_major" value={formData.wr_major || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">한국장학재단고객번호</div>
-                                <div><input type="text" name="wr_jang_num" value={formData.wr_jang_num || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">본인명의 계좌 은행명</div>
-                                <div><input type="text" name="wr_bank_nm" value={formData.wr_bank_nm || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">본인명의 계좌 계좌번호</div>
-                                <div><input type="text" name="wr_bank_num" value={formData.wr_bank_num || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">평균성적</div>
-                                <div><input type="text" name="wr_average" value={formData.wr_average || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
                             </div>
                         </div>
 
-                        <div className="jil_adm_form_area mt-2">
-                            <div className="jil_adm_form_title">■ 보호자정보</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">전화번호</div>
-                                <div><input type="text" name="wr_ptel" value={formData.wr_ptel || ''} className="jil_form_input jil_w_450" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" /></div>
+                        <div className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">보호자정보</h4>
+
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+
+                                    <label className="text-sm font-medium text-gray-700">전화번호</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_ptel" value={formData.wr_ptel} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" />
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
                         {/* 대학 신입생 파일첨부 s */}
-                        <div id="scate1_area" className="jil_adm_form_area mt-2 hidden">
-                            <div className="jil_adm_form_title">■ 대학 신입생 파일첨부</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">[필수]개인정보 수집 이용, 제3자 제공 동의서 1부(진흥원 서식)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader1.getRootProps}
-                                        getInputProps={aauploader1.getInputProps}
-                                        isDragActive={aauploader1.isDragActive}
-                                        files={aafiles1}
-                                    />
-                                    <div id="aafiles1">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles1")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
+                        <div id="scate1_area" className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">대학 신입생 파일첨부</h4>
 
-                                <div className="jil_form_field_subject">[필수]주민등록초본 1부(본인)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader2.getRootProps}
-                                        getInputProps={aauploader2.getInputProps}
-                                        isDragActive={aauploader2.isDragActive}
-                                        files={aafiles2}
-                                    />
-                                    <div id="aafiles2">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles2")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
-                                <div className="jil_form_field_subject">[필수]주민등록초본 1부 (부모)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader3.getRootProps}
-                                        getInputProps={aauploader3.getInputProps}
-                                        isDragActive={aauploader3.isDragActive}
-                                        files={aafiles3}
-                                    />
-                                    <div id="aafiles3">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles3")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 개인정보 수집 이용 동의서 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader1.getRootProps}
+                                            getInputProps={aauploader1.getInputProps}
+                                            isDragActive={aauploader1.isDragActive}
+                                            files={aafiles1}
+                                        />
+                                        <div id="aafiles1">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles1")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수]가족관계증명서 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader4.getRootProps}
-                                        getInputProps={aauploader4.getInputProps}
-                                        isDragActive={aauploader4.isDragActive}
-                                        files={aafiles4}
-                                    />
-                                    <div id="aafiles4">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles4")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 주민등록초본 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부 (본인)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader2.getRootProps}
+                                            getInputProps={aauploader2.getInputProps}
+                                            isDragActive={aauploader2.isDragActive}
+                                            files={aafiles2}
+                                        />
+                                        <div id="aafiles2">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles2")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 재학증명서 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader5.getRootProps}
-                                        getInputProps={aauploader5.getInputProps}
-                                        isDragActive={aauploader5.isDragActive}
-                                        files={aafiles5}
-                                    />
-                                    <div id="aafiles5">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles5")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 주민등록초본 - 부모 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부 (부모)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader3.getRootProps}
+                                            getInputProps={aauploader3.getInputProps}
+                                            isDragActive={aauploader3.isDragActive}
+                                            files={aafiles3}
+                                        />
+                                        <div id="aafiles3">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles3")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수]  성적증명서 1부<br />(해당 학년도 대학수학능력시험 성적표)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader6.getRootProps}
-                                        getInputProps={aauploader6.getInputProps}
-                                        isDragActive={aauploader6.isDragActive}
-                                        files={aafiles6}
-                                    />
-                                    <div id="aafiles6">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles6")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 가족관계증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 가족관계증명서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader4.getRootProps}
+                                            getInputProps={aauploader4.getInputProps}
+                                            isDragActive={aauploader4.isDragActive}
+                                            files={aafiles4}
+                                        />
+                                        <div id="aafiles4">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles4")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수]  등록금 납부 영수증 1부(해당 학년도 1학기)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader7.getRootProps}
-                                        getInputProps={aauploader7.getInputProps}
-                                        isDragActive={aauploader7.isDragActive}
-                                        files={aafiles7}
-                                    />
-                                    <div id="aafiles7">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles7")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 재학증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 재학증명서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader5.getRootProps}
+                                            getInputProps={aauploader5.getInputProps}
+                                            isDragActive={aauploader5.isDragActive}
+                                            files={aafiles5}
+                                        />
+                                        <div id="aafiles5">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles5")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수]  본인명의 통장사본 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={aauploader8.getRootProps}
-                                        getInputProps={aauploader8.getInputProps}
-                                        isDragActive={aauploader8.isDragActive}
-                                        files={aafiles8}
-                                    />
-                                    <div id="aafiles8">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "aafiles8")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 성적증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(해당 학학년도 대학수학능력시험 성적표) </label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader6.getRootProps}
+                                            getInputProps={aauploader6.getInputProps}
+                                            isDragActive={aauploader6.isDragActive}
+                                            files={aafiles6}
+                                        />
+                                        <div id="aafiles6">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles6")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
+                                    {/* 등록금 납부 영수증 1부(2025학년도 1학기) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 등록금 납부 영수증 1부(해당 학년도 1학기) </label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader7.getRootProps}
+                                            getInputProps={aauploader7.getInputProps}
+                                            isDragActive={aauploader7.isDragActive}
+                                            files={aafiles7}
+                                        />
+                                        <div id="aafiles7">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles7")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
+                                    {/* 본인명의 통장사본 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 본인명의 통장사본 1부 </label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader8.getRootProps}
+                                            getInputProps={aauploader8.getInputProps}
+                                            isDragActive={aauploader8.isDragActive}
+                                            files={aafiles8}
+                                        />
+                                        <div id="aafiles8">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles8")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         {/* 대학 신입생 파일첨부 e */}
 
                         {/* 대학 재학생 파일첨부 s */}
-                        <div id="scate2_area" className="jil_adm_form_area mt-2 hidden">
-                            <div className="jil_adm_form_title">■ 대학 재학생 파일첨부</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">[필수]개인정보 수집 이용, 제3자 제공 동의서 1부(진흥원 서식)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader1.getRootProps}
-                                        getInputProps={abuploader1.getInputProps}
-                                        isDragActive={abuploader1.isDragActive}
-                                        files={abfiles1}
-                                    />
-                                    <div id="abfiles1">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles1")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
+                        <div id="scate2_area" className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">대학 재학생 파일첨부</h4>
 
-                                <div className="jil_form_field_subject">[필수] 주민등록초본 1부(본인)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader2.getRootProps}
-                                        getInputProps={abuploader2.getInputProps}
-                                        isDragActive={abuploader2.isDragActive}
-                                        files={abfiles2}
-                                    />
-                                    <div id="abfiles2">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles2")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
-                                    </div>
-                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
-                                <div className="jil_form_field_subject">[필수] 주민등록초본 1부(부모)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader3.getRootProps}
-                                        getInputProps={abuploader3.getInputProps}
-                                        isDragActive={abuploader3.isDragActive}
-                                        files={abfiles3}
-                                    />
-                                    <div id="abfiles3">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles3")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 개인정보 수집 이용 동의서 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader1.getRootProps}
+                                            getInputProps={abuploader1.getInputProps}
+                                            isDragActive={abuploader1.isDragActive}
+                                            files={abfiles1}
+                                        />
+                                        <div id="abfiles1">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles1")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 가족관계증명서 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader4.getRootProps}
-                                        getInputProps={abuploader4.getInputProps}
-                                        isDragActive={abuploader4.isDragActive}
-                                        files={abfiles4}
-                                    />
-                                    <div id="abfiles4">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles4")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 주민등록초본 1부(본인) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(본인)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader2.getRootProps}
+                                            getInputProps={abuploader2.getInputProps}
+                                            isDragActive={abuploader2.isDragActive}
+                                            files={abfiles2}
+                                        />
+                                        <div id="abfiles2">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles2")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 재학증명서 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader5.getRootProps}
-                                        getInputProps={abuploader5.getInputProps}
-                                        isDragActive={abuploader5.isDragActive}
-                                        files={abfiles5}
-                                    />
-                                    <div id="abfiles5">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles5")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 주민등록초본 1부(부모) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(부모)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader3.getRootProps}
+                                            getInputProps={abuploader3.getInputProps}
+                                            isDragActive={abuploader3.isDragActive}
+                                            files={abfiles3}
+                                        />
+                                        <div id="abfiles3">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles3")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader6.getRootProps}
-                                        getInputProps={abuploader6.getInputProps}
-                                        isDragActive={abuploader6.isDragActive}
-                                        files={abfiles6}
-                                    />
-                                    <div id="abfiles6">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles6")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 가족관계증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 가족관계증명서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader4.getRootProps}
+                                            getInputProps={abuploader4.getInputProps}
+                                            isDragActive={abuploader4.isDragActive}
+                                            files={abfiles4}
+                                        />
+                                        <div id="abfiles4">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles4")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 등록금 납부 영수증 1부<br />(해당 학년도 1학기)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader7.getRootProps}
-                                        getInputProps={abuploader7.getInputProps}
-                                        isDragActive={abuploader7.isDragActive}
-                                        files={abfiles7}
-                                    />
-                                    <div id="abfiles7">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles7")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 재학증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 재학증명서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader5.getRootProps}
+                                            getInputProps={abuploader5.getInputProps}
+                                            isDragActive={abuploader5.isDragActive}
+                                            files={abfiles5}
+                                        />
+                                        <div id="abfiles5">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles5")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 본인명의 통장사본 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader8.getRootProps}
-                                        getInputProps={abuploader8.getInputProps}
-                                        isDragActive={abuploader8.isDragActive}
-                                        files={abfiles8}
-                                    />
-                                    <div id="abfiles8">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles8")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 성적증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader6.getRootProps}
+                                            getInputProps={abuploader6.getInputProps}
+                                            isDragActive={abuploader6.isDragActive}
+                                            files={abfiles6}
+                                        />
+                                        <div id="abfiles6">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles6")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
-                                
-                                <div className="jil_form_field_subject">[선택]대학 학적부 1부(2024학년도 군복무 휴학자)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={abuploader9.getRootProps}
-                                        getInputProps={abuploader9.getInputProps}
-                                        isDragActive={abuploader9.isDragActive}
-                                        files={abfiles9}
-                                    />
-                                    <div id="abfiles9">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "abfiles9")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+
+                                    {/* 등록금 납부 영수증 1부(2025학년도 1학기) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 등록금 납부 영수증 1부<br />(해당 학년도 1학기)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader7.getRootProps}
+                                            getInputProps={abuploader7.getInputProps}
+                                            isDragActive={abuploader7.isDragActive}
+                                            files={abfiles7}
+                                        />
+                                        <div id="abfiles7">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles7")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
+
+                                    {/* 본인명의 통장사본 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 본인명의 통장사본 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader8.getRootProps}
+                                            getInputProps={abuploader8.getInputProps}
+                                            isDragActive={abuploader8.isDragActive}
+                                            files={abfiles8}
+                                        />
+                                        <div id="abfiles8">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles8")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
+                                    {/* 대학 학적부 (선택사항) */}
+                                    <label className="text-sm font-medium text-gray-700">[선택] 대학 학적부 1부 (2024학년도 군복무 휴학자)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader9.getRootProps}
+                                            getInputProps={abuploader9.getInputProps}
+                                            isDragActive={abuploader9.isDragActive}
+                                            files={abfiles9}
+                                        />
+                                        <div id="abfiles9">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles9")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
                         {/* 대학 재학생 파일첨부 e */}
 
                         {/* 대학원 석사재학생 파일첨부 s */}
-                        <div id="scate3_area" className="jil_adm_form_area mt-2">
-                            <div className="jil_adm_form_title">■ 대학원 석사재학생 파일첨부</div>
-                            <div className="jil_adm_form_field_wrap">
-                                
-                                <div className="jil_form_field_subject">[필수]개인정보 수집 이용, 제3자 제공 동의서 1부(진흥원 서식)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader1.getRootProps}
-                                        getInputProps={acuploader1.getInputProps}
-                                        isDragActive={acuploader1.isDragActive}
-                                        files={acfiles1}
-                                    />
-                                    <div id="acfiles1">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles1")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                        <div id="scate3_area" className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">대학원 석사재학생 파일첨부</h4>
+
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
+
+                                    {/* 개인정보 수집 이용 동의서 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader1.getRootProps}
+                                            getInputProps={acuploader1.getInputProps}
+                                            isDragActive={acuploader1.isDragActive}
+                                            files={acfiles1}
+                                        />
+                                        <div id="acfiles1">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles1")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 주민등록초본 1부(본인)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader2.getRootProps}
-                                        getInputProps={acuploader2.getInputProps}
-                                        isDragActive={acuploader2.isDragActive}
-                                        files={acfiles2}
-                                    />
-                                    <div id="acfiles2">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles2")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 주민등록초본 1부(본인) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(본인)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader2.getRootProps}
+                                            getInputProps={acuploader2.getInputProps}
+                                            isDragActive={acuploader2.isDragActive}
+                                            files={acfiles2}
+                                        />
+                                        <div id="acfiles2">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles2")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 주민등록초본 1부(부모)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader3.getRootProps}
-                                        getInputProps={acuploader3.getInputProps}
-                                        isDragActive={acuploader3.isDragActive}
-                                        files={acfiles3}
-                                    />
-                                    <div id="acfiles3">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles3")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 주민등록초본 1부(부모) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 주민등록초본 1부(부모)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader3.getRootProps}
+                                            getInputProps={acuploader3.getInputProps}
+                                            isDragActive={acuploader3.isDragActive}
+                                            files={acfiles3}
+                                        />
+                                        <div id="acfiles3">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles3")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 가족관계증명서 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader4.getRootProps}
-                                        getInputProps={acuploader4.getInputProps}
-                                        isDragActive={acuploader4.isDragActive}
-                                        files={acfiles4}
-                                    />
-                                    <div id="acfiles4">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles4")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 가족관계증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 가족관계증명서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader4.getRootProps}
+                                            getInputProps={acuploader4.getInputProps}
+                                            isDragActive={acuploader4.isDragActive}
+                                            files={acfiles4}
+                                        />
+                                        <div id="acfiles4">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles4")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 재학증명서 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader5.getRootProps}
-                                        getInputProps={acuploader5.getInputProps}
-                                        isDragActive={acuploader5.isDragActive}
-                                        files={acfiles5}
-                                    />
-                                    <div id="acfiles5">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles5")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 재학증명서 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 재학증명서 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader5.getRootProps}
+                                            getInputProps={acuploader5.getInputProps}
+                                            isDragActive={acuploader5.isDragActive}
+                                            files={acfiles5}
+                                        />
+                                        <div id="acfiles5">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles5")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader6.getRootProps}
-                                        getInputProps={acuploader6.getInputProps}
-                                        isDragActive={acuploader6.isDragActive}
-                                        files={acfiles6}
-                                    />
-                                    <div id="acfiles6">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles6")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 성적증명서 1부(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader6.getRootProps}
+                                            getInputProps={acuploader6.getInputProps}
+                                            isDragActive={acuploader6.isDragActive}
+                                            files={acfiles6}
+                                        />
+                                        <div id="acfiles6">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles6")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 등록금 납부 영수증 1부<br />(해당 학년도 1학기)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader7.getRootProps}
-                                        getInputProps={acuploader7.getInputProps}
-                                        isDragActive={acuploader7.isDragActive}
-                                        files={acfiles7}
-                                    />
-                                    <div id="acfiles7">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles7")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 등록금 납부 영수증 1부(2025학년도 1학기) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 등록금 납부 영수증 1부<br />(해당 학년도 1학기)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader7.getRootProps}
+                                            getInputProps={acuploader7.getInputProps}
+                                            isDragActive={acuploader7.isDragActive}
+                                            files={acfiles7}
+                                        />
+                                        <div id="acfiles7">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles7")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 본인명의 통장사본 1부</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader8.getRootProps}
-                                        getInputProps={acuploader8.getInputProps}
-                                        isDragActive={acuploader8.isDragActive}
-                                        files={acfiles8}
-                                    />
-                                    <div id="acfiles8">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles8")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 본인명의 통장사본 1부 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 본인명의 통장사본 1부</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader8.getRootProps}
+                                            getInputProps={acuploader8.getInputProps}
+                                            isDragActive={acuploader8.isDragActive}
+                                            files={acfiles8}
+                                        />
+                                        <div id="acfiles8">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles8")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader9.getRootProps}
-                                        getInputProps={acuploader9.getInputProps}
-                                        isDragActive={acuploader9.isDragActive}
-                                        files={acfiles9}
-                                    />
-                                    <div id="acfiles9">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles9")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader9.getRootProps}
+                                            getInputProps={acuploader9.getInputProps}
+                                            isDragActive={acuploader9.isDragActive}
+                                            files={acfiles9}
+                                        />
+                                        <div id="acfiles9">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles9")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[필수] 연구실적 증빙서류</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader10.getRootProps}
-                                        getInputProps={acuploader10.getInputProps}
-                                        isDragActive={acuploader10.isDragActive}
-                                        files={acfiles10}
-                                    />
-                                    <div id="acfiles10">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles10")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* 연구실적 증빙서류 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 연구실적 증빙서류</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader10.getRootProps}
+                                            getInputProps={acuploader10.getInputProps}
+                                            isDragActive={acuploader10.isDragActive}
+                                            files={acfiles10}
+                                        />
+                                        <div id="acfiles10">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles10")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div className="jil_form_field_subject">[선택] 대학 학적부 1부<br />(해당 학년도 군복무 휴학 이력자)</div>
-                                <div>
-                                    <FileUploader
-                                        getRootProps={acuploader11.getRootProps}
-                                        getInputProps={acuploader11.getInputProps}
-                                        isDragActive={acuploader11.isDragActive}
-                                        files={acfiles10}
-                                    />
-                                    <div id="acfiles11">
-                                        {formData.files
-                                            ?.filter(file => file.wr_title === "acfiles11")
-                                            .map((file, index) => (
-                                                <div key={index}>
-                                                    <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
-                                                </div>
-                                            ))}
+                                    {/* [선택] 대학 학적부 1부(2024학년도 군복무 휴학 이력자) */}
+                                    <label className="text-sm font-medium text-gray-700">[선택] 대학 학적부 1부<br />(해당 학년도 군복무 휴학 이력자)</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader11.getRootProps}
+                                            getInputProps={acuploader11.getInputProps}
+                                            isDragActive={acuploader11.isDragActive}
+                                            files={acfiles11}
+                                        />
+                                        <div id="acfiles11">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles11")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
                                     </div>
+
                                 </div>
-
-
                             </div>
                         </div>
                         {/* 대학원 석사재학생 파일첨부 e */}

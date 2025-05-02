@@ -40,19 +40,17 @@ export default function SchoolSearchModal({ onSelect, onClose }: any) {
         </div>
         <div className="p-1">
           <div className="overflow-y-auto" style={{ maxWidth: "800px", maxHeight: "350px" }}>
-            <table className="table table-bordered">
+            <table className="table table-bordered w-full" style={{width:"500px"}}>
               <thead>
                 <tr>
+                  <th style={{ width: "70px", textAlign: "center", backgroundColor: "#efefef" }}>선택</th>
                   <th style={{ textAlign: "center", backgroundColor: "#efefef" }}>학교명</th>
                   <th style={{ textAlign: "center", backgroundColor: "#efefef" }}>주소</th>
-                  <th style={{ width: "70px", textAlign: "center", backgroundColor: "#efefef" }}>선택</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((school) => (
                   <tr key={school.wr_code}>
-                    <td>{school.wr_schnm}</td>
-                    <td>{school.wr_address}</td>
                     <td style={{ textAlign: "center" }}>
                       <button
                         onClick={() => {
@@ -64,6 +62,8 @@ export default function SchoolSearchModal({ onSelect, onClose }: any) {
                         선택
                       </button>
                     </td>
+                    <td style={{textAlign:"left"}}>{school.wr_schnm}</td>
+                    <td style={{textAlign:"left"}}>{school.wr_address}</td>
                   </tr>
                 ))}
               </tbody>

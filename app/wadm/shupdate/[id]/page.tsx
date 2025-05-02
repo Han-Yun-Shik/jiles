@@ -421,160 +421,292 @@ export default function Sjupdate() {
                         <div className="jil_adm_c_hdr_right">
                             <button onClick={handleSubmit} className="btn btn-secondary btn-sm jil_adm_mr_2">수정</button>&nbsp;
                             <button onClick={() => downloadAllFiles(`${id}`)} className="btn btn-secondary btn-sm jil_adm_mr_2">파일전체다운로드</button>&nbsp;
-                            <Link href="/wadm/slist" className="btn btn-secondary btn-sm">목록</Link>
+                            <Link href="/wadm/shlist" className="btn btn-secondary btn-sm">목록</Link>
 
                         </div>
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="jil_adm_form_area">
-                            <div className="jil_adm_form_title">■ 장학구분</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">년도</div>
-                                <div><input type="text" name="wr_year" value={formData.wr_year || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
+                        <div className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">장학구분</h4>
 
-                                <div className="jil_form_field_subject">장학분야</div>
-                                <div>
-                                    <select
-                                        name="wr_cate"
-                                        value={formData.wr_cate || ''}
-                                        className="jil_form_select jil_w_450"
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">장학구분 선택</option>
-                                        {Object.entries(WR_HCATE_ARR).map(([key, label]) => (
-                                            <option key={key} value={key}>
-                                                {label}
-                                            </option>
-                                        ))}
-                                    </select>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                                    <label className="text-sm font-medium text-gray-700">년도</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_year" value={formData.wr_year || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                                    </div>
+
+                                    <label className="text-sm font-medium text-gray-700">장학분야</label>
+                                    <div className="md:col-span-3">
+                                        <select
+                                            name="wr_cate"
+                                            value={formData.wr_cate}
+                                            onChange={handleChange}
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">장학구분 선택</option>
+                                            {Object.entries(WR_HCATE_ARR).map(([key, label]) => (
+                                                <option key={key} value={key}>
+                                                    {label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <label className="text-sm font-medium text-gray-700">진행상태</label>
+                                    <div className="md:col-span-3">
+                                        <select
+                                            name="wr_state"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                            value={formData.wr_state || 1}
+                                            onChange={handleChange}
+                                        >
+                                            <option value="">진행상태 선택</option>
+                                            {Object.entries(WR_STATE_ARR).map(([key, label]) => (
+                                                <option key={key} value={key}>
+                                                    {label}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    <label className="text-sm font-medium text-gray-700">등록일</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_regdate" value={formData.wr_regdate || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                                    </div>
+
                                 </div>
-
-                                <div className="jil_form_field_subject">진행상태</div>
-                                <div>
-                                    <select
-                                        name="wr_state"
-                                        className="jil_form_select jil_w_450"
-                                        value={formData.wr_state || 1}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">진행상태 선택</option>
-                                        {Object.entries(WR_STATE_ARR).map(([key, label]) => (
-                                            <option key={key} value={key}>
-                                                {label}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="jil_form_field_subject">등록일</div>
-                                <div><input type="text" name="wr_regdate" value={formData.wr_regdate || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
                             </div>
                         </div>
 
-                        <div className="jil_adm_form_area mt-2">
-                            <div className="jil_adm_form_title">■ 학생정보</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">신청자 성명</div>
-                                <div><input type="text" name="wr_name" value={formData.wr_name || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
+                        <div className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">학생정보</h4>
 
-                                <div className="jil_form_field_subject">신청자 생년월일</div>
-                                <div style={{ position: "relative" }}>
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
 
-                                    <select
-                                        name="wr_birthy"
-                                        className="jil_form_select jil_w_120"
-                                        value={formData.wr_birthy || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">년도 선택</option>
-                                        {years.map(year => (
-                                            <option key={year} value={year}>
-                                                {year}년
-                                            </option>
-                                        ))}
-                                    </select>&nbsp;
-
-                                    <select
-                                        name="wr_birthm"
-                                        className="jil_form_select jil_w_120"
-                                        value={formData.wr_birthm || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">월 선택</option>
-                                        {months.map(month => (
-                                            <option key={month} value={month}>
-                                                {month}월
-                                            </option>
-                                        ))}
-                                    </select>&nbsp;
-
-                                    <select
-                                        name="wr_birthd"
-                                        className="jil_form_select jil_w_120"
-                                        value={formData.wr_birthd || ''}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">일 선택</option>
-                                        {days.map(day => (
-                                            <option key={day} value={day}>
-                                                {day}일
-                                            </option>
-                                        ))}
-                                    </select>
-
-                                </div>
-
-                                <div className="jil_form_field_subject">주소</div>
-                                <div>
-                                    <input type="text" name="wr_post" value={formData.wr_post || ''} className="jil_form_input jil_w_120" onChange={handleChange} placeholder="우편번호" readOnly />&nbsp;
-                                    <input type="button" value="주소검색" onClick={handleAddressSearch} className="jil_state_btn" />
-                                    <br />
-                                    <input type="text" name="wr_address" value={formData.wr_address || ''} className="jil_form_input jil_w_per_100  mt-2" onChange={handleChange} placeholder="도로명 주소" readOnly />
-                                    <input type="text" name="wr_detailaddress" value={formData.wr_detailaddress || ''} className="jil_form_input jil_w_per_100  mt-2" onChange={handleChange} placeholder="상세주소" />
-                                </div>
-
-                                <div className="jil_form_field_subject">전화번호</div>
-                                <div><input type="text" name="wr_phone" value={formData.wr_phone || ''} className="jil_form_input jil_w_450" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" /></div>
-
-                                <div className="jil_form_field_subject">이메일</div>
-                                <div><input type="text" name="wr_email" value={formData.wr_email || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">학교</div>
-                                <div>
-                                    <input type="text" name="wr_schoolcode" value={formData.wr_schoolcode || ''} className="jil_form_input jil_w_120" onChange={handleChange} placeholder="학교코드드" /><br />
-                                    <input type="text" name="wr_school" value={formData.wr_school || ''} className="jil_form_input jil_w_450" onChange={handleChange} placeholder="학교명" style={{ marginTop: "2px" }} /> &nbsp;
-                                    <input type="button" value="학교검색" onClick={() => setShowModal(true)} className="jil_state_btn" />
-                                    <input type="text" name="wr_schooladdr" value={formData.wr_schooladdr || ''} className="jil_form_input jil_w_per_100" onChange={handleChange} placeholder="학교주소" style={{ marginTop: "2px" }} />
-
-                                    {showModal && (
-                                        <SchoolSearchModal
-                                            onSelect={handleSelectSchool}
-                                            onClose={() => setShowModal(false)}
+                                    {/* 신청자 성명 */}
+                                    <label className="text-sm font-medium text-gray-700">신청자 성명</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_name"
+                                            value={formData.wr_name}
+                                            onChange={handleChange}
+                                            placeholder="성명 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500"
                                         />
-                                    )}
+                                    </div>
+
+                                    {/* 생년월일 */}
+                                    <label className="text-sm font-medium text-gray-700">생년월일</label>
+                                    <div className="flex gap-2 md:col-span-3">
+                                        <select
+                                            name="wr_birthy"
+                                            value={formData.wr_birthy}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">년도</option>
+                                            {years.map((year) => (
+                                                <option key={year} value={year}>{year}년</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            name="wr_birthm"
+                                            value={formData.wr_birthm}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">월</option>
+                                            {months.map((month) => (
+                                                <option key={month} value={month}>{month}월</option>
+                                            ))}
+                                        </select>
+                                        <select
+                                            name="wr_birthd"
+                                            value={formData.wr_birthd}
+                                            onChange={handleChange}
+                                            className="border border-gray-300 rounded-md px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">일</option>
+                                            {days.map((day) => (
+                                                <option key={day} value={day}>{day}일</option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                    {/* 주소 */}
+                                    <label className="text-sm font-medium text-gray-700">주소</label>
+                                    <div className="md:col-span-3 space-y-2">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                name="wr_post"
+                                                value={formData.wr_post}
+                                                placeholder="우편번호"
+                                                readOnly
+                                                className="w-36 border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                            />
+                                            <button type="button" onClick={handleAddressSearch} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
+                                                주소검색
+                                            </button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="wr_address"
+                                            value={formData.wr_address}
+                                            placeholder="도로명 주소"
+                                            readOnly
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            name="wr_detailaddress"
+                                            value={formData.wr_detailaddress}
+                                            placeholder="상세주소"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+
+                                    {/* 전화번호 */}
+                                    <label className="text-sm font-medium text-gray-700">전화번호</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_phone"
+                                            value={formData.wr_phone}
+                                            onChange={handleChange}
+                                            maxLength={11}
+                                            placeholder="'-' 없이 숫자만 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 이메일 */}
+                                    <label className="text-sm font-medium text-gray-700">이메일</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="email"
+                                            name="wr_email"
+                                            value={formData.wr_email}
+                                            onChange={handleChange}
+                                            placeholder="이메일 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 학교 코드 및 명칭 */}
+                                    <label className="text-sm font-medium text-gray-700">학교</label>
+                                    <div className="md:col-span-3 space-y-2">
+                                        <div className="flex gap-2">
+                                            <input
+                                                type="text"
+                                                name="wr_schoolcode"
+                                                value={formData.wr_schoolcode}
+                                                onChange={handleChange}
+                                                placeholder="학교 코드"
+                                                className="w-36 border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                            />
+                                            <button type="button" onClick={() => setShowModal(true)} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
+                                                학교검색
+                                            </button>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            name="wr_school"
+                                            value={formData.wr_school}
+                                            onChange={handleChange}
+                                            placeholder="학교명"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                        <input
+                                            type="text"
+                                            name="wr_schooladdr"
+                                            value={formData.wr_schooladdr}
+                                            onChange={handleChange}
+                                            placeholder="학교 주소"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
+                                        />
+
+                                        {showModal && (
+                                            <SchoolSearchModal
+                                                onSelect={handleSelectSchool}
+                                                onClose={() => setShowModal(false)}
+                                            />
+                                        )}
+                                    </div>
+
+                                    {/* 학년 */}
+                                    <label className="text-sm font-medium text-gray-700">학년</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_grade"
+                                            value={formData.wr_grade}
+                                            onChange={handleChange}
+                                            placeholder="학년 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 전공 */}
+                                    <label className="text-sm font-medium text-gray-700">전공</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_major"
+                                            value={formData.wr_major}
+                                            onChange={handleChange}
+                                            placeholder="전공 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 본인명의 은행명 */}
+                                    <label className="text-sm font-medium text-gray-700">은행명</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_bank_nm"
+                                            value={formData.wr_bank_nm}
+                                            onChange={handleChange}
+                                            placeholder="은행명 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
+                                    {/* 본인명의 계좌번호 */}
+                                    <label className="text-sm font-medium text-gray-700">계좌번호</label>
+                                    <div className="md:col-span-3">
+                                        <input
+                                            type="text"
+                                            name="wr_bank_num"
+                                            value={formData.wr_bank_num}
+                                            onChange={handleChange}
+                                            placeholder="계좌번호 입력"
+                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                        />
+                                    </div>
+
                                 </div>
-
-                                <div className="jil_form_field_subject">학년</div>
-                                <div><input type="text" name="wr_grade" value={formData.wr_grade || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">전공</div>
-                                <div><input type="text" name="wr_major" value={formData.wr_major || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">본인명의 계좌 은행명</div>
-                                <div><input type="text" name="wr_bank_nm" value={formData.wr_bank_nm || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
-                                <div className="jil_form_field_subject">본인명의 계좌 계좌번호</div>
-                                <div><input type="text" name="wr_bank_num" value={formData.wr_bank_num || ''} className="jil_form_input jil_w_450" onChange={handleChange} /></div>
-
                             </div>
                         </div>
 
-                        <div className="jil_adm_form_area mt-2">
-                            <div className="jil_adm_form_title">■ 보호자정보</div>
-                            <div className="jil_adm_form_field_wrap">
-                                <div className="jil_form_field_subject">전화번호</div>
-                                <div><input type="text" name="wr_ptel" value={formData.wr_ptel || ''} className="jil_form_input jil_w_450" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" /></div>
+                        <div className="flex justify-center p-4">
+                            <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
+                                <h4 className="text-2xl font-bold mb-6">보호자정보</h4>
+
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+
+                                    <label className="text-sm font-medium text-gray-700">전화번호</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_ptel" value={formData.wr_ptel} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} maxLength={11} placeholder="'-'생략 숫자만 입력" />
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
