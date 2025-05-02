@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { REGDATE_YMD_STR, WR_STATE_ARR, WR_SCATE_ARR } from "@/app/utils";
+import { REGDATE_YMD_STR, WR_STATE_ARR, WR_ALLCATE_ARR } from "@/app/utils";
 import UserMenu from "@/components/UserMenu";
 import UserIcon from '@/components/icons/UserIcon';
 
@@ -99,7 +99,7 @@ export default function Plist() {
                             {data.map((item, index) => (
                                 <tr key={index} className="border-b last:border-b-0">
                                     <td className="py-3 px-2">{item.wr_year}</td>
-                                    <td className="py-3 px-2">{WR_SCATE_ARR[item.wr_cate]}</td>
+                                    <td className="py-3 px-2">{WR_ALLCATE_ARR[item.wr_cate]}</td>
                                     <td className="py-3 px-2">{item.wr_name}</td>
                                     <td className="py-3 px-2">{item.wr_school}</td>
                                     <td className="py-3 px-2">{item.wr_grade}</td>

@@ -49,7 +49,7 @@ export default function Jilesjform() {
     wr_bank_nm: "",
     wr_bank_num: "",
     wr_average: "",
-    wr_gubun: "",
+    wr_gubun: "gubunj",
   });
   const [agreed, setAgreed] = useState(false)
   const [daumPostLoaded, setDaumPostLoaded] = useState(false);
@@ -315,7 +315,7 @@ export default function Jilesjform() {
 
 
           <form onSubmit={handleSubmit}>
-            <input type="hidden" name="wr_gubun" defaultValue="gubunj" />
+            <input type="hidden" name="wr_gubun" value="gubunj" />
             <div className="flex justify-center p-4">
               <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>

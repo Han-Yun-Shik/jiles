@@ -40,6 +40,8 @@ export default function RootLayout({
         <div>&nbsp;</div>
         <div className="jil_adm_hdr_mid bg-secondary-subtle">
           <Link href="/wadm/slist" className="jil_adm_menu_lk jil_adm_mr_2">성취장학금</Link>
+          <Link href="/wadm/sjlist" className="jil_adm_menu_lk jil_adm_mr_2">재능장학금</Link>
+          <Link href="/wadm/shlist" className="jil_adm_menu_lk jil_adm_mr_2">희망장학금</Link>
         </div>
         <div>&nbsp;</div>
       </div>

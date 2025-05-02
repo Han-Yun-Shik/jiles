@@ -55,3 +55,14 @@ export const WR_HCATE_ARR: { [key: string]: string } = {
     "hcate3": "대학재학생",
     "hcate4": "비정규학교 등 평생교육시설 고교학력과정 재학생",
 };
+export const WR_ALLCATE_ARR: { [key: string]: string } = {
+    "jcate1": "재능장학금(도내고교생)",
+    "jcate2": "재능장학금(국내대학생)",
+    "scate1": "성취장학금(대학신입생)",
+    "scate2": "성취장학금(대학재학생)",
+    "scate3": "성취장학금(대학원석사재학생)",
+    "hcate1": "고등학생",
+    "hcate2": "대학신입생",
+    "hcate3": "대학재학생",
+    "hcate4": "비정규학교 등 평생교육시설 고교학력과정 재학생",
+};
