@@ -386,15 +386,31 @@ export default function Slist() {
     const downloadAllFiles = async (wr_code: string) => {
         if (!wr_code) return;
 
-        const downloadUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/downloadall/${wr_code}`;
+        try {
+            const res = await fetch(`/api/wroute/proxy-downloadall?wr_code=${wr_code}`);
 
-        // 동적으로 링크 생성하여 다운로드 유도
-        const link = document.createElement("a");
-        link.href = downloadUrl;
-        link.setAttribute("download", `${wr_code}_files.zip`);
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
+            if (!res.ok) {
+                alert("다운로드 실패");
+                return;
+            }
+
+            const blob = await res.blob();
+            const contentDisposition = res.headers.get("Content-Disposition");
+            const fileNameMatch = contentDisposition?.match(/filename="?([^"]+)"?/);
+            const fileName = fileNameMatch?.[1] ?? `${wr_code}_files.zip`;
+
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = decodeURIComponent(fileName);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (err) {
+            console.error("다운로드 오류", err);
+            alert("다운로드 중 오류 발생");
+        }
     };
 
     const handleSelectSchool = (schoolName: string, schoolCode: string, schoolAddr: string) => {
@@ -427,6 +443,34 @@ export default function Slist() {
         }
     };
 
+    const handleDownload = async (code: string) => {
+        try {
+            const res = await fetch(`/api/wroute/proxy-download?dw_code=${code}`);
+
+            if (!res.ok) {
+                alert("파일 다운로드 실패");
+                return;
+            }
+
+            const blob = await res.blob();
+            const contentDisposition = res.headers.get("Content-Disposition");
+            const fileNameMatch = contentDisposition?.match(/filename="?([^"]+)"?/);
+            const fileName = fileNameMatch?.[1] ?? "downloaded_file.hwpx";
+
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = decodeURIComponent(fileName); // 파일명에 한글 포함 가능
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("다운로드 오류:", error);
+            alert("다운로드 중 오류 발생");
+        }
+    };
+
     return (
         <>
             <div className="d-flex bg-secondary-subtle p-3">
@@ -435,7 +479,14 @@ export default function Slist() {
                         <div className="jil_adm_c_hdr_left">성취장학금 신청서 제출 - 수정</div>
                         <div className="jil_adm_c_hdr_right">
                             <button onClick={handleSubmit} className="btn btn-secondary btn-sm jil_adm_mr_2">수정</button>&nbsp;
-                            <button onClick={() => downloadAllFiles(`${id}`)} className="btn btn-secondary btn-sm jil_adm_mr_2">파일전체다운로드</button>&nbsp;
+                            <button
+                                type="button"
+                                onClick={() => downloadAllFiles(`${id}`)}
+                                className="btn btn-secondary btn-sm jil_adm_mr_2"
+                            >
+                                파일전체다운로드
+                            </button>
+                            &nbsp;
                             <button type="button" onClick={() => router.push(backToListUrl)} className="btn btn-secondary btn-sm">
                                 목록
                             </button>
@@ -765,14 +816,13 @@ export default function Slist() {
                                     {/* 개인정보 수집 이용 동의서 */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/aafiles1`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("aafiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            진흥원 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
@@ -947,14 +997,13 @@ export default function Slist() {
                                     {/* 개인정보 수집 이용 동의서 */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/abfiles1`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("abfiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            진흥원 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
@@ -1149,14 +1198,13 @@ export default function Slist() {
                                     {/* 개인정보 수집 이용 동의서 */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/acfiles1`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("acfiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            진흥원 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
@@ -1319,14 +1367,13 @@ export default function Slist() {
                                     {/* 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/acfiles9`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("acfiles9")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            연구실적표 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader

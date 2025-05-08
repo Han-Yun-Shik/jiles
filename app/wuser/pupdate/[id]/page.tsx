@@ -438,6 +438,34 @@ export default function Pupdate() {
         }
     };
 
+    const handleDownload = async (code: string) => {
+        try {
+            const res = await fetch(`/api/wroute/proxy-download?dw_code=${code}`);
+
+            if (!res.ok) {
+                alert("파일 다운로드 실패");
+                return;
+            }
+
+            const blob = await res.blob();
+            const contentDisposition = res.headers.get("Content-Disposition");
+            const fileNameMatch = contentDisposition?.match(/filename="?([^"]+)"?/);
+            const fileName = fileNameMatch?.[1] ?? "downloaded_file.hwpx";
+
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = decodeURIComponent(fileName); // 파일명에 한글 포함 가능
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("다운로드 오류:", error);
+            alert("다운로드 중 오류 발생");
+        }
+    };
+
     return (
         <>
             <UserMenu />
@@ -772,14 +800,13 @@ export default function Pupdate() {
                                     {/* 개인정보 수집 이용 동의서 */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/aafiles1`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("aafiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            진흥원 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
@@ -954,14 +981,13 @@ export default function Pupdate() {
                                     {/* 개인정보 수집 이용 동의서 */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/abfiles1`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("abfiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            진흥원 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
@@ -1156,14 +1182,13 @@ export default function Pupdate() {
                                     {/* 개인정보 수집 이용 동의서 */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/acfiles1`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("acfiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            진흥원 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
@@ -1326,14 +1351,13 @@ export default function Pupdate() {
                                     {/* 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) */}
                                     <label className="text-sm font-medium text-gray-700">
                                         [필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)<br />
-                                        <a
-                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/acfiles9`}
+                                        <button
+                                            type="button"
                                             className="btn btn-secondary btn-sm jil_adm_mr_2"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                            onClick={() => handleDownload("acfiles1")}
                                         >
-                                            파일다운로드
-                                        </a>
+                                            연구실적표 서식 다운로드
+                                        </button>
                                     </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
