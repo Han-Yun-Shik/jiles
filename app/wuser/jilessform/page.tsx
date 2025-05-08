@@ -674,8 +674,8 @@ export default function Jilessform() {
                   {/* 개인정보 수집 이용 동의서 */}
                   <label className="text-sm font-medium text-gray-700">
                     [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
-                    <a
-                      href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/aafiles1`}
+                    <a 
+                      href="/api/wroute/proxy-download?dw_code=aafiles1"
                       className="btn btn-secondary btn-sm jil_adm_mr_2"
                       target="_blank"
                       rel="noopener noreferrer"
