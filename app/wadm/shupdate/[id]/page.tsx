@@ -107,6 +107,7 @@ export default function Sjupdate() {
     const wstate = searchParams.get("wstate") || "";
     const currentPage = searchParams.get("currentPage") || "1";
     const backToListUrl = `/wadm/shlist?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
+    const updateUrl = `/wadm/shupdate/${id}?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
 
     //--#################### 파일첨부 State s ####################--//
     //--### 고교생 첨부파일(hcate1) s ###--//
@@ -373,7 +374,8 @@ export default function Sjupdate() {
                 },
             });
             setMessage(response.data.message);
-            router.push(backToListUrl);
+            //router.push(backToListUrl);
+            window.location.href = updateUrl;
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
@@ -419,6 +421,27 @@ export default function Sjupdate() {
             wr_schoolcode: schoolCode,
             wr_schooladdr: schoolAddr,
         }));
+    };
+
+    const fileDelete = async (file_seq?: number) => {
+        if (!file_seq) return;
+
+        if (!window.confirm("정말 첨부파일을 삭제하시겠습니까?")) return;
+
+        try {
+            const res = await axios.delete(`/api/wroute/fdelete?id=${file_seq}`);
+            if (res.status === 200) {
+                //alert("첨부파일 삭제되었습니다.");
+                //router.replace(updateUrl); // URL 유지 + 히스토리 반영
+                //router.refresh();          // 서버 컴포넌트 데이터 재요청
+                window.location.href = updateUrl;
+            } else {
+                alert("첨부파일 삭제 실패");
+            }
+        } catch (error) {
+            console.error("첨부파일 삭제 오류:", error);
+            alert("첨부파일 삭제 중 오류가 발생했습니다.");
+        }
     };
 
     return (
@@ -742,7 +765,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -763,7 +786,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -784,7 +807,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -805,7 +828,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -826,7 +849,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -847,7 +870,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -868,7 +891,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -889,7 +912,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hafiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -922,7 +945,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -943,7 +966,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -964,7 +987,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -985,7 +1008,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1006,7 +1029,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1027,7 +1050,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1048,7 +1071,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1069,7 +1092,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1090,7 +1113,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hbfiles9")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1123,7 +1146,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1144,7 +1167,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1165,7 +1188,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1186,7 +1209,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1207,7 +1230,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1228,7 +1251,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1249,7 +1272,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1270,7 +1293,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1291,7 +1314,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hcfiles9")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1324,7 +1347,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1345,7 +1368,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1366,7 +1389,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1387,7 +1410,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1408,7 +1431,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1429,7 +1452,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1450,7 +1473,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1471,7 +1494,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "hdfiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>

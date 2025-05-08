@@ -554,7 +554,7 @@ export default function Jilesjform() {
                       className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                     />
                   </div>
-                  
+
                 </div>
               </div>
             </div>
@@ -630,7 +630,17 @@ export default function Jilesjform() {
                   </div>
 
                   {/* 학교장 추천서 1부(진흥원 서식) */}
-                  <label className="text-sm font-medium text-gray-700">[필수] 학교장 추천서 1부(진흥원 서식)</label>
+                  <label className="text-sm font-medium text-gray-700">
+                    [필수] 학교장 추천서 1부(진흥원 서식)<br />
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jafiles5`}
+                      className="btn btn-secondary btn-sm jil_adm_mr_2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      파일다운로드
+                    </a>
+                  </label>
                   <div className="md:col-span-3">
                     <FileUploader
                       getRootProps={jauploader5.getRootProps}
@@ -654,7 +664,17 @@ export default function Jilesjform() {
                   </div>
 
                   {/* 대회 입상 실적표 1부(진흥원 서식) */}
-                  <label className="text-sm font-medium text-gray-700">[필수] 대회 입상 실적표 1부(진흥원 서식) </label>
+                  <label className="text-sm font-medium text-gray-700">
+                    [필수] 대회 입상 실적표 1부(진흥원 서식) <br />
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jafiles7`}
+                      className="btn btn-secondary btn-sm jil_adm_mr_2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      파일다운로드
+                    </a>
+                  </label>
                   <div className="md:col-span-3">
                     <FileUploader
                       getRootProps={jauploader7.getRootProps}
@@ -774,7 +794,17 @@ export default function Jilesjform() {
                   </div>
 
                   {/* 대회 입상 실적표 1부(진흥원 서식) */}
-                  <label className="text-sm font-medium text-gray-700">[필수] 대회 입상 실적표 1부(진흥원 서식)</label>
+                  <label className="text-sm font-medium text-gray-700">
+                    [필수] 대회 입상 실적표 1부(진흥원 서식)<br />
+                    <a
+                      href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jbfiles8`}
+                      className="btn btn-secondary btn-sm jil_adm_mr_2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      파일다운로드
+                    </a>
+                  </label>
                   <div className="md:col-span-3">
                     <FileUploader
                       getRootProps={jbuploader8.getRootProps}
@@ -830,7 +860,36 @@ export default function Jilesjform() {
                 </div>
 
                 <div className="border p-4 bg-gray-50 rounded-md h-40 overflow-y-auto text-sm text-gray-700">
-                  내용 작성...
+                  한국장학재단에서는 「한국장학재단 설립 등에 관한 법률」제50조의5(중복지원의 방지),
+                  「취업 후 학자금 상환 특별법」제39조(중복 지원의 방지)에 따라 “중복지원 방지시스템”을 운영하고 있으며,
+                  각 기관에서 대학(원)생에게 학자금(장학금)을 지급한 내역이 있다면 “중복지원 방지시스템”에 등록을 요청하고 있습니다.<br /><br />
+
+                  <span className="font-bold">1. 학자금 중복지원 방지제도란?</span><br />
+                  학자금 지원의 균등한 배분과 학자금 관련 예산 집행의 효율성 제고를 위하여 동일 학기에 한 학생이 한국장학재단 및 기타학자금을 등록금 범위를 초과하여 지원 받지 않도록 하는 제도<br /><br />
+
+                  <span className="font-bold">2. 중복지원 범위</span><br />
+                  - 학자금 대출, 장학금 등 학자금 수혜금액이 등록금을 초과할 경우 중복지원자 등록<br />
+                  - 장학금 수혜금액의 합이 등록금을 초과한 경우 중복지원자로 등록<br />
+                  - 사설 및 기타, 정부, 대학 교내 장학금 및 학자금 대출 모두 포함<br />
+                  - 근로 장학금 및 생활비 지원 등 일부 장학금은 중복지원 범위에서 제외<br />
+                  - 교내 장학금은 근로, 공로, 도우미등 일부 장학금을 제외하고 모두 중복지원에 해당<br /><br />
+
+                  <span className="font-bold">3. 중복지원자 명단 및 금액확인</span><br />
+                  - 한국장학재단 전화문의(1599-2000)<br />
+                  - 한국장학재단 홈페이지(www.kosaf.go.kr) 로그인 → 사이버창구에서 확인<br /><br />
+
+                  <span className="font-bold">4. 학자금 대출이 있는 경우, 우선 상환 실시</span><br />
+                  원칙적으로 장학금은 학자금 대출 상환을 우선으로 실시해야 함. 이를 어길 경우 ｢한국장학재단｣ 중복지원자 명단에 등록됨<br /><br />
+
+                  <span className="font-bold">5. 중복지원자 명단에 등록되었을 경우 불이익 발생</span><br />
+                  한국장학재단에서 반환 및 상환 통지가 되며 기간 내에 따르지 않을 경우 법적인 변제의무 발생<br />
+                  중복지원 해소(수혜 학자금 상환 및 반환)시까지 국가장학금 수혜 및 학자금 대출 불가<br /><br />
+
+                  <span className="font-bold">6. 중복지원 해소(상환 및 반환) 절차</span><br />
+                  가. 학자금 대출자 : 장학금 수혜 후 대출금 미상환의 경우<br />
+                  * 한국장학재단(1599-2000) 전화문의 ⇒ 상환금액 및 가상계좌 확인 ⇒ 대출금 상환<br />
+                  나. 장학금 중복 수혜자 :<br />
+                  * 한국장학재단(1599-2000) 전화문의  ⇒ 반환금액(=등록금-장학금) 확인 ⇒ 수혜기관으로 반환
                 </div>
               </div>
             </div>

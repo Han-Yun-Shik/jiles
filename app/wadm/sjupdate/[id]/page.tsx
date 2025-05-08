@@ -107,6 +107,7 @@ export default function Sjupdate() {
     const wstate = searchParams.get("wstate") || "";
     const currentPage = searchParams.get("currentPage") || "1";
     const backToListUrl = `/wadm/sjlist?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
+    const updateUrl = `/wadm/sjupdate/${id}?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
     //--##### Search arg e #####--//
 
     //--#################### 파일첨부 State s ####################--//
@@ -306,7 +307,8 @@ export default function Sjupdate() {
                 },
             });
             setMessage(response.data.message);
-            router.push(backToListUrl);
+            //router.push(backToListUrl);
+            window.location.href = updateUrl;
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
@@ -352,6 +354,27 @@ export default function Sjupdate() {
             wr_schoolcode: schoolCode,
             wr_schooladdr: schoolAddr,
         }));
+    };
+
+    const fileDelete = async (file_seq?: number) => {
+        if (!file_seq) return;
+
+        if (!window.confirm("정말 첨부파일을 삭제하시겠습니까?")) return;
+
+        try {
+            const res = await axios.delete(`/api/wroute/fdelete?id=${file_seq}`);
+            if (res.status === 200) {
+                //alert("첨부파일 삭제되었습니다.");
+                //router.replace(updateUrl); // URL 유지 + 히스토리 반영
+                //router.refresh();          // 서버 컴포넌트 데이터 재요청
+                window.location.href = updateUrl;
+            } else {
+                alert("첨부파일 삭제 실패");
+            }
+        } catch (error) {
+            console.error("첨부파일 삭제 오류:", error);
+            alert("첨부파일 삭제 중 오류가 발생했습니다.");
+        }
     };
 
     return (
@@ -676,7 +699,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -697,7 +720,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -718,7 +741,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -739,14 +762,24 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
                                     </div>
 
                                     {/* 학교장 추천서 1부(진흥원 서식) */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 학교장 추천서 1부(진흥원 서식)</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 학교장 추천서 1부(진흥원 서식)<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jafiles5`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jauploader5.getRootProps}
@@ -760,7 +793,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -781,14 +814,24 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
                                     </div>
 
                                     {/* 대회 입상 실적표 1부(진흥원 서식) */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 대회 입상 실적표 1부(진흥원 서식) </label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 대회 입상 실적표 1부(진흥원 서식) <br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jafiles7`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jauploader7.getRootProps}
@@ -802,7 +845,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -823,7 +866,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jafiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -856,7 +899,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -877,7 +920,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -898,7 +941,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -919,7 +962,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -940,7 +983,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -961,7 +1004,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -982,14 +1025,24 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
                                     </div>
 
                                     {/* 대회 입상 실적표 1부(진흥원 서식) */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 대회 입상 실적표 1부(진흥원 서식)</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 대회 입상 실적표 1부(진흥원 서식)<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jbfiles8`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jbuploader8.getRootProps}
@@ -1003,7 +1056,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1024,7 +1077,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles9")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1044,7 +1097,7 @@ export default function Sjupdate() {
                                                 ?.filter(file => file.wr_title === "jbfiles10")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>

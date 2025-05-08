@@ -107,6 +107,8 @@ export default function Slist() {
     const wstate = searchParams.get("wstate") || "";
     const currentPage = searchParams.get("currentPage") || "1";
     const backToListUrl = `/wadm/slist?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
+    const updateUrl = `/wadm/supdate/${id}?wyear=${wyear}&wcate=${wcate}&wname=${wname}&wstate=${wstate}&currentPage=${currentPage}`;
+
     //--##### Search arg e #####--//
 
     //--#################### 파일첨부 State s ####################--//
@@ -353,7 +355,10 @@ export default function Slist() {
                 },
             });
             setMessage(response.data.message);
-            router.push(backToListUrl);
+            //router.push(backToListUrl);
+            //router.replace(updateUrl); // ✅ 수정페이지로 다시 이동 (파라미터 유지)
+            //router.refresh();          // ✅ 데이터 갱신
+            window.location.href = updateUrl;
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
@@ -399,6 +404,27 @@ export default function Slist() {
             wr_schoolcode: schoolCode,
             wr_schooladdr: schoolAddr,
         }));
+    };
+
+    const fileDelete = async (file_seq?: number) => {
+        if (!file_seq) return;
+
+        if (!window.confirm("정말 첨부파일을 삭제하시겠습니까?")) return;
+
+        try {
+            const res = await axios.delete(`/api/wroute/fdelete?id=${file_seq}`);
+            if (res.status === 200) {
+                //alert("첨부파일 삭제되었습니다.");
+                //router.replace(updateUrl); // URL 유지 + 히스토리 반영
+                //router.refresh();          // 서버 컴포넌트 데이터 재요청
+                window.location.href = updateUrl;
+            } else {
+                alert("첨부파일 삭제 실패");
+            }
+        } catch (error) {
+            console.error("첨부파일 삭제 오류:", error);
+            alert("첨부파일 삭제 중 오류가 발생했습니다.");
+        }
     };
 
     return (
@@ -750,7 +776,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -770,7 +796,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -790,7 +816,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -810,7 +836,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -830,7 +856,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -850,7 +876,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -870,7 +896,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -890,7 +916,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "aafiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -922,7 +948,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -942,7 +968,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -962,7 +988,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -982,7 +1008,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1002,7 +1028,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1022,7 +1048,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1042,7 +1068,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1062,7 +1088,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1082,7 +1108,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "abfiles9")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1114,7 +1140,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles1")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1134,7 +1160,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles2")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1154,7 +1180,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles3")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1174,7 +1200,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles4")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1194,7 +1220,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles5")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1214,7 +1240,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles6")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1234,7 +1260,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles7")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1254,14 +1280,24 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles8")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
                                     </div>
 
                                     {/* 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 연구실적표 1부<br />(진흥원 서식, SCI급 논문만 인정)<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/acfiles9`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={acuploader9.getRootProps}
@@ -1274,7 +1310,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles9")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1294,7 +1330,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles10")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
@@ -1314,7 +1350,7 @@ export default function Slist() {
                                                 ?.filter(file => file.wr_title === "acfiles11")
                                                 .map((file, index) => (
                                                     <div key={index}>
-                                                        <button className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
                                                     </div>
                                                 ))}
                                         </div>
