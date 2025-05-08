@@ -98,7 +98,7 @@ export default function Plist() {
                         <tbody>
                             {data.map((item, index) => (
                                 <tr key={index} className="border-b last:border-b-0">
-                                    <td className="py-3 px-2">{item.wr_year}</td>
+                                    <td className="py-3 px-2">{item.wr_year != 'null' ? item.wr_year : ""}</td>
                                     <td className="py-3 px-2">{WR_ALLCATE_ARR[item.wr_cate]}</td>
                                     <td className="py-3 px-2">{item.wr_name}</td>
                                     <td className="py-3 px-2">{item.wr_school}</td>
@@ -112,20 +112,26 @@ export default function Plist() {
                                     </td>
                                     <td className="py-3 px-2">{REGDATE_YMD_STR(item.wr_regdate)}</td>
                                     <td className="py-3 px-2 space-x-2">
-                                        <Link
-                                            href={
-                                                item.wr_gubun === "gubuns"
-                                                    ? `/wuser/pupdate/${item.wr_code}`
-                                                    : item.wr_gubun === "gubunj"
-                                                        ? `/wuser/pjupdate/${item.wr_code}`
-                                                        : item.wr_gubun === "gubunh"
-                                                            ? `/wuser/phupdate/${item.wr_code}`
-                                                            : "#"
-                                            }
-                                            className="inline-block bg-gray-600 hover:bg-gray-700 text-white text-xs py-1 px-3 rounded"
-                                        >
-                                            수정
-                                        </Link>
+
+                                        {item.wr_state === 3 ? (
+                                            <Link
+                                                href={
+                                                    item.wr_gubun === "gubuns"
+                                                        ? `/wuser/pupdate/${item.wr_code}`
+                                                        : item.wr_gubun === "gubunj"
+                                                            ? `/wuser/pjupdate/${item.wr_code}`
+                                                            : item.wr_gubun === "gubunh"
+                                                                ? `/wuser/phupdate/${item.wr_code}`
+                                                                : "#"
+                                                }
+                                                className="inline-block bg-gray-600 hover:bg-gray-700 text-white text-xs py-1 px-3 rounded"
+                                            >
+                                                수정
+                                            </Link>
+                                        ) : (
+                                            <span>&nbsp;</span>
+                                        )}
+
 
                                     </td>
                                 </tr>

@@ -761,7 +761,17 @@ export default function Phupdate() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
                                     {/* 개인정보 수집 이용 동의서 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/hafiles1`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={hauploader1.getRootProps}
@@ -941,7 +951,17 @@ export default function Phupdate() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
                                     {/* 개인정보 수집 이용 동의서 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/hbfiles1`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={hbuploader1.getRootProps}
@@ -1142,7 +1162,17 @@ export default function Phupdate() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
                                     {/* 개인정보 수집 이용 동의서 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/hcfiles1`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={hcuploader1.getRootProps}
@@ -1343,7 +1373,17 @@ export default function Phupdate() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
                                     {/* 개인정보 수집 이용 동의서 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/hdfiles1`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={hduploader1.getRootProps}

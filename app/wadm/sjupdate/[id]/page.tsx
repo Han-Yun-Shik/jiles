@@ -685,7 +685,17 @@ export default function Sjupdate() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
                                     {/* 개인정보 수집 이용 동의서 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jafiles1`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jauploader1.getRootProps}
@@ -885,7 +895,17 @@ export default function Sjupdate() {
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
 
                                     {/* 개인정보 수집 이용 동의서 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 개인정보 수집 이용, 제3자 제공 동의서 1부</label>
+                                    <label className="text-sm font-medium text-gray-700">
+                                        [필수] 개인정보 수집 이용, 제3자 제공 동의서 1부<br />
+                                        <a
+                                            href={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/download/jbfiles1`}
+                                            className="btn btn-secondary btn-sm jil_adm_mr_2"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            파일다운로드
+                                        </a>
+                                    </label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jbuploader1.getRootProps}
