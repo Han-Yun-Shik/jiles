@@ -49,7 +49,7 @@ export default function Jilessform() {
     wr_bank_nm: "",
     wr_bank_num: "",
     wr_average: "",
-    wr_gubun: "",
+    wr_gubun: "gubuns",
   });
   const [agreed, setAgreed] = useState(false)
   const [daumPostLoaded, setDaumPostLoaded] = useState(false);
