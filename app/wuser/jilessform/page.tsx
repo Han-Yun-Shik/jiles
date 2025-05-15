@@ -390,17 +390,18 @@ export default function Jilessform() {
       <UserMenu />
 
       {isSubmitting && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex flex-col items-center justify-center text-white">
+        <div
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        >
           <div className="text-lg mb-4">등록 진행중 입니다...</div>
           <div className="flex space-x-2 mt-2">
-            <div className="w-3 h-3 bg-white rounded-full animate-bounce [animation-delay:-0.3s]"></div>
-            <div className="w-3 h-3 bg-white rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+            <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
+            <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
             <div className="w-3 h-3 bg-white rounded-full animate-bounce"></div>
           </div>
         </div>
       )}
-
-
 
       <div className="jil_biz_hdr">제주인재육성 장학금 신청</div>
 
