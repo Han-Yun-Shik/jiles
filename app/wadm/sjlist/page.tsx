@@ -31,7 +31,7 @@ export default function Sjlist() {
 
   const [totalCount, setTotalCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(2);
+  const [itemsPerPage] = useState(20);
 
   const totalPages = Math.ceil(totalCount / itemsPerPage);
 
