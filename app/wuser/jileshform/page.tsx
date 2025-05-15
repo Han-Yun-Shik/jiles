@@ -54,6 +54,7 @@ export default function Jileshform() {
   const [agreed, setAgreed] = useState(false)
   const [daumPostLoaded, setDaumPostLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [years, setYears] = useState<number[]>([]);
   const [months, setMonths] = useState<string[]>([]);
@@ -220,6 +221,9 @@ export default function Jileshform() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isSubmitting) return; // 중복 제출 방지
+    setIsSubmitting(true);    // 제출 시작
+
     // 장학구분별 필수 파일 체크
     //--### 고등학생 첨부파일(hcate1) s ###--//
     if (formData.wr_cate === "hcate1" && hafiles1.length === 0) { alert("고등학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
@@ -350,6 +354,8 @@ export default function Jileshform() {
     } catch (error) {
       console.error("데이터 전송 실패:", error);
       setMessage("데이터 전송 실패");
+    } finally {
+      setIsSubmitting(false); // 실패 시 다시 버튼 활성화
     }
   };
 
@@ -410,6 +416,14 @@ export default function Jileshform() {
   return (
     <>
       <UserMenu />
+
+      {isSubmitting && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-70 flex flex-col items-center justify-center text-white">
+          <div className="text-lg mb-4">등록 진행중 입니다...</div>
+          <div className="animate-spin rounded-full h-10 w-10 border-4 border-white border-t-transparent" />
+        </div>
+      )}
+
       <div className="jil_biz_hdr">제주인재육성 장학금 신청</div>
 
       <div className="d-flex bg-secondary-subtle p-3">
@@ -1237,7 +1251,7 @@ export default function Jileshform() {
             <div className="flex justify-center gap-3 mt-6">
               <button
                 type="submit"
-                disabled={!agreed}
+                disabled={!agreed || isSubmitting}
                 onClick={() => setSaveMode("temp")}
                 className="btn btn-secondary"
               >
@@ -1246,7 +1260,7 @@ export default function Jileshform() {
 
               <button
                 type="submit"
-                disabled={!agreed}
+                disabled={!agreed || isSubmitting}
                 onClick={() => setSaveMode("submit")}
                 className="btn btn-success"
               >
