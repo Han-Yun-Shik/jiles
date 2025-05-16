@@ -212,40 +212,55 @@ export default function Jilessform() {
     if (isSubmitting) return; // 중복 제출 방지
     setIsSubmitting(true);    // 제출 시작
 
+    if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_post || !formData.wr_address || !formData.wr_detailaddress.trim()) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
+    if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_schoolcode || !formData.wr_school || !formData.wr_schooladdr) { alert("학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_major) { alert("전공을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_average) { alert("평균 성적을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_jang_num) { alert("장학재단 고객번호를 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_bank_num) { alert("계좌번호를 입력해 주세요."); return; setIsSubmitting(false); }
+    if (!formData.wr_ptel || formData.wr_ptel.length < 10) { alert("보호자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+
     // 장학구분별 필수 파일 체크
     //--### 대학 신입생 첨부파일(scate1) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles7.length === 0) { alert("대학 신입생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles8.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles7.length === 0) { alert("대학 신입생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles8.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 대학 신입생 첨부파일(scate1) e ###--//
 
     //--### 대학 재학생 첨부파일(scate2) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles7.length === 0) { alert("대학 재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles8.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles7.length === 0) { alert("대학 재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles8.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 대학 재학생 첨부파일(scate2) e ###--//
 
     //--### 석사재학생 첨부파일(scate3) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles1.length === 0) { alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles2.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles3.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles4.length === 0) { alert("대학원 석사재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles5.length === 0) { alert("대학원 석사재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles6.length === 0) { alert("대학원 석사재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles7.length === 0) { alert("대학원 석사재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles8.length === 0) { alert("대학원 석사재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles9.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적표 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles10.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적 증빙서류 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles1.length === 0) { alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles2.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles3.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles4.length === 0) { alert("대학원 석사재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles5.length === 0) { alert("대학원 석사재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles6.length === 0) { alert("대학원 석사재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles7.length === 0) { alert("대학원 석사재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles8.length === 0) { alert("대학원 석사재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles9.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적표 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles10.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적 증빙서류 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 석사재학생 첨부파일(scate3) e ###--//
 
     const data = new FormData();

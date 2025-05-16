@@ -175,31 +175,45 @@ export default function Jilesjform() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); return; }
+
     if (isSubmitting) return; // 중복 제출 방지
     setIsSubmitting(true);    // 제출 시작
 
+    if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_post || !formData.wr_address || !formData.wr_detailaddress.trim()) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
+    if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_schoolcode || !formData.wr_school || !formData.wr_schooladdr) { alert("학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_bank_num) { alert("계좌번호를 입력해 주세요."); return; setIsSubmitting(false); }
+    if (!formData.wr_ptel || formData.wr_ptel.length < 10) { alert("보호자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+
     // 장학구분별 필수 파일 체크
     //--### 도내 고교생 첨부파일(scate1) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles1.length === 0) { alert("도내 고교생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles2.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles3.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles4.length === 0) { alert("도내 고교생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles5.length === 0) { alert("도내 고교생은 [필수] 학교장 추천서 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles6.length === 0) { alert("도내 고교생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles7.length === 0) { alert("도내 고교생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles8.length === 0) { alert("도내 고교생은 [필수] 입상실적 증빙서류을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles1.length === 0) { alert("도내 고교생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles2.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles3.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles4.length === 0) { alert("도내 고교생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles5.length === 0) { alert("도내 고교생은 [필수] 학교장 추천서 1부(진흥원 서식) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles6.length === 0) { alert("도내 고교생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles7.length === 0) { alert("도내 고교생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles8.length === 0) { alert("도내 고교생은 [필수] 입상실적 증빙서류을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 도내 고교생 첨부파일(scate1) e ###--//
 
     //--### 국내 대학생 첨부파일(scate2) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles1.length === 0) { alert("국내 대학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles2.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles3.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles4.length === 0) { alert("국내 대학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles5.length === 0) { alert("국내 대학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles6.length === 0) { alert("국내 대학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles7.length === 0) { alert("국내 대학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles8.length === 0) { alert("국내 대학생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles9.length === 0) { alert("국내 대학생은 [필수] 입상실적 증빙서류 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles1.length === 0) { alert("국내 대학생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles2.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles3.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles4.length === 0) { alert("국내 대학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles5.length === 0) { alert("국내 대학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles6.length === 0) { alert("국내 대학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles7.length === 0) { alert("국내 대학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles8.length === 0) { alert("국내 대학생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles9.length === 0) { alert("국내 대학생은 [필수] 입상실적 증빙서류 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 국내 대학생 첨부파일(scate2) e ###--//
 
     const data = new FormData();

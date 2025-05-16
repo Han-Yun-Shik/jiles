@@ -224,49 +224,61 @@ export default function Jileshform() {
     if (isSubmitting) return; // 중복 제출 방지
     setIsSubmitting(true);    // 제출 시작
 
+    if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_post || !formData.wr_address || !formData.wr_detailaddress.trim()) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
+    if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_schoolcode || !formData.wr_school || !formData.wr_schooladdr) { alert("학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_bank_num) { alert("계좌번호를 입력해 주세요."); return; setIsSubmitting(false); }
+    if (!formData.wr_ptel || formData.wr_ptel.length < 10) { alert("보호자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+
     // 장학구분별 필수 파일 체크
     //--### 고등학생 첨부파일(hcate1) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles1.length === 0) { alert("고등학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles2.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles3.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles4.length === 0) { alert("고등학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles5.length === 0) { alert("고등학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles6.length === 0) { alert("고등학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles7.length === 0) { alert("고등학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles8.length === 0) { alert("고등학생은 [필수] 소득수준 증빙자료을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles1.length === 0) { alert("고등학생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles2.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles3.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles4.length === 0) { alert("고등학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles5.length === 0) { alert("고등학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles6.length === 0) { alert("고등학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles7.length === 0) { alert("고등학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles8.length === 0) { alert("고등학생은 [필수] 소득수준 증빙자료을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 고등학생 첨부파일(hcate1) e ###--//
 
     //--### 대학 신입생 첨부파일(hcate2) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles7.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles8.length === 0) { alert("대학 신입생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles7.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles8.length === 0) { alert("대학 신입생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 대학 신입생 첨부파일(hcate2) e ###--//
 
     //--### 대학 재학생 첨부파일(hcate3) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles7.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles8.length === 0) { alert("대학 재학생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles7.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles8.length === 0) { alert("대학 재학생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 대학 재학생 첨부파일(hcate3) e ###--//
 
     //--### 비정규학교 첨부파일(hcate4) s ###--//
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles1.length === 0) { alert("비정규학교는 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles2.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles3.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles4.length === 0) { alert("비정규학교는 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles5.length === 0) { alert("비정규학교는 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles6.length === 0) { alert("비정규학교는 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles7.length === 0) { alert("비정규학교는 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles8.length === 0) { alert("비정규학교는 [필수] 소득수준 증빙자료을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles1.length === 0) { alert("비정규학교는 [필수] 개인정보 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles2.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles3.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles4.length === 0) { alert("비정규학교는 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles5.length === 0) { alert("비정규학교는 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles6.length === 0) { alert("비정규학교는 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles7.length === 0) { alert("비정규학교는 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles8.length === 0) { alert("비정규학교는 [필수] 소득수준 증빙자료을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 비정규학교 첨부파일(hcate4) e ###--//
 
     const data = new FormData();
