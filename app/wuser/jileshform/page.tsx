@@ -226,47 +226,47 @@ export default function Jileshform() {
 
     // 장학구분별 필수 파일 체크
     //--### 고등학생 첨부파일(hcate1) s ###--//
-    if (formData.wr_cate === "hcate1" && hafiles1.length === 0) { alert("고등학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles2.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles3.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles4.length === 0) { alert("고등학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles5.length === 0) { alert("고등학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles6.length === 0) { alert("고등학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles7.length === 0) { alert("고등학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate1" && hafiles8.length === 0) { alert("고등학생은 [필수] 소득수준 증빙자료을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles1.length === 0) { alert("고등학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles2.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles3.length === 0) { alert("고등학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles4.length === 0) { alert("고등학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles5.length === 0) { alert("고등학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles6.length === 0) { alert("고등학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles7.length === 0) { alert("고등학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && hafiles8.length === 0) { alert("고등학생은 [필수] 소득수준 증빙자료을 첨부해야 합니다."); return; }
     //--### 고등학생 첨부파일(hcate1) e ###--//
 
     //--### 대학 신입생 첨부파일(hcate2) s ###--//
-    if (formData.wr_cate === "hcate2" && hbfiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles7.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate2" && hbfiles8.length === 0) { alert("대학 신입생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles7.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && hbfiles8.length === 0) { alert("대학 신입생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); return; }
     //--### 대학 신입생 첨부파일(hcate2) e ###--//
 
     //--### 대학 재학생 첨부파일(hcate3) s ###--//
-    if (formData.wr_cate === "hcate3" && hcfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles7.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate3" && hcfiles8.length === 0) { alert("대학 재학생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles7.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && hcfiles8.length === 0) { alert("대학 재학생은 [필수] 소득수준 증빙자료 파일을 첨부해야 합니다."); return; }
     //--### 대학 재학생 첨부파일(hcate3) e ###--//
 
     //--### 비정규학교 첨부파일(hcate4) s ###--//
-    if (formData.wr_cate === "hcate4" && hdfiles1.length === 0) { alert("비정규학교는 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles2.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles3.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles4.length === 0) { alert("비정규학교는 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles5.length === 0) { alert("비정규학교는 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles6.length === 0) { alert("비정규학교는 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles7.length === 0) { alert("비정규학교는 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "hcate4" && hdfiles8.length === 0) { alert("비정규학교는 [필수] 소득수준 증빙자료을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles1.length === 0) { alert("비정규학교는 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles2.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles3.length === 0) { alert("비정규학교는 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles4.length === 0) { alert("비정규학교는 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles5.length === 0) { alert("비정규학교는 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles6.length === 0) { alert("비정규학교는 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles7.length === 0) { alert("비정규학교는 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && hdfiles8.length === 0) { alert("비정규학교는 [필수] 소득수준 증빙자료을 첨부해야 합니다."); return; }
     //--### 비정규학교 첨부파일(hcate4) e ###--//
 
     const data = new FormData();
@@ -413,6 +413,85 @@ export default function Jileshform() {
     }
   };
 
+  // 공통 삭제 핸들러
+  const handleRemoveFile = (target:
+    "hafiles1" |
+    "hafiles2" |
+    "hafiles3" |
+    "hafiles4" |
+    "hafiles5" |
+    "hafiles6" |
+    "hafiles7" |
+    "hafiles8" |
+    "hbfiles1" |
+    "hbfiles2" |
+    "hbfiles3" |
+    "hbfiles4" |
+    "hbfiles5" |
+    "hbfiles6" |
+    "hbfiles7" |
+    "hbfiles8" |
+    "hbfiles9" |
+    "hcfiles1" |
+    "hcfiles2" |
+    "hcfiles3" |
+    "hcfiles4" |
+    "hcfiles5" |
+    "hcfiles6" |
+    "hcfiles7" |
+    "hcfiles8" |
+    "hcfiles9" |
+    "hdfiles1" |
+    "hdfiles2" |
+    "hdfiles3" |
+    "hdfiles4" |
+    "hdfiles5" |
+    "hdfiles6" |
+    "hdfiles7" |
+    "hdfiles8", index: number) => {
+    const setStateMap = {
+      hafiles1: setHafiles1,
+      hafiles2: setHafiles2,
+      hafiles3: setHafiles3,
+      hafiles4: setHafiles4,
+      hafiles5: setHafiles5,
+      hafiles6: setHafiles6,
+      hafiles7: setHafiles7,
+      hafiles8: setHafiles8,
+      hbfiles1: setHbfiles1,
+      hbfiles2: setHbfiles2,
+      hbfiles3: setHbfiles3,
+      hbfiles4: setHbfiles4,
+      hbfiles5: setHbfiles5,
+      hbfiles6: setHbfiles6,
+      hbfiles7: setHbfiles7,
+      hbfiles8: setHbfiles8,
+      hbfiles9: setHbfiles9,
+      hcfiles1: setHcfiles1,
+      hcfiles2: setHcfiles2,
+      hcfiles3: setHcfiles3,
+      hcfiles4: setHcfiles4,
+      hcfiles5: setHcfiles5,
+      hcfiles6: setHcfiles6,
+      hcfiles7: setHcfiles7,
+      hcfiles8: setHcfiles8,
+      hcfiles9: setHcfiles9,
+      hdfiles1: setHdfiles1,
+      hdfiles2: setHdfiles2,
+      hdfiles3: setHdfiles3,
+      hdfiles4: setHdfiles4,
+      hdfiles5: setHdfiles5,
+      hdfiles6: setHdfiles6,
+      hdfiles7: setHdfiles7,
+      hdfiles8: setHdfiles8,
+    };
+
+    const setFiles = setStateMap[target];
+    if (setFiles) {
+      setFiles(prev => prev.filter((_, i) => i !== index));
+    }
+  };
+
   return (
     <>
       <UserMenu />
@@ -422,7 +501,7 @@ export default function Jileshform() {
           className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
-          <div className="text-lg mb-4">등록 진행중 입니다...</div>
+          <div className="text-lg mb-4">신청서 제줄 진행중 입니다...</div>
           <div className="flex space-x-2 mt-2">
             <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
             <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
@@ -691,7 +770,7 @@ export default function Jileshform() {
                       className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                     />
                   </div>
-                  
+
                 </div>
               </div>
             </div>
@@ -736,6 +815,7 @@ export default function Jileshform() {
                       isDragActive={hauploader1.isDragActive}
                       files={hafiles1}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles1", index)}
                     />
                   </div>
 
@@ -748,6 +828,7 @@ export default function Jileshform() {
                       isDragActive={hauploader2.isDragActive}
                       files={hafiles2}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles2", index)}
                     />
                   </div>
 
@@ -760,6 +841,7 @@ export default function Jileshform() {
                       isDragActive={hauploader3.isDragActive}
                       files={hafiles3}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles3", index)}
                     />
                   </div>
 
@@ -772,6 +854,7 @@ export default function Jileshform() {
                       isDragActive={hauploader4.isDragActive}
                       files={hafiles4}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles4", index)}
                     />
                   </div>
 
@@ -784,6 +867,7 @@ export default function Jileshform() {
                       isDragActive={hauploader5.isDragActive}
                       files={hafiles5}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles5", index)}
                     />
                   </div>
 
@@ -796,6 +880,7 @@ export default function Jileshform() {
                       isDragActive={hauploader6.isDragActive}
                       files={hafiles6}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles6", index)}
                     />
                   </div>
 
@@ -808,6 +893,7 @@ export default function Jileshform() {
                       isDragActive={hauploader7.isDragActive}
                       files={hafiles7}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles7", index)}
                     />
                   </div>
 
@@ -820,6 +906,7 @@ export default function Jileshform() {
                       isDragActive={hauploader8.isDragActive}
                       files={hafiles8}
                       required={formData.wr_cate === "hcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("hafiles8", index)}
                     />
                   </div>
 
@@ -853,6 +940,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader1.isDragActive}
                       files={hbfiles1}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles1", index)}
                     />
                   </div>
 
@@ -865,6 +953,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader2.isDragActive}
                       files={hbfiles2}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles2", index)}
                     />
                   </div>
 
@@ -877,6 +966,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader3.isDragActive}
                       files={hbfiles3}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles3", index)}
                     />
                   </div>
 
@@ -889,6 +979,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader4.isDragActive}
                       files={hbfiles4}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles4", index)}
                     />
                   </div>
 
@@ -901,6 +992,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader5.isDragActive}
                       files={hbfiles5}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles5", index)}
                     />
                   </div>
 
@@ -913,6 +1005,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader6.isDragActive}
                       files={hbfiles6}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles6", index)}
                     />
                   </div>
 
@@ -925,6 +1018,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader7.isDragActive}
                       files={hbfiles7}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles7", index)}
                     />
                   </div>
 
@@ -937,6 +1031,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader8.isDragActive}
                       files={hbfiles8}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles8", index)}
                     />
                   </div>
 
@@ -949,6 +1044,7 @@ export default function Jileshform() {
                       isDragActive={hbuploader9.isDragActive}
                       files={hbfiles9}
                       required={formData.wr_cate === "hcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("hbfiles9", index)}
                     />
                   </div>
 
@@ -982,6 +1078,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader1.isDragActive}
                       files={hcfiles1}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles1", index)}
                     />
                   </div>
 
@@ -994,6 +1091,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader2.isDragActive}
                       files={hcfiles2}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles2", index)}
                     />
                   </div>
 
@@ -1006,6 +1104,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader3.isDragActive}
                       files={hcfiles3}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles3", index)}
                     />
                   </div>
 
@@ -1018,6 +1117,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader4.isDragActive}
                       files={hcfiles4}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles4", index)}
                     />
                   </div>
 
@@ -1030,6 +1130,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader5.isDragActive}
                       files={hcfiles5}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles5", index)}
                     />
                   </div>
 
@@ -1042,6 +1143,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader6.isDragActive}
                       files={hcfiles6}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles6", index)}
                     />
                   </div>
 
@@ -1054,6 +1156,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader7.isDragActive}
                       files={hcfiles7}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles7", index)}
                     />
                   </div>
 
@@ -1066,6 +1169,7 @@ export default function Jileshform() {
                       isDragActive={hcuploader8.isDragActive}
                       files={hcfiles8}
                       required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles8", index)}
                     />
                   </div>
 
@@ -1077,7 +1181,7 @@ export default function Jileshform() {
                       getInputProps={hcuploader9.getInputProps}
                       isDragActive={hcuploader9.isDragActive}
                       files={hcfiles9}
-                      required={formData.wr_cate === "hcate3"}
+                      onRemoveFile={(index) => handleRemoveFile("hcfiles9", index)}
                     />
                   </div>
 
@@ -1111,6 +1215,7 @@ export default function Jileshform() {
                       isDragActive={hduploader1.isDragActive}
                       files={hdfiles1}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles1", index)}
                     />
                   </div>
 
@@ -1123,6 +1228,7 @@ export default function Jileshform() {
                       isDragActive={hduploader2.isDragActive}
                       files={hdfiles2}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles2", index)}
                     />
                   </div>
 
@@ -1135,6 +1241,7 @@ export default function Jileshform() {
                       isDragActive={hduploader3.isDragActive}
                       files={hdfiles3}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles3", index)}
                     />
                   </div>
 
@@ -1147,6 +1254,7 @@ export default function Jileshform() {
                       isDragActive={hduploader4.isDragActive}
                       files={hdfiles4}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles4", index)}
                     />
                   </div>
 
@@ -1159,6 +1267,7 @@ export default function Jileshform() {
                       isDragActive={hduploader5.isDragActive}
                       files={hdfiles5}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles5", index)}
                     />
                   </div>
 
@@ -1171,6 +1280,7 @@ export default function Jileshform() {
                       isDragActive={hduploader6.isDragActive}
                       files={hdfiles6}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles6", index)}
                     />
                   </div>
 
@@ -1183,6 +1293,7 @@ export default function Jileshform() {
                       isDragActive={hduploader7.isDragActive}
                       files={hdfiles7}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles7", index)}
                     />
                   </div>
 
@@ -1195,6 +1306,7 @@ export default function Jileshform() {
                       isDragActive={hduploader8.isDragActive}
                       files={hdfiles8}
                       required={formData.wr_cate === "hcate4"}
+                      onRemoveFile={(index) => handleRemoveFile("hdfiles8", index)}
                     />
                   </div>
 
@@ -1220,7 +1332,7 @@ export default function Jileshform() {
                 </div>
 
                 <div className="border p-4 bg-gray-50 rounded-md h-40 overflow-y-auto text-sm text-gray-700">
-                한국장학재단에서는 「한국장학재단 설립 등에 관한 법률」제50조의5(중복지원의 방지),
+                  한국장학재단에서는 「한국장학재단 설립 등에 관한 법률」제50조의5(중복지원의 방지),
                   「취업 후 학자금 상환 특별법」제39조(중복 지원의 방지)에 따라 “중복지원 방지시스템”을 운영하고 있으며,
                   각 기관에서 대학(원)생에게 학자금(장학금)을 지급한 내역이 있다면 “중복지원 방지시스템”에 등록을 요청하고 있습니다.<br /><br />
 

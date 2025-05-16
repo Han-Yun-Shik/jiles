@@ -101,6 +101,7 @@ export default function Pjupdate() {
     const [agreed, setAgreed] = useState(false)
     const [daumPostLoaded, setDaumPostLoaded] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [years, setYears] = useState<number[]>([]);
     const [months, setMonths] = useState<string[]>([]);
@@ -257,6 +258,9 @@ export default function Pjupdate() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (isSubmitting) return; // 중복 제출 방지
+        setIsSubmitting(true);    // 제출 시작
+
         const data = new FormData();
         data.append("wr_year", formData.wr_year);
         data.append("wr_cate", formData.wr_cate);
@@ -326,6 +330,8 @@ export default function Pjupdate() {
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
+        } finally {
+            setIsSubmitting(false); // 실패 시 다시 버튼 활성화
         }
     };
 
@@ -419,9 +425,71 @@ export default function Pjupdate() {
         }
     };
 
+    // 공통 삭제 핸들러
+    const handleRemoveFile = (target:
+        "jafiles1" |
+        "jafiles2" |
+        "jafiles3" |
+        "jafiles4" |
+        "jafiles5" |
+        "jafiles6" |
+        "jafiles7" |
+        "jafiles8" |
+        "jbfiles1" |
+        "jbfiles2" |
+        "jbfiles3" |
+        "jbfiles4" |
+        "jbfiles5" |
+        "jbfiles6" |
+        "jbfiles7" |
+        "jbfiles8" |
+        "jbfiles9" |
+        "jbfiles10", index: number) => {
+        const setStateMap = {
+            jafiles1: setJafiles1,
+            jafiles2: setJafiles2,
+            jafiles3: setJafiles3,
+            jafiles4: setJafiles4,
+            jafiles5: setJafiles5,
+            jafiles6: setJafiles6,
+            jafiles7: setJafiles7,
+            jafiles8: setJafiles8,
+            jbfiles1: setJbfiles1,
+            jbfiles2: setJbfiles2,
+            jbfiles3: setJbfiles3,
+            jbfiles4: setJbfiles4,
+            jbfiles5: setJbfiles5,
+            jbfiles6: setJbfiles6,
+            jbfiles7: setJbfiles7,
+            jbfiles8: setJbfiles8,
+            jbfiles9: setJbfiles9,
+            jbfiles10: setJbfiles10,
+        };
+
+        const setFiles = setStateMap[target];
+        if (setFiles) {
+            setFiles(prev => prev.filter((_, i) => i !== index));
+        }
+    };
+
     return (
         <>
             <UserMenu />
+
+            {isSubmitting && (
+                <div
+                    className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                >
+                    <div className="text-lg mb-4">신청서 제줄 진행중 입니다...</div>
+                    <div className="flex space-x-2 mt-2">
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            )}
+
             <div className="jil_biz_hdr">제주인재육성 장학금 신청</div>
 
             <div className="d-flex bg-secondary-subtle p-3">
@@ -738,7 +806,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader1.getInputProps}
                                             isDragActive={jauploader1.isDragActive}
                                             files={jafiles1}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles1", index)}
                                         />
                                         <div id="jafiles1">
                                             {formData.files
@@ -759,7 +827,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader2.getInputProps}
                                             isDragActive={jauploader2.isDragActive}
                                             files={jafiles2}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles2", index)}
                                         />
                                         <div id="jafiles2">
                                             {formData.files
@@ -780,7 +848,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader3.getInputProps}
                                             isDragActive={jauploader3.isDragActive}
                                             files={jafiles3}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles3", index)}
                                         />
                                         <div id="jafiles3">
                                             {formData.files
@@ -801,7 +869,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader4.getInputProps}
                                             isDragActive={jauploader4.isDragActive}
                                             files={jafiles4}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles4", index)}
                                         />
                                         <div id="jafiles4">
                                             {formData.files
@@ -831,7 +899,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader5.getInputProps}
                                             isDragActive={jauploader5.isDragActive}
                                             files={jafiles5}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles5", index)}
                                         />
                                         <div id="jafiles5">
                                             {formData.files
@@ -852,7 +920,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader6.getInputProps}
                                             isDragActive={jauploader6.isDragActive}
                                             files={jafiles6}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles6", index)}
                                         />
                                         <div id="jafiles6">
                                             {formData.files
@@ -882,7 +950,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader7.getInputProps}
                                             isDragActive={jauploader7.isDragActive}
                                             files={jafiles7}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles7", index)}
                                         />
                                         <div id="jafiles7">
                                             {formData.files
@@ -903,7 +971,7 @@ export default function Pjupdate() {
                                             getInputProps={jauploader8.getInputProps}
                                             isDragActive={jauploader8.isDragActive}
                                             files={jafiles8}
-                                            required={formData.wr_cate === "jcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("jafiles8", index)}
                                         />
                                         <div id="jafiles8">
                                             {formData.files
@@ -945,7 +1013,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader1.getInputProps}
                                             isDragActive={jbuploader1.isDragActive}
                                             files={jbfiles1}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles1", index)}
                                         />
                                         <div id="jbfiles1">
                                             {formData.files
@@ -966,7 +1034,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader2.getInputProps}
                                             isDragActive={jbuploader2.isDragActive}
                                             files={jbfiles2}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles2", index)}
                                         />
                                         <div id="jbfiles2">
                                             {formData.files
@@ -987,7 +1055,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader3.getInputProps}
                                             isDragActive={jbuploader3.isDragActive}
                                             files={jbfiles3}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles3", index)}
                                         />
                                         <div id="jbfiles3">
                                             {formData.files
@@ -1008,7 +1076,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader4.getInputProps}
                                             isDragActive={jbuploader4.isDragActive}
                                             files={jbfiles4}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles4", index)}
                                         />
                                         <div id="jbfiles4">
                                             {formData.files
@@ -1029,7 +1097,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader5.getInputProps}
                                             isDragActive={jbuploader5.isDragActive}
                                             files={jbfiles5}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles5", index)}
                                         />
                                         <div id="jbfiles5">
                                             {formData.files
@@ -1050,7 +1118,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader6.getInputProps}
                                             isDragActive={jbuploader6.isDragActive}
                                             files={jbfiles6}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles6", index)}
                                         />
                                         <div id="jbfiles6">
                                             {formData.files
@@ -1071,7 +1139,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader7.getInputProps}
                                             isDragActive={jbuploader7.isDragActive}
                                             files={jbfiles7}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles7", index)}
                                         />
                                         <div id="jbfiles7">
                                             {formData.files
@@ -1101,7 +1169,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader8.getInputProps}
                                             isDragActive={jbuploader8.isDragActive}
                                             files={jbfiles8}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles8", index)}
                                         />
                                         <div id="jbfiles8">
                                             {formData.files
@@ -1122,7 +1190,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader9.getInputProps}
                                             isDragActive={jbuploader9.isDragActive}
                                             files={jbfiles9}
-                                            required={formData.wr_cate === "jcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles9", index)}
                                         />
                                         <div id="jbfiles9">
                                             {formData.files
@@ -1143,6 +1211,7 @@ export default function Pjupdate() {
                                             getInputProps={jbuploader10.getInputProps}
                                             isDragActive={jbuploader10.isDragActive}
                                             files={jbfiles10}
+                                            onRemoveFile={(index) => handleRemoveFile("jbfiles10", index)}
                                         />
                                         <div id="jbfiles10">
                                             {formData.files
@@ -1215,7 +1284,7 @@ export default function Pjupdate() {
                         <div className="flex justify-center gap-3 mt-6">
                             <button
                                 type="submit"
-                                disabled={!agreed}
+                                disabled={!agreed || isSubmitting}
                                 onClick={() => setSaveMode("temp")}
                                 className="btn btn-secondary"
                             >
@@ -1224,7 +1293,7 @@ export default function Pjupdate() {
 
                             <button
                                 type="submit"
-                                disabled={!agreed}
+                                disabled={!agreed || isSubmitting}
                                 onClick={() => setSaveMode("submit")}
                                 className="btn btn-success"
                             >

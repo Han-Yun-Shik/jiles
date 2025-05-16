@@ -180,26 +180,26 @@ export default function Jilesjform() {
 
     // 장학구분별 필수 파일 체크
     //--### 도내 고교생 첨부파일(scate1) s ###--//
-    if (formData.wr_cate === "jcate1" && jafiles1.length === 0) { alert("도내 고교생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles2.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles3.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles4.length === 0) { alert("도내 고교생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles5.length === 0) { alert("도내 고교생은 [필수] 학교장 추천서 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles6.length === 0) { alert("도내 고교생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles7.length === 0) { alert("도내 고교생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate1" && jafiles8.length === 0) { alert("도내 고교생은 [필수] 입상실적 증빙서류을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles1.length === 0) { alert("도내 고교생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles2.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles3.length === 0) { alert("도내 고교생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles4.length === 0) { alert("도내 고교생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles5.length === 0) { alert("도내 고교생은 [필수] 학교장 추천서 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles6.length === 0) { alert("도내 고교생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles7.length === 0) { alert("도내 고교생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && jafiles8.length === 0) { alert("도내 고교생은 [필수] 입상실적 증빙서류을 첨부해야 합니다."); return; }
     //--### 도내 고교생 첨부파일(scate1) e ###--//
 
     //--### 국내 대학생 첨부파일(scate2) s ###--//
-    if (formData.wr_cate === "jcate2" && jbfiles1.length === 0) { alert("국내 대학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles2.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles3.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles4.length === 0) { alert("국내 대학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles5.length === 0) { alert("국내 대학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles6.length === 0) { alert("국내 대학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles7.length === 0) { alert("국내 대학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles8.length === 0) { alert("국내 대학생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "jcate2" && jbfiles9.length === 0) { alert("국내 대학생은 [필수] 입상실적 증빙서류 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles1.length === 0) { alert("국내 대학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles2.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles3.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles4.length === 0) { alert("국내 대학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles5.length === 0) { alert("국내 대학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles6.length === 0) { alert("국내 대학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles7.length === 0) { alert("국내 대학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles8.length === 0) { alert("국내 대학생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles9.length === 0) { alert("국내 대학생은 [필수] 입상실적 증빙서류 파일을 첨부해야 합니다."); return; }
     //--### 국내 대학생 첨부파일(scate2) e ###--//
 
     const data = new FormData();
@@ -324,6 +324,53 @@ export default function Jilesjform() {
     }
   };
 
+  // 공통 삭제 핸들러
+  const handleRemoveFile = (target:
+    "jafiles1" |
+    "jafiles2" |
+    "jafiles3" |
+    "jafiles4" |
+    "jafiles5" |
+    "jafiles6" |
+    "jafiles7" |
+    "jafiles8" |
+    "jbfiles1" |
+    "jbfiles2" |
+    "jbfiles3" |
+    "jbfiles4" |
+    "jbfiles5" |
+    "jbfiles6" |
+    "jbfiles7" |
+    "jbfiles8" |
+    "jbfiles9" |
+    "jbfiles10", index: number) => {
+    const setStateMap = {
+      jafiles1: setJafiles1,
+      jafiles2: setJafiles2,
+      jafiles3: setJafiles3,
+      jafiles4: setJafiles4,
+      jafiles5: setJafiles5,
+      jafiles6: setJafiles6,
+      jafiles7: setJafiles7,
+      jafiles8: setJafiles8,
+      jbfiles1: setJbfiles1,
+      jbfiles2: setJbfiles2,
+      jbfiles3: setJbfiles3,
+      jbfiles4: setJbfiles4,
+      jbfiles5: setJbfiles5,
+      jbfiles6: setJbfiles6,
+      jbfiles7: setJbfiles7,
+      jbfiles8: setJbfiles8,
+      jbfiles9: setJbfiles9,
+      jbfiles10: setJbfiles10,
+    };
+
+    const setFiles = setStateMap[target];
+    if (setFiles) {
+      setFiles(prev => prev.filter((_, i) => i !== index));
+    }
+  };
+
   return (
     <>
       <UserMenu />
@@ -333,7 +380,7 @@ export default function Jilesjform() {
           className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
-          <div className="text-lg mb-4">등록 진행중 입니다...</div>
+          <div className="text-lg mb-4">신청서 제줄 진행중 입니다...</div>
           <div className="flex space-x-2 mt-2">
             <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
             <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
@@ -647,6 +694,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader1.isDragActive}
                       files={jafiles1}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles1", index)}
                     />
                   </div>
 
@@ -659,6 +707,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader2.isDragActive}
                       files={jafiles2}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles2", index)}
                     />
                   </div>
 
@@ -671,6 +720,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader3.isDragActive}
                       files={jafiles3}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles3", index)}
                     />
                   </div>
 
@@ -683,6 +733,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader4.isDragActive}
                       files={jafiles4}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles4", index)}
                     />
                   </div>
 
@@ -704,6 +755,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader5.isDragActive}
                       files={jafiles5}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles5", index)}
                     />
                   </div>
 
@@ -716,6 +768,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader6.isDragActive}
                       files={jafiles6}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles6", index)}
                     />
                   </div>
 
@@ -737,6 +790,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader7.isDragActive}
                       files={jafiles7}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles7", index)}
                     />
                   </div>
 
@@ -749,6 +803,7 @@ export default function Jilesjform() {
                       isDragActive={jauploader8.isDragActive}
                       files={jafiles8}
                       required={formData.wr_cate === "jcate1"}
+                      onRemoveFile={(index) => handleRemoveFile("jafiles8", index)}
                     />
                   </div>
 
@@ -782,6 +837,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader1.isDragActive}
                       files={jbfiles1}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles1", index)}
                     />
                   </div>
 
@@ -794,6 +850,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader2.isDragActive}
                       files={jbfiles2}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles2", index)}
                     />
                   </div>
 
@@ -806,6 +863,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader3.isDragActive}
                       files={jbfiles3}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles3", index)}
                     />
                   </div>
 
@@ -818,6 +876,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader4.isDragActive}
                       files={jbfiles4}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles4", index)}
                     />
                   </div>
 
@@ -830,6 +889,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader5.isDragActive}
                       files={jbfiles5}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles5", index)}
                     />
                   </div>
 
@@ -842,6 +902,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader6.isDragActive}
                       files={jbfiles6}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles6", index)}
                     />
                   </div>
 
@@ -854,6 +915,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader7.isDragActive}
                       files={jbfiles7}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles7", index)}
                     />
                   </div>
 
@@ -875,6 +937,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader8.isDragActive}
                       files={jbfiles8}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles8", index)}
                     />
                   </div>
 
@@ -887,6 +950,7 @@ export default function Jilesjform() {
                       isDragActive={jbuploader9.isDragActive}
                       files={jbfiles9}
                       required={formData.wr_cate === "jcate2"}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles9", index)}
                     />
                   </div>
 
@@ -898,6 +962,7 @@ export default function Jilesjform() {
                       getInputProps={jbuploader10.getInputProps}
                       isDragActive={jbuploader10.isDragActive}
                       files={jbfiles10}
+                      onRemoveFile={(index) => handleRemoveFile("jbfiles10", index)}
                     />
                   </div>
 

@@ -214,38 +214,38 @@ export default function Jilessform() {
 
     // 장학구분별 필수 파일 체크
     //--### 대학 신입생 첨부파일(scate1) s ###--//
-    if (formData.wr_cate === "scate1" && aafiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles7.length === 0) { alert("대학 신입생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate1" && aafiles8.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles1.length === 0) { alert("대학 신입생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles2.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles3.length === 0) { alert("대학 신입생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles4.length === 0) { alert("대학 신입생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles5.length === 0) { alert("대학 신입생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles6.length === 0) { alert("대학 신입생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles7.length === 0) { alert("대학 신입생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate1" && aafiles8.length === 0) { alert("대학 신입생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
     //--### 대학 신입생 첨부파일(scate1) e ###--//
 
     //--### 대학 재학생 첨부파일(scate2) s ###--//
-    if (formData.wr_cate === "scate2" && abfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles7.length === 0) { alert("대학 재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate2" && abfiles8.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles1.length === 0) { alert("대학 재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles2.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles3.length === 0) { alert("대학 재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles4.length === 0) { alert("대학 재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles5.length === 0) { alert("대학 재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles6.length === 0) { alert("대학 재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles7.length === 0) { alert("대학 재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate2" && abfiles8.length === 0) { alert("대학 재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
     //--### 대학 재학생 첨부파일(scate2) e ###--//
 
     //--### 석사재학생 첨부파일(scate3) s ###--//
-    if (formData.wr_cate === "scate3" && acfiles1.length === 0) { alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles2.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles3.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles4.length === 0) { alert("대학원 석사재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles5.length === 0) { alert("대학원 석사재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles6.length === 0) { alert("대학원 석사재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles7.length === 0) { alert("대학원 석사재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles8.length === 0) { alert("대학원 석사재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles9.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적표 1부 파일을 첨부해야 합니다."); return; }
-    if (formData.wr_cate === "scate3" && acfiles10.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적 증빙서류 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles1.length === 0) { alert("대학원 석사재학생은 [필수] 개인정보 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles2.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(본인) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles3.length === 0) { alert("대학원 석사재학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles4.length === 0) { alert("대학원 석사재학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles5.length === 0) { alert("대학원 석사재학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles6.length === 0) { alert("대학원 석사재학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles7.length === 0) { alert("대학원 석사재학생은 [필수] 등록금 납부 영수증 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles8.length === 0) { alert("대학원 석사재학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles9.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적표 1부 파일을 첨부해야 합니다."); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "scate3" && acfiles10.length === 0) { alert("대학원 석사재학생은 [필수] 연구실적 증빙서류 파일을 첨부해야 합니다."); return; }
     //--### 석사재학생 첨부파일(scate3) e ###--//
 
     const data = new FormData();
@@ -384,6 +384,72 @@ export default function Jilessform() {
     }
   };
 
+  // 공통 삭제 핸들러
+  const handleRemoveFile = (target:
+    "aafiles1" |
+    "aafiles2" |
+    "aafiles3" |
+    "aafiles4" |
+    "aafiles5" |
+    "aafiles6" |
+    "aafiles7" |
+    "aafiles8" |
+    "abfiles1" |
+    "abfiles2" |
+    "abfiles3" |
+    "abfiles4" |
+    "abfiles5" |
+    "abfiles6" |
+    "abfiles7" |
+    "abfiles8" |
+    "abfiles9" |
+    "acfiles1" |
+    "acfiles2" |
+    "acfiles3" |
+    "acfiles4" |
+    "acfiles5" |
+    "acfiles6" |
+    "acfiles7" |
+    "acfiles8" |
+    "acfiles9" |
+    "acfiles10" |
+    "acfiles11", index: number) => {
+    const setStateMap = {
+      aafiles1: setAafiles1,
+      aafiles2: setAafiles2,
+      aafiles3: setAafiles3,
+      aafiles4: setAafiles4,
+      aafiles5: setAafiles5,
+      aafiles6: setAafiles6,
+      aafiles7: setAafiles7,
+      aafiles8: setAafiles8,
+      abfiles1: setAbfiles1,
+      abfiles2: setAbfiles2,
+      abfiles3: setAbfiles3,
+      abfiles4: setAbfiles4,
+      abfiles5: setAbfiles5,
+      abfiles6: setAbfiles6,
+      abfiles7: setAbfiles7,
+      abfiles8: setAbfiles8,
+      abfiles9: setAbfiles9,
+      acfiles1: setAcfiles1,
+      acfiles2: setAcfiles2,
+      acfiles3: setAcfiles3,
+      acfiles4: setAcfiles4,
+      acfiles5: setAcfiles5,
+      acfiles6: setAcfiles6,
+      acfiles7: setAcfiles7,
+      acfiles8: setAcfiles8,
+      acfiles9: setAcfiles9,
+      acfiles10: setAcfiles10,
+      acfiles11: setAcfiles11,
+    };
+
+    const setFiles = setStateMap[target];
+    if (setFiles) {
+      setFiles(prev => prev.filter((_, i) => i !== index));
+    }
+  };
 
   return (
     <>
@@ -394,7 +460,7 @@ export default function Jilessform() {
           className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
-          <div className="text-lg mb-4">등록 진행중 입니다...</div>
+          <div className="text-lg mb-4">신청서 제줄 진행중 입니다...</div>
           <div className="flex space-x-2 mt-2">
             <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
             <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
@@ -737,6 +803,7 @@ export default function Jilessform() {
                       isDragActive={aauploader1.isDragActive}
                       files={aafiles1}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles1", index)}
                     />
                   </div>
 
@@ -749,6 +816,7 @@ export default function Jilessform() {
                       isDragActive={aauploader2.isDragActive}
                       files={aafiles2}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles2", index)}
                     />
                   </div>
 
@@ -761,6 +829,7 @@ export default function Jilessform() {
                       isDragActive={aauploader3.isDragActive}
                       files={aafiles3}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles3", index)}
                     />
                   </div>
 
@@ -773,6 +842,7 @@ export default function Jilessform() {
                       isDragActive={aauploader4.isDragActive}
                       files={aafiles4}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles4", index)}
                     />
                   </div>
 
@@ -785,6 +855,7 @@ export default function Jilessform() {
                       isDragActive={aauploader5.isDragActive}
                       files={aafiles5}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles5", index)}
                     />
                   </div>
 
@@ -797,6 +868,7 @@ export default function Jilessform() {
                       isDragActive={aauploader6.isDragActive}
                       files={aafiles6}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles6", index)}
                     />
                   </div>
 
@@ -809,6 +881,7 @@ export default function Jilessform() {
                       isDragActive={aauploader7.isDragActive}
                       files={aafiles7}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles7", index)}
                     />
                   </div>
 
@@ -821,6 +894,7 @@ export default function Jilessform() {
                       isDragActive={aauploader8.isDragActive}
                       files={aafiles8}
                       required={formData.wr_cate === "scate1"}
+                      onRemoveFile={(index) => handleRemoveFile("aafiles8", index)}
                     />
                   </div>
 
@@ -854,6 +928,7 @@ export default function Jilessform() {
                       isDragActive={abuploader1.isDragActive}
                       files={abfiles1}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles1", index)}
                     />
                   </div>
 
@@ -866,6 +941,7 @@ export default function Jilessform() {
                       isDragActive={abuploader2.isDragActive}
                       files={abfiles2}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles2", index)}
                     />
                   </div>
 
@@ -878,6 +954,7 @@ export default function Jilessform() {
                       isDragActive={abuploader3.isDragActive}
                       files={abfiles3}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles3", index)}
                     />
                   </div>
 
@@ -890,6 +967,7 @@ export default function Jilessform() {
                       isDragActive={abuploader4.isDragActive}
                       files={abfiles4}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles4", index)}
                     />
                   </div>
 
@@ -902,6 +980,7 @@ export default function Jilessform() {
                       isDragActive={abuploader5.isDragActive}
                       files={abfiles5}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles5", index)}
                     />
                   </div>
 
@@ -914,6 +993,7 @@ export default function Jilessform() {
                       isDragActive={abuploader6.isDragActive}
                       files={abfiles6}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles6", index)}
                     />
                   </div>
 
@@ -926,6 +1006,7 @@ export default function Jilessform() {
                       isDragActive={abuploader7.isDragActive}
                       files={abfiles7}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles7", index)}
                     />
                   </div>
 
@@ -938,6 +1019,7 @@ export default function Jilessform() {
                       isDragActive={abuploader8.isDragActive}
                       files={abfiles8}
                       required={formData.wr_cate === "scate2"}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles8", index)}
                     />
                   </div>
 
@@ -949,6 +1031,7 @@ export default function Jilessform() {
                       getInputProps={abuploader9.getInputProps}
                       isDragActive={abuploader9.isDragActive}
                       files={abfiles9}
+                      onRemoveFile={(index) => handleRemoveFile("abfiles9", index)}
                     />
                   </div>
 
@@ -982,6 +1065,7 @@ export default function Jilessform() {
                       isDragActive={acuploader1.isDragActive}
                       files={acfiles1}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles1", index)}
                     />
                   </div>
 
@@ -994,6 +1078,7 @@ export default function Jilessform() {
                       isDragActive={acuploader2.isDragActive}
                       files={acfiles2}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles2", index)}
                     />
                   </div>
 
@@ -1006,6 +1091,7 @@ export default function Jilessform() {
                       isDragActive={acuploader3.isDragActive}
                       files={acfiles3}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles3", index)}
                     />
                   </div>
 
@@ -1018,6 +1104,7 @@ export default function Jilessform() {
                       isDragActive={acuploader4.isDragActive}
                       files={acfiles4}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles4", index)}
                     />
                   </div>
 
@@ -1030,6 +1117,7 @@ export default function Jilessform() {
                       isDragActive={acuploader5.isDragActive}
                       files={acfiles5}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles5", index)}
                     />
                   </div>
 
@@ -1042,6 +1130,7 @@ export default function Jilessform() {
                       isDragActive={acuploader6.isDragActive}
                       files={acfiles6}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles6", index)}
                     />
                   </div>
 
@@ -1054,6 +1143,7 @@ export default function Jilessform() {
                       isDragActive={acuploader7.isDragActive}
                       files={acfiles7}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles7", index)}
                     />
                   </div>
 
@@ -1066,6 +1156,7 @@ export default function Jilessform() {
                       isDragActive={acuploader8.isDragActive}
                       files={acfiles8}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles8", index)}
                     />
                   </div>
 
@@ -1089,6 +1180,7 @@ export default function Jilessform() {
                       isDragActive={acuploader9.isDragActive}
                       files={acfiles9}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles9", index)}
                     />
                   </div>
 
@@ -1101,6 +1193,7 @@ export default function Jilessform() {
                       isDragActive={acuploader10.isDragActive}
                       files={acfiles10}
                       required={formData.wr_cate === "scate3"}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles10", index)}
                     />
                   </div>
 
@@ -1112,6 +1205,7 @@ export default function Jilessform() {
                       getInputProps={acuploader11.getInputProps}
                       isDragActive={acuploader11.isDragActive}
                       files={acfiles11}
+                      onRemoveFile={(index) => handleRemoveFile("acfiles11", index)}
                     />
                   </div>
 

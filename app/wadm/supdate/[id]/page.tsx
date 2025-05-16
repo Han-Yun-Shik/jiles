@@ -94,6 +94,7 @@ export default function Slist() {
 
     const [daumPostLoaded, setDaumPostLoaded] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [years, setYears] = useState<number[]>([]);
     const [months, setMonths] = useState<string[]>([]);
@@ -284,6 +285,9 @@ export default function Slist() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (isSubmitting) return; // 중복 제출 방지
+        setIsSubmitting(true);    // 제출 시작
+
         const data = new FormData();
         data.append("wr_year", formData.wr_year);
         data.append("wr_cate", formData.wr_cate);
@@ -362,6 +366,8 @@ export default function Slist() {
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
+        } finally {
+            setIsSubmitting(false); // 실패 시 다시 버튼 활성화
         }
     };
 
@@ -471,8 +477,89 @@ export default function Slist() {
         }
     };
 
+    // 공통 삭제 핸들러
+    const handleRemoveFile = (target:
+        "aafiles1" |
+        "aafiles2" |
+        "aafiles3" |
+        "aafiles4" |
+        "aafiles5" |
+        "aafiles6" |
+        "aafiles7" |
+        "aafiles8" |
+        "abfiles1" |
+        "abfiles2" |
+        "abfiles3" |
+        "abfiles4" |
+        "abfiles5" |
+        "abfiles6" |
+        "abfiles7" |
+        "abfiles8" |
+        "abfiles9" |
+        "acfiles1" |
+        "acfiles2" |
+        "acfiles3" |
+        "acfiles4" |
+        "acfiles5" |
+        "acfiles6" |
+        "acfiles7" |
+        "acfiles8" |
+        "acfiles9" |
+        "acfiles10" |
+        "acfiles11", index: number) => {
+        const setStateMap = {
+            aafiles1: setAafiles1,
+            aafiles2: setAafiles2,
+            aafiles3: setAafiles3,
+            aafiles4: setAafiles4,
+            aafiles5: setAafiles5,
+            aafiles6: setAafiles6,
+            aafiles7: setAafiles7,
+            aafiles8: setAafiles8,
+            abfiles1: setAbfiles1,
+            abfiles2: setAbfiles2,
+            abfiles3: setAbfiles3,
+            abfiles4: setAbfiles4,
+            abfiles5: setAbfiles5,
+            abfiles6: setAbfiles6,
+            abfiles7: setAbfiles7,
+            abfiles8: setAbfiles8,
+            abfiles9: setAbfiles9,
+            acfiles1: setAcfiles1,
+            acfiles2: setAcfiles2,
+            acfiles3: setAcfiles3,
+            acfiles4: setAcfiles4,
+            acfiles5: setAcfiles5,
+            acfiles6: setAcfiles6,
+            acfiles7: setAcfiles7,
+            acfiles8: setAcfiles8,
+            acfiles9: setAcfiles9,
+            acfiles10: setAcfiles10,
+            acfiles11: setAcfiles11,
+        };
+
+        const setFiles = setStateMap[target];
+        if (setFiles) {
+            setFiles(prev => prev.filter((_, i) => i !== index));
+        }
+    };
+
     return (
         <>
+            {isSubmitting && (
+                <div
+                    className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                >
+                    <div className="text-lg mb-4">신청서 제줄 진행중 입니다...</div>
+                    <div className="flex space-x-2 mt-2">
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            )}
+
             <div className="d-flex bg-secondary-subtle p-3">
                 <div className="w-100 bg-white p-4 mt-4">
                     <div className="jil_adm_c_hdr">
@@ -830,6 +917,7 @@ export default function Slist() {
                                             getInputProps={aauploader1.getInputProps}
                                             isDragActive={aauploader1.isDragActive}
                                             files={aafiles1}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles1", index)}
                                         />
                                         <div id="aafiles1">
                                             {formData.files
@@ -850,6 +938,7 @@ export default function Slist() {
                                             getInputProps={aauploader2.getInputProps}
                                             isDragActive={aauploader2.isDragActive}
                                             files={aafiles2}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles2", index)}
                                         />
                                         <div id="aafiles2">
                                             {formData.files
@@ -870,6 +959,7 @@ export default function Slist() {
                                             getInputProps={aauploader3.getInputProps}
                                             isDragActive={aauploader3.isDragActive}
                                             files={aafiles3}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles3", index)}
                                         />
                                         <div id="aafiles3">
                                             {formData.files
@@ -890,6 +980,7 @@ export default function Slist() {
                                             getInputProps={aauploader4.getInputProps}
                                             isDragActive={aauploader4.isDragActive}
                                             files={aafiles4}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles4", index)}
                                         />
                                         <div id="aafiles4">
                                             {formData.files
@@ -910,6 +1001,7 @@ export default function Slist() {
                                             getInputProps={aauploader5.getInputProps}
                                             isDragActive={aauploader5.isDragActive}
                                             files={aafiles5}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles5", index)}
                                         />
                                         <div id="aafiles5">
                                             {formData.files
@@ -930,6 +1022,7 @@ export default function Slist() {
                                             getInputProps={aauploader6.getInputProps}
                                             isDragActive={aauploader6.isDragActive}
                                             files={aafiles6}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles6", index)}
                                         />
                                         <div id="aafiles6">
                                             {formData.files
@@ -950,6 +1043,7 @@ export default function Slist() {
                                             getInputProps={aauploader7.getInputProps}
                                             isDragActive={aauploader7.isDragActive}
                                             files={aafiles7}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles7", index)}
                                         />
                                         <div id="aafiles7">
                                             {formData.files
@@ -970,6 +1064,7 @@ export default function Slist() {
                                             getInputProps={aauploader8.getInputProps}
                                             isDragActive={aauploader8.isDragActive}
                                             files={aafiles8}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles8", index)}
                                         />
                                         <div id="aafiles8">
                                             {formData.files
@@ -1011,6 +1106,7 @@ export default function Slist() {
                                             getInputProps={abuploader1.getInputProps}
                                             isDragActive={abuploader1.isDragActive}
                                             files={abfiles1}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles1", index)}
                                         />
                                         <div id="abfiles1">
                                             {formData.files
@@ -1031,6 +1127,7 @@ export default function Slist() {
                                             getInputProps={abuploader2.getInputProps}
                                             isDragActive={abuploader2.isDragActive}
                                             files={abfiles2}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles2", index)}
                                         />
                                         <div id="abfiles2">
                                             {formData.files
@@ -1051,6 +1148,7 @@ export default function Slist() {
                                             getInputProps={abuploader3.getInputProps}
                                             isDragActive={abuploader3.isDragActive}
                                             files={abfiles3}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles3", index)}
                                         />
                                         <div id="abfiles3">
                                             {formData.files
@@ -1071,6 +1169,7 @@ export default function Slist() {
                                             getInputProps={abuploader4.getInputProps}
                                             isDragActive={abuploader4.isDragActive}
                                             files={abfiles4}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles4", index)}
                                         />
                                         <div id="abfiles4">
                                             {formData.files
@@ -1091,6 +1190,7 @@ export default function Slist() {
                                             getInputProps={abuploader5.getInputProps}
                                             isDragActive={abuploader5.isDragActive}
                                             files={abfiles5}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles5", index)}
                                         />
                                         <div id="abfiles5">
                                             {formData.files
@@ -1111,6 +1211,7 @@ export default function Slist() {
                                             getInputProps={abuploader6.getInputProps}
                                             isDragActive={abuploader6.isDragActive}
                                             files={abfiles6}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles6", index)}
                                         />
                                         <div id="abfiles6">
                                             {formData.files
@@ -1131,6 +1232,7 @@ export default function Slist() {
                                             getInputProps={abuploader7.getInputProps}
                                             isDragActive={abuploader7.isDragActive}
                                             files={abfiles7}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles7", index)}
                                         />
                                         <div id="abfiles7">
                                             {formData.files
@@ -1151,6 +1253,7 @@ export default function Slist() {
                                             getInputProps={abuploader8.getInputProps}
                                             isDragActive={abuploader8.isDragActive}
                                             files={abfiles8}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles8", index)}
                                         />
                                         <div id="abfiles8">
                                             {formData.files
@@ -1171,6 +1274,7 @@ export default function Slist() {
                                             getInputProps={abuploader9.getInputProps}
                                             isDragActive={abuploader9.isDragActive}
                                             files={abfiles9}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles9", index)}
                                         />
                                         <div id="abfiles9">
                                             {formData.files
@@ -1212,6 +1316,7 @@ export default function Slist() {
                                             getInputProps={acuploader1.getInputProps}
                                             isDragActive={acuploader1.isDragActive}
                                             files={acfiles1}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles1", index)}
                                         />
                                         <div id="acfiles1">
                                             {formData.files
@@ -1232,6 +1337,7 @@ export default function Slist() {
                                             getInputProps={acuploader2.getInputProps}
                                             isDragActive={acuploader2.isDragActive}
                                             files={acfiles2}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles2", index)}
                                         />
                                         <div id="acfiles2">
                                             {formData.files
@@ -1252,6 +1358,7 @@ export default function Slist() {
                                             getInputProps={acuploader3.getInputProps}
                                             isDragActive={acuploader3.isDragActive}
                                             files={acfiles3}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles3", index)}
                                         />
                                         <div id="acfiles3">
                                             {formData.files
@@ -1272,6 +1379,7 @@ export default function Slist() {
                                             getInputProps={acuploader4.getInputProps}
                                             isDragActive={acuploader4.isDragActive}
                                             files={acfiles4}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles4", index)}
                                         />
                                         <div id="acfiles4">
                                             {formData.files
@@ -1292,6 +1400,7 @@ export default function Slist() {
                                             getInputProps={acuploader5.getInputProps}
                                             isDragActive={acuploader5.isDragActive}
                                             files={acfiles5}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles5", index)}
                                         />
                                         <div id="acfiles5">
                                             {formData.files
@@ -1312,6 +1421,7 @@ export default function Slist() {
                                             getInputProps={acuploader6.getInputProps}
                                             isDragActive={acuploader6.isDragActive}
                                             files={acfiles6}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles6", index)}
                                         />
                                         <div id="acfiles6">
                                             {formData.files
@@ -1332,6 +1442,7 @@ export default function Slist() {
                                             getInputProps={acuploader7.getInputProps}
                                             isDragActive={acuploader7.isDragActive}
                                             files={acfiles7}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles7", index)}
                                         />
                                         <div id="acfiles7">
                                             {formData.files
@@ -1352,6 +1463,7 @@ export default function Slist() {
                                             getInputProps={acuploader8.getInputProps}
                                             isDragActive={acuploader8.isDragActive}
                                             files={acfiles8}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles8", index)}
                                         />
                                         <div id="acfiles8">
                                             {formData.files
@@ -1381,6 +1493,7 @@ export default function Slist() {
                                             getInputProps={acuploader9.getInputProps}
                                             isDragActive={acuploader9.isDragActive}
                                             files={acfiles9}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles9", index)}
                                         />
                                         <div id="acfiles9">
                                             {formData.files
@@ -1401,6 +1514,7 @@ export default function Slist() {
                                             getInputProps={acuploader10.getInputProps}
                                             isDragActive={acuploader10.isDragActive}
                                             files={acfiles10}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles10", index)}
                                         />
                                         <div id="acfiles10">
                                             {formData.files
@@ -1421,6 +1535,7 @@ export default function Slist() {
                                             getInputProps={acuploader11.getInputProps}
                                             isDragActive={acuploader11.isDragActive}
                                             files={acfiles11}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles11", index)}
                                         />
                                         <div id="acfiles11">
                                             {formData.files

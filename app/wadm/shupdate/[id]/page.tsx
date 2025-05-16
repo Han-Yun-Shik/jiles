@@ -94,6 +94,7 @@ export default function Sjupdate() {
 
     const [daumPostLoaded, setDaumPostLoaded] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [years, setYears] = useState<number[]>([]);
     const [months, setMonths] = useState<string[]>([]);
@@ -294,6 +295,9 @@ export default function Sjupdate() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (isSubmitting) return; // 중복 제출 방지
+        setIsSubmitting(true);    // 제출 시작
+
         const data = new FormData();
         data.append("wr_year", formData.wr_year);
         data.append("wr_cate", formData.wr_cate);
@@ -379,6 +383,8 @@ export default function Sjupdate() {
         } catch (error) {
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
+        } finally {
+            setIsSubmitting(false); // 실패 시 다시 버튼 활성화
         }
     };
 
@@ -488,8 +494,101 @@ export default function Sjupdate() {
         }
     };
 
+    // 공통 삭제 핸들러
+    const handleRemoveFile = (target:
+        "hafiles1" |
+        "hafiles2" |
+        "hafiles3" |
+        "hafiles4" |
+        "hafiles5" |
+        "hafiles6" |
+        "hafiles7" |
+        "hafiles8" |
+        "hbfiles1" |
+        "hbfiles2" |
+        "hbfiles3" |
+        "hbfiles4" |
+        "hbfiles5" |
+        "hbfiles6" |
+        "hbfiles7" |
+        "hbfiles8" |
+        "hbfiles9" |
+        "hcfiles1" |
+        "hcfiles2" |
+        "hcfiles3" |
+        "hcfiles4" |
+        "hcfiles5" |
+        "hcfiles6" |
+        "hcfiles7" |
+        "hcfiles8" |
+        "hcfiles9" |
+        "hdfiles1" |
+        "hdfiles2" |
+        "hdfiles3" |
+        "hdfiles4" |
+        "hdfiles5" |
+        "hdfiles6" |
+        "hdfiles7" |
+        "hdfiles8", index: number) => {
+        const setStateMap = {
+            hafiles1: setHafiles1,
+            hafiles2: setHafiles2,
+            hafiles3: setHafiles3,
+            hafiles4: setHafiles4,
+            hafiles5: setHafiles5,
+            hafiles6: setHafiles6,
+            hafiles7: setHafiles7,
+            hafiles8: setHafiles8,
+            hbfiles1: setHbfiles1,
+            hbfiles2: setHbfiles2,
+            hbfiles3: setHbfiles3,
+            hbfiles4: setHbfiles4,
+            hbfiles5: setHbfiles5,
+            hbfiles6: setHbfiles6,
+            hbfiles7: setHbfiles7,
+            hbfiles8: setHbfiles8,
+            hbfiles9: setHbfiles9,
+            hcfiles1: setHcfiles1,
+            hcfiles2: setHcfiles2,
+            hcfiles3: setHcfiles3,
+            hcfiles4: setHcfiles4,
+            hcfiles5: setHcfiles5,
+            hcfiles6: setHcfiles6,
+            hcfiles7: setHcfiles7,
+            hcfiles8: setHcfiles8,
+            hcfiles9: setHcfiles9,
+            hdfiles1: setHdfiles1,
+            hdfiles2: setHdfiles2,
+            hdfiles3: setHdfiles3,
+            hdfiles4: setHdfiles4,
+            hdfiles5: setHdfiles5,
+            hdfiles6: setHdfiles6,
+            hdfiles7: setHdfiles7,
+            hdfiles8: setHdfiles8,
+        };
+
+        const setFiles = setStateMap[target];
+        if (setFiles) {
+            setFiles(prev => prev.filter((_, i) => i !== index));
+        }
+    };
+
     return (
         <>
+            {isSubmitting && (
+                <div
+                    className="fixed inset-0 z-50 flex flex-col items-center justify-center text-white"
+                    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+                >
+                    <div className="text-lg mb-4">신청서 제줄 진행중 입니다...</div>
+                    <div className="flex space-x-2 mt-2">
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.3s" }}></div>
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce" style={{ animationDelay: "-0.15s" }}></div>
+                        <div className="w-3 h-3 bg-white rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            )}
+
             <div className="d-flex bg-secondary-subtle p-3">
                 <div className="w-100 bg-white p-4 mt-4">
                     <div className="jil_adm_c_hdr">
@@ -818,7 +917,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader1.getInputProps}
                                             isDragActive={hauploader1.isDragActive}
                                             files={hafiles1}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles1", index)}
                                         />
                                         <div id="hafiles1">
                                             {formData.files
@@ -839,7 +938,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader2.getInputProps}
                                             isDragActive={hauploader2.isDragActive}
                                             files={hafiles2}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles2", index)}
                                         />
                                         <div id="hafiles2">
                                             {formData.files
@@ -860,7 +959,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader3.getInputProps}
                                             isDragActive={hauploader3.isDragActive}
                                             files={hafiles3}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles3", index)}
                                         />
                                         <div id="hafiles3">
                                             {formData.files
@@ -881,7 +980,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader4.getInputProps}
                                             isDragActive={hauploader4.isDragActive}
                                             files={hafiles4}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles4", index)}
                                         />
                                         <div id="hafiles4">
                                             {formData.files
@@ -902,7 +1001,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader5.getInputProps}
                                             isDragActive={hauploader5.isDragActive}
                                             files={hafiles5}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles5", index)}
                                         />
                                         <div id="hafiles5">
                                             {formData.files
@@ -923,7 +1022,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader6.getInputProps}
                                             isDragActive={hauploader6.isDragActive}
                                             files={hafiles6}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles6", index)}
                                         />
                                         <div id="hafiles6">
                                             {formData.files
@@ -944,7 +1043,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader7.getInputProps}
                                             isDragActive={hauploader7.isDragActive}
                                             files={hafiles7}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles7", index)}
                                         />
                                         <div id="hafiles7">
                                             {formData.files
@@ -965,7 +1064,7 @@ export default function Sjupdate() {
                                             getInputProps={hauploader8.getInputProps}
                                             isDragActive={hauploader8.isDragActive}
                                             files={hafiles8}
-                                            required={formData.wr_cate === "hcate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("hafiles8", index)}
                                         />
                                         <div id="hafiles8">
                                             {formData.files
@@ -1007,7 +1106,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader1.getInputProps}
                                             isDragActive={hbuploader1.isDragActive}
                                             files={hbfiles1}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles1", index)}
                                         />
                                         <div id="hbfiles1">
                                             {formData.files
@@ -1028,7 +1127,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader2.getInputProps}
                                             isDragActive={hbuploader2.isDragActive}
                                             files={hbfiles2}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles2", index)}
                                         />
                                         <div id="hbfiles2">
                                             {formData.files
@@ -1049,7 +1148,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader3.getInputProps}
                                             isDragActive={hbuploader3.isDragActive}
                                             files={hbfiles3}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles3", index)}
                                         />
                                         <div id="hbfiles3">
                                             {formData.files
@@ -1070,7 +1169,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader4.getInputProps}
                                             isDragActive={hbuploader4.isDragActive}
                                             files={hbfiles4}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles4", index)}
                                         />
                                         <div id="hbfiles4">
                                             {formData.files
@@ -1091,7 +1190,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader5.getInputProps}
                                             isDragActive={hbuploader5.isDragActive}
                                             files={hbfiles5}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles5", index)}
                                         />
                                         <div id="hbfiles5">
                                             {formData.files
@@ -1112,7 +1211,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader6.getInputProps}
                                             isDragActive={hbuploader6.isDragActive}
                                             files={hbfiles6}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles6", index)}
                                         />
                                         <div id="hbfiles6">
                                             {formData.files
@@ -1133,7 +1232,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader7.getInputProps}
                                             isDragActive={hbuploader7.isDragActive}
                                             files={hbfiles7}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles7", index)}
                                         />
                                         <div id="hbfiles7">
                                             {formData.files
@@ -1154,7 +1253,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader8.getInputProps}
                                             isDragActive={hbuploader8.isDragActive}
                                             files={hbfiles8}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles8", index)}
                                         />
                                         <div id="hbfiles8">
                                             {formData.files
@@ -1175,7 +1274,7 @@ export default function Sjupdate() {
                                             getInputProps={hbuploader9.getInputProps}
                                             isDragActive={hbuploader9.isDragActive}
                                             files={hbfiles9}
-                                            required={formData.wr_cate === "hcate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("hbfiles9", index)}
                                         />
                                         <div id="hbfiles9">
                                             {formData.files
@@ -1217,7 +1316,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader1.getInputProps}
                                             isDragActive={hcuploader1.isDragActive}
                                             files={hcfiles1}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles1", index)}
                                         />
                                         <div id="hcfiles1">
                                             {formData.files
@@ -1238,7 +1337,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader2.getInputProps}
                                             isDragActive={hcuploader2.isDragActive}
                                             files={hcfiles2}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles2", index)}
                                         />
                                         <div id="hcfiles2">
                                             {formData.files
@@ -1259,7 +1358,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader3.getInputProps}
                                             isDragActive={hcuploader3.isDragActive}
                                             files={hcfiles3}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles3", index)}
                                         />
                                         <div id="hcfiles3">
                                             {formData.files
@@ -1280,7 +1379,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader4.getInputProps}
                                             isDragActive={hcuploader4.isDragActive}
                                             files={hcfiles4}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles4", index)}
                                         />
                                         <div id="hcfiles4">
                                             {formData.files
@@ -1301,7 +1400,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader5.getInputProps}
                                             isDragActive={hcuploader5.isDragActive}
                                             files={hcfiles5}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles5", index)}
                                         />
                                         <div id="hcfiles5">
                                             {formData.files
@@ -1322,7 +1421,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader6.getInputProps}
                                             isDragActive={hcuploader6.isDragActive}
                                             files={hcfiles6}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles6", index)}
                                         />
                                         <div id="hcfiles6">
                                             {formData.files
@@ -1343,7 +1442,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader7.getInputProps}
                                             isDragActive={hcuploader7.isDragActive}
                                             files={hcfiles7}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles7", index)}
                                         />
                                         <div id="hcfiles7">
                                             {formData.files
@@ -1364,7 +1463,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader8.getInputProps}
                                             isDragActive={hcuploader8.isDragActive}
                                             files={hcfiles8}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles8", index)}
                                         />
                                         <div id="hcfiles8">
                                             {formData.files
@@ -1385,7 +1484,7 @@ export default function Sjupdate() {
                                             getInputProps={hcuploader9.getInputProps}
                                             isDragActive={hcuploader9.isDragActive}
                                             files={hcfiles9}
-                                            required={formData.wr_cate === "hcate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("hcfiles9", index)}
                                         />
                                         <div id="hcfiles9">
                                             {formData.files
@@ -1427,7 +1526,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader1.getInputProps}
                                             isDragActive={hduploader1.isDragActive}
                                             files={hdfiles1}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles1", index)}
                                         />
                                         <div id="hdfiles1">
                                             {formData.files
@@ -1448,7 +1547,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader2.getInputProps}
                                             isDragActive={hduploader2.isDragActive}
                                             files={hdfiles2}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles2", index)}
                                         />
                                         <div id="hdfiles2">
                                             {formData.files
@@ -1469,7 +1568,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader3.getInputProps}
                                             isDragActive={hduploader3.isDragActive}
                                             files={hdfiles3}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles3", index)}
                                         />
                                         <div id="hdfiles3">
                                             {formData.files
@@ -1490,7 +1589,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader4.getInputProps}
                                             isDragActive={hduploader4.isDragActive}
                                             files={hdfiles4}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles4", index)}
                                         />
                                         <div id="hdfiles4">
                                             {formData.files
@@ -1511,7 +1610,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader5.getInputProps}
                                             isDragActive={hduploader5.isDragActive}
                                             files={hdfiles5}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles5", index)}
                                         />
                                         <div id="hdfiles5">
                                             {formData.files
@@ -1532,7 +1631,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader6.getInputProps}
                                             isDragActive={hduploader6.isDragActive}
                                             files={hdfiles6}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles6", index)}
                                         />
                                         <div id="hdfiles6">
                                             {formData.files
@@ -1553,7 +1652,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader7.getInputProps}
                                             isDragActive={hduploader7.isDragActive}
                                             files={hdfiles7}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles7", index)}
                                         />
                                         <div id="hdfiles7">
                                             {formData.files
@@ -1574,7 +1673,7 @@ export default function Sjupdate() {
                                             getInputProps={hduploader8.getInputProps}
                                             isDragActive={hduploader8.isDragActive}
                                             files={hdfiles8}
-                                            required={formData.wr_cate === "hcate4"}
+                                            onRemoveFile={(index) => handleRemoveFile("hdfiles8", index)}
                                         />
                                         <div id="hdfiles8">
                                             {formData.files
