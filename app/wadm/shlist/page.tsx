@@ -242,7 +242,7 @@ export default function Shlist() {
 
                 return <tr key={index}>
                   <td style={{ textAlign: "center" }}><input className="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." /></td>
-                  <td style={{ textAlign: "center", fontSize: "13px" }}>{item.wr_seq}</td>
+                  <td style={{ textAlign: "center", fontSize: "13px" }}>{totalCount - ((currentPage - 1) * itemsPerPage + index)}</td>
                   <td style={{ textAlign: "center" }}>{item.wr_year}</td>
                   <td style={{ textAlign: "center" }}>{WR_ALLCATE_ARR[item.wr_cate]}</td>
                   <td style={{ textAlign: "center" }}>{item.wr_name}</td>
