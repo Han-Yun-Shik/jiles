@@ -32,7 +32,8 @@ export default function RootLayout({
         <div style={{ textAlign: "right" }}>
           <Link href="/wadm/slist" className="jil_adm_t_btn jil_adm_mr_2">관리자 홈</Link>
           <Link href="/" className="jil_adm_t_btn_logout jil_adm_mr_2">사용자 홈</Link>
-          <Link href="/wadm/excelupload" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀</Link>
+          <Link href="/wadm/excelupload" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀(대)</Link>
+          <Link href="/wadm/exceluploadmid" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀(고)</Link>
         </div>
       </div>
 
