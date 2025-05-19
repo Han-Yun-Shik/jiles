@@ -13,7 +13,8 @@ import { ko } from "date-fns/locale"; // 한국어 설정 (선택)
 import "@/styles/form.css";
 import FileUploader from '@/components/FileUploader';
 import { useFileUploader } from '@/hooks/useFileUploader';
-import SchoolSearchModal from "@/components/SchoolSearchModal";
+import SchoolSearchModal from "@/components/SchoolSearchModal"; // 대학교
+import SchoolSearchModalmid from "@/components/SchoolSearchModalmid"; // 고등학교
 import UserMenu from "@/components/UserMenu";
 import CustomCheckbox from "@/components/ui/checkbox";
 import { GraduationCap } from "lucide-react"; // 아이콘 라이브러리 사용 (lucide-react)
@@ -100,7 +101,8 @@ export default function Pjupdate() {
     });
     const [agreed, setAgreed] = useState(false)
     const [daumPostLoaded, setDaumPostLoaded] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(false); // 대학교
+    const [showModalmid, setShowModalmid] = useState(false); // 고등학교
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [years, setYears] = useState<number[]>([]);
@@ -199,11 +201,16 @@ export default function Pjupdate() {
         document.getElementById("jcate1_area")?.classList.add("hidden");
         document.getElementById("jcate2_area")?.classList.add("hidden");
 
+        document.getElementById("jcate1_scarea")?.classList.add("hidden");
+        document.getElementById("jcate2_scarea")?.classList.add("hidden");
+
         // 선택된 영역만 보이게 설정
         if (formData.wr_cate === "jcate1") {
             document.getElementById("jcate1_area")?.classList.remove("hidden");
+            document.getElementById("jcate1_scarea")?.classList.remove("hidden");
         } else if (formData.wr_cate === "jcate2") {
             document.getElementById("jcate2_area")?.classList.remove("hidden");
+            document.getElementById("jcate2_scarea")?.classList.remove("hidden");
         }
     }, [formData.wr_cate]);
 
@@ -372,6 +379,14 @@ export default function Pjupdate() {
             ...prev,
             wr_school: schoolName,
             wr_schoolcode: schoolCode,
+            wr_schooladdr: schoolAddr,
+        }));
+    };
+
+    const handleSelectSchoolmid = (schoolName: string, schoolAddr: string) => {
+        setFormData(prev => ({
+            ...prev,
+            wr_school: schoolName,
             wr_schooladdr: schoolAddr,
         }));
     };
@@ -671,43 +686,78 @@ export default function Pjupdate() {
 
                                     {/* 학교 코드 및 명칭 */}
                                     <label className="text-sm font-medium text-gray-700">학교</label>
-                                    <div className="md:col-span-3 space-y-2">
-                                        <div className="flex gap-2">
+                                    <div className="md:col-span-3 space-y-2"><p className="text-red-700">※ 장학구분을 선택후 학교검색을 해주십시오.</p>
+                                        {/* 재능장학금(도내고교생) */}
+                                        <div id="jcate1_scarea" className="md:col-span-3 space-y-2">
+                                            <div className="flex gap-2">
+                                                <button type="button" onClick={() => setShowModalmid(true)} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
+                                                    고등학교 검색
+                                                </button>
+                                            </div>
                                             <input
                                                 type="text"
-                                                name="wr_schoolcode"
-                                                value={formData.wr_schoolcode}
+                                                name="wr_school"
+                                                value={formData.wr_school}
                                                 onChange={handleChange}
-                                                placeholder="학교 코드"
-                                                className="w-36 border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                                placeholder="학교명"
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                             />
-                                            <button type="button" onClick={() => setShowModal(true)} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
-                                                학교검색
-                                            </button>
-                                        </div>
-                                        <input
-                                            type="text"
-                                            name="wr_school"
-                                            value={formData.wr_school}
-                                            onChange={handleChange}
-                                            placeholder="학교명"
-                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
-                                        />
-                                        <input
-                                            type="text"
-                                            name="wr_schooladdr"
-                                            value={formData.wr_schooladdr}
-                                            onChange={handleChange}
-                                            placeholder="학교 주소"
-                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                                        />
+                                            <input
+                                                type="text"
+                                                name="wr_schooladdr"
+                                                value={formData.wr_schooladdr}
+                                                onChange={handleChange}
+                                                placeholder="학교 주소"
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
+                                            />
 
-                                        {showModal && (
-                                            <SchoolSearchModal
-                                                onSelect={handleSelectSchool}
-                                                onClose={() => setShowModal(false)}
+                                            {showModalmid && (
+                                                <SchoolSearchModalmid
+                                                    onSelect={handleSelectSchoolmid}
+                                                    onClose={() => setShowModalmid(false)}
+                                                />
+                                            )}
+                                        </div>
+
+                                        {/* 재능장학금(국내대학생) */}
+                                        <div id="jcate2_scarea" className="md:col-span-3 space-y-2">
+                                            <div className="flex gap-2">
+                                                <input
+                                                    type="text"
+                                                    name="wr_schoolcode"
+                                                    value={formData.wr_schoolcode}
+                                                    onChange={handleChange}
+                                                    placeholder="학교 코드"
+                                                    className="w-36 border border-gray-300 rounded-md px-4 py-2 text-sm"
+                                                />
+                                                <button type="button" onClick={() => setShowModal(true)} className="px-4 py-2 text-sm bg-blue-600 text-white rounded-md">
+                                                    대학교 검색
+                                                </button>
+                                            </div>
+                                            <input
+                                                type="text"
+                                                name="wr_school"
+                                                value={formData.wr_school}
+                                                onChange={handleChange}
+                                                placeholder="학교명"
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                             />
-                                        )}
+                                            <input
+                                                type="text"
+                                                name="wr_schooladdr"
+                                                value={formData.wr_schooladdr}
+                                                onChange={handleChange}
+                                                placeholder="학교 주소"
+                                                className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
+                                            />
+
+                                            {showModal && (
+                                                <SchoolSearchModal
+                                                    onSelect={handleSelectSchool}
+                                                    onClose={() => setShowModal(false)}
+                                                />
+                                            )}
+                                        </div>
                                     </div>
 
                                     {/* 학년 */}

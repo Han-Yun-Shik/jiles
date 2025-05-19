@@ -17,7 +17,7 @@ export default function UploadPage() {
     formData.append("file", file);
 
     try {
-      await axios.post("http://localhost:3000/api/upload-excel", formData, {
+      await axios.post("http://localhost:8002/api/upload-excel", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       alert("엑셀 업로드 성공");
