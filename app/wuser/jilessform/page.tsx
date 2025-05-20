@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { REGDATE_STR, WR_STATE_ARR, WR_GENDER_ARR, WR_SCATE_ARR } from "@/app/utils";
+import { REGDATE_STR, WR_STATE_ARR, WR_GENDER_ARR, WR_SCATE_ARR, getCurrentKoreanYear } from "@/app/utils";
 import { useDropzone } from "react-dropzone";
 import Script from "next/script";
 import "react-datepicker/dist/react-datepicker.css";
@@ -29,6 +29,7 @@ declare global {
 export default function Jilessform() {
   const router = useRouter();
   const [formData, setFormData] = useState({
+    wr_year: getCurrentKoreanYear(),
     wr_cate: "",
     wr_name: "",
     wr_birthy: "",
@@ -212,15 +213,16 @@ export default function Jilessform() {
     if (isSubmitting) return; // 중복 제출 방지
     setIsSubmitting(true);    // 제출 시작
 
+    if (!formData.wr_year) { alert("년도를 선택해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
-    if (!formData.wr_post || !formData.wr_address || !formData.wr_detailaddress.trim()) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
+    if (!formData.wr_post || !formData.wr_address) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
     if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
-    if (!formData.wr_schoolcode || !formData.wr_school || !formData.wr_schooladdr) { alert("학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_schoolcode || !formData.wr_school) { alert("학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
-    if (!formData.wr_major) { alert("전공을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_major) { alert("학과를 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_average) { alert("평균 성적을 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_jang_num) { alert("장학재단 고객번호를 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
@@ -264,6 +266,7 @@ export default function Jilessform() {
     //--### 석사재학생 첨부파일(scate3) e ###--//
 
     const data = new FormData();
+    data.append("wr_year", formData.wr_year);
     data.append("wr_cate", formData.wr_cate);
     data.append("wr_name", formData.wr_name);
     data.append("wr_birth", formData.wr_birthy + "-" + formData.wr_birthm + "-" + formData.wr_birthd);
@@ -361,12 +364,11 @@ export default function Jilessform() {
       },
     }).open();
   };
-  const handleSelectSchool = (schoolName: string, schoolCode: string, schoolAddr: string) => {
+  const handleSelectSchool = (schoolName: string, schoolCode: string) => {
     setFormData(prev => ({
       ...prev,
       wr_school: schoolName,
       wr_schoolcode: schoolCode,
-      wr_schooladdr: schoolAddr,
     }));
   };
 
@@ -511,6 +513,11 @@ export default function Jilessform() {
                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                  <label className="text-sm font-medium text-gray-700">년도</label>
+                  <div className="md:col-span-3">
+                    <input type="text" name="wr_year" value={formData.wr_year || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                  </div>
+
                   {/* 장학분야 */}
                   <label className="text-sm font-medium text-gray-700">장학분야</label>
                   <div className="md:col-span-3">
@@ -675,14 +682,6 @@ export default function Jilessform() {
                       placeholder="학교명"
                       className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                     />
-                    <input
-                      type="text"
-                      name="wr_schooladdr"
-                      value={formData.wr_schooladdr}
-                      onChange={handleChange}
-                      placeholder="학교 주소"
-                      className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                    />
 
                     {showModal && (
                       <SchoolSearchModal
@@ -706,14 +705,14 @@ export default function Jilessform() {
                   </div>
 
                   {/* 전공 */}
-                  <label className="text-sm font-medium text-gray-700">전공</label>
+                  <label className="text-sm font-medium text-gray-700">학과</label>
                   <div className="md:col-span-3">
                     <input
                       type="text"
                       name="wr_major"
                       value={formData.wr_major}
                       onChange={handleChange}
-                      placeholder="전공 입력"
+                      placeholder="학과 입력"
                       className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                     />
                   </div>

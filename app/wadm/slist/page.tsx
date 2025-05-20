@@ -19,6 +19,7 @@ interface JilesData {
   wr_major: string;
   wr_state: number;
   wr_regdate: string;
+  wr_phone: string;
 }
 
 export default function Slist() {
@@ -249,7 +250,7 @@ export default function Slist() {
                   <td style={{ textAlign: "center" }}>{item.wr_school}</td>
                   <td style={{ textAlign: "center" }}>{item.wr_grade}</td>
                   <td style={{ textAlign: "center" }}>{item.wr_major}</td>
-                  <td style={{ textAlign: "center" }}>{item.wr_ptel}</td>
+                  <td style={{ textAlign: "center" }}>{item.wr_phone}</td>
                   <td style={{ textAlign: "center" }}><button className="jil_state_btn">{WR_STATE_ARR[item.wr_state]}</button></td>
                   <td style={{ textAlign: "center" }}>{REGDATE_YMD_STR(item.wr_regdate)}</td>
                   <td style={{ textAlign: "center" }}>

@@ -54,7 +54,7 @@ export default function SchoolSearchModal({ onSelect, onClose }: any) {
                     <td style={{ textAlign: "center" }}>
                       <button
                         onClick={() => {
-                          onSelect(school.wr_schnm, school.wr_code, school.wr_address);
+                          onSelect(school.wr_schnm, school.wr_code);
                           onClose();
                         }}
                         className="btn btn-secondary btn-sm"

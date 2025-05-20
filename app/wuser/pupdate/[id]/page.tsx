@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useSearchParams, useRouter, useParams } from "next/navigation";
-import { REGDATE_STR, WR_STATE_ARR, WR_GENDER_ARR, WR_SCATE_ARR } from "@/app/utils";
+import { REGDATE_STR, WR_STATE_ARR, WR_GENDER_ARR, WR_SCATE_ARR, getCurrentKoreanYear } from "@/app/utils";
 import { useDropzone } from "react-dropzone";
 import Script from "next/script";
 import "react-datepicker/dist/react-datepicker.css";
@@ -414,12 +414,11 @@ export default function Pupdate() {
         link.remove();
     };
 
-    const handleSelectSchool = (schoolName: string, schoolCode: string, schoolAddr: string) => {
+    const handleSelectSchool = (schoolName: string, schoolCode: string) => {
         setFormData(prev => ({
             ...prev,
             wr_school: schoolName,
             wr_schoolcode: schoolCode,
-            wr_schooladdr: schoolAddr,
         }));
     };
 
@@ -584,13 +583,16 @@ export default function Pupdate() {
 
 
                     <form onSubmit={handleSubmit}>
-                        <input type="hidden" name="wr_year" defaultValue={formData.wr_year} />
                         <input type="hidden" name="wr_regdate" defaultValue={formData.wr_regdate} />
                         <div className="flex justify-center p-4">
                             <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
                                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>
 
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                                    <label className="text-sm font-medium text-gray-700">년도</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_year" value={formData.wr_year || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                                    </div>
                                     {/* 장학분야 */}
                                     <label className="text-sm font-medium text-gray-700">장학분야</label>
                                     <div className="md:col-span-3">
@@ -760,14 +762,6 @@ export default function Pupdate() {
                                             placeholder="학교명"
                                             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                         />
-                                        <input
-                                            type="text"
-                                            name="wr_schooladdr"
-                                            value={formData.wr_schooladdr}
-                                            onChange={handleChange}
-                                            placeholder="학교 주소"
-                                            className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                                        />
 
                                         {showModal && (
                                             <SchoolSearchModal
@@ -791,14 +785,14 @@ export default function Pupdate() {
                                     </div>
 
                                     {/* 전공 */}
-                                    <label className="text-sm font-medium text-gray-700">전공</label>
+                                    <label className="text-sm font-medium text-gray-700">학과</label>
                                     <div className="md:col-span-3">
                                         <input
                                             type="text"
                                             name="wr_major"
                                             value={formData.wr_major}
                                             onChange={handleChange}
-                                            placeholder="전공 입력"
+                                            placeholder="학과 입력"
                                             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                         />
                                     </div>

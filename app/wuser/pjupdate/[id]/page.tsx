@@ -141,7 +141,7 @@ export default function Pjupdate() {
     const [jbfiles3, setJbfiles3] = useState<File[]>([]);// [필수] 주민등록초본 1부(부모)
     const [jbfiles4, setJbfiles4] = useState<File[]>([]);// [필수] 가족관계증명서 1부
     const [jbfiles5, setJbfiles5] = useState<File[]>([]);// [필수] 재학증명서 1부
-    const [jbfiles6, setJbfiles6] = useState<File[]>([]);// [필수] 성적증명서 1부(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서) 
+    const [jbfiles6, setJbfiles6] = useState<File[]>([]);// [필수] 학교장 추천서
     const [jbfiles7, setJbfiles7] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부
     const [jbfiles8, setJbfiles8] = useState<File[]>([]);// [필수] 대회 입상 실적표 1부(진흥원 서식)
     const [jbfiles9, setJbfiles9] = useState<File[]>([]);// [필수] 입상실적 증빙서류
@@ -318,7 +318,7 @@ export default function Pjupdate() {
         jbfiles3.forEach((file) => data.append("jbfiles3", file));// [필수] 주민등록초본 1부(부모)
         jbfiles4.forEach((file) => data.append("jbfiles4", file));// [필수] 가족관계증명서 1부
         jbfiles5.forEach((file) => data.append("jbfiles5", file));// [필수] 재학증명서 1부
-        jbfiles6.forEach((file) => data.append("jbfiles6", file));// [필수] 성적증명서 1부
+        jbfiles6.forEach((file) => data.append("jbfiles6", file));// [필수] 학교장 추천서
         jbfiles7.forEach((file) => data.append("jbfiles7", file));// [필수] 본인명의 통장사본 1부
         jbfiles8.forEach((file) => data.append("jbfiles8", file));// [필수] 대회 입상 실적표 1부(진흥원 서식)
         jbfiles9.forEach((file) => data.append("jbfiles9", file));// [필수] 입상실적 증빙서류
@@ -374,20 +374,18 @@ export default function Pjupdate() {
         link.remove();
     };
 
-    const handleSelectSchool = (schoolName: string, schoolCode: string, schoolAddr: string) => {
+    const handleSelectSchool = (schoolName: string, schoolCode: string) => {
         setFormData(prev => ({
             ...prev,
             wr_school: schoolName,
             wr_schoolcode: schoolCode,
-            wr_schooladdr: schoolAddr,
         }));
     };
 
-    const handleSelectSchoolmid = (schoolName: string, schoolAddr: string) => {
+    const handleSelectSchoolmid = (schoolName: string) => {
         setFormData(prev => ({
             ...prev,
             wr_school: schoolName,
-            wr_schooladdr: schoolAddr,
         }));
     };
 
@@ -532,13 +530,16 @@ export default function Pjupdate() {
 
 
                     <form onSubmit={handleSubmit}>
-                        <input type="hidden" name="wr_year" defaultValue={formData.wr_year} />
                         <input type="hidden" name="wr_regdate" defaultValue={formData.wr_regdate} />
                         <div className="flex justify-center p-4">
                             <div className="w-full max-w-[1400px] bg-white p-8 rounded-lg shadow">
                                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>
 
                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                                    <label className="text-sm font-medium text-gray-700">년도</label>
+                                    <div className="md:col-span-3">
+                                        <input type="text" name="wr_year" value={formData.wr_year || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                                    </div>
                                     {/* 장학분야 */}
                                     <label className="text-sm font-medium text-gray-700">장학분야</label>
                                     <div className="md:col-span-3">
@@ -702,14 +703,6 @@ export default function Pjupdate() {
                                                 placeholder="학교명"
                                                 className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                             />
-                                            <input
-                                                type="text"
-                                                name="wr_schooladdr"
-                                                value={formData.wr_schooladdr}
-                                                onChange={handleChange}
-                                                placeholder="학교 주소"
-                                                className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                                            />
 
                                             {showModalmid && (
                                                 <SchoolSearchModalmid
@@ -742,14 +735,6 @@ export default function Pjupdate() {
                                                 placeholder="학교명"
                                                 className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                             />
-                                            <input
-                                                type="text"
-                                                name="wr_schooladdr"
-                                                value={formData.wr_schooladdr}
-                                                onChange={handleChange}
-                                                placeholder="학교 주소"
-                                                className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                                            />
 
                                             {showModal && (
                                                 <SchoolSearchModal
@@ -774,14 +759,14 @@ export default function Pjupdate() {
                                     </div>
 
                                     {/* 전공 */}
-                                    <label className="text-sm font-medium text-gray-700">전공<br />(대학생 경우에만 입력)</label>
+                                    <label className="text-sm font-medium text-gray-700">학과<br />(대학생 경우에만 입력)</label>
                                     <div className="md:col-span-3">
                                         <input
                                             type="text"
                                             name="wr_major"
                                             value={formData.wr_major}
                                             onChange={handleChange}
-                                            placeholder="전공 입력"
+                                            placeholder="학과 입력"
                                             className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                                         />
                                     </div>
@@ -1161,7 +1146,7 @@ export default function Pjupdate() {
                                     </div>
 
                                     {/* 성적증명서 1부 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</label>
+                                    <label className="text-sm font-medium text-gray-700">[필수] 학교장 추천서</label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jbuploader6.getRootProps}
@@ -1233,7 +1218,7 @@ export default function Pjupdate() {
                                     </div>
 
                                     {/* 입상실적 증빙서류 */}
-                                    <label className="text-sm font-medium text-gray-700">[필수] 입상실적 증빙서류</label>
+                                    <label className="text-sm font-medium text-gray-700">[필수] 입상실적 증빙서류(상장사본, 대회 개최기관 사업자등록증 등)</label>
                                     <div className="md:col-span-3">
                                         <FileUploader
                                             getRootProps={jbuploader9.getRootProps}

@@ -1,7 +1,7 @@
 import { useDropzone } from 'react-dropzone';
 import { useCallback } from 'react';
 
-const MAX_FILE_SIZE = 1024 * 1024; // 1MB
+const MAX_FILE_SIZE = 30 * 1024 * 1024; // 30MB
 
 export function useFileUploader(setFiles: React.Dispatch<React.SetStateAction<File[]>>) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -13,7 +13,7 @@ export function useFileUploader(setFiles: React.Dispatch<React.SetStateAction<Fi
     fileRejections.forEach(rejection => {
       const file = rejection.file;
       if (file.size > MAX_FILE_SIZE) {
-        alert(`"${file.name}" 파일은 1MB를 초과하여 업로드할 수 없습니다.`);
+        alert(`"${file.name}" 파일은 30MB를 초과하여 업로드할 수 없습니다.`);
       }
     });
   }, []);

@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
-import { REGDATE_STR, WR_STATE_ARR, WR_GENDER_ARR, WR_JCATE_ARR } from "@/app/utils";
+import { REGDATE_STR, WR_STATE_ARR, WR_GENDER_ARR, WR_JCATE_ARR, getCurrentKoreanYear } from "@/app/utils";
 import { useDropzone } from "react-dropzone";
 import Script from "next/script";
 import "react-datepicker/dist/react-datepicker.css";
@@ -30,6 +30,7 @@ declare global {
 export default function Jilesjform() {
   const router = useRouter();
   const [formData, setFormData] = useState({
+    wr_year: getCurrentKoreanYear(),
     wr_cate: "",
     wr_name: "",
     wr_birthy: "",
@@ -92,7 +93,7 @@ export default function Jilesjform() {
   const [jbfiles3, setJbfiles3] = useState<File[]>([]);// [필수] 주민등록초본 1부(부모)
   const [jbfiles4, setJbfiles4] = useState<File[]>([]);// [필수] 가족관계증명서 1부
   const [jbfiles5, setJbfiles5] = useState<File[]>([]);// [필수] 재학증명서 1부
-  const [jbfiles6, setJbfiles6] = useState<File[]>([]);// [필수] 성적증명서 1부(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서) 
+  const [jbfiles6, setJbfiles6] = useState<File[]>([]);// [필수] 학교장 추천서
   const [jbfiles7, setJbfiles7] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부
   const [jbfiles8, setJbfiles8] = useState<File[]>([]);// [필수] 대회 입상 실적표 1부(진흥원 서식)
   const [jbfiles9, setJbfiles9] = useState<File[]>([]);// [필수] 입상실적 증빙서류
@@ -187,14 +188,17 @@ export default function Jilesjform() {
     if (isSubmitting) return; // 중복 제출 방지
     setIsSubmitting(true);    // 제출 시작
 
+    if (!formData.wr_year) { alert("년도를 선택해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
-    if (!formData.wr_post || !formData.wr_address || !formData.wr_detailaddress.trim()) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
+    if (!formData.wr_post || !formData.wr_address) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
     if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
-    if (formData.wr_cate === "jcate1" && (!formData.wr_school || !formData.wr_schooladdr)) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
-    if (formData.wr_cate === "jcate2" && (!formData.wr_schoolcode || !formData.wr_school || !formData.wr_schooladdr)) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    
+    if (formData.wr_cate === "jcate1" && (!formData.wr_school)) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (formData.wr_cate === "jcate2" && (!formData.wr_schoolcode || !formData.wr_school)) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    
     if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_bank_num) { alert("계좌번호를 입력해 주세요."); return; setIsSubmitting(false); }
@@ -218,13 +222,14 @@ export default function Jilesjform() {
     if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles3.length === 0) { alert("국내 대학생은 [필수] 주민등록초본 1부(부모) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles4.length === 0) { alert("국내 대학생은 [필수] 가족관계증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles5.length === 0) { alert("국내 대학생은 [필수] 재학증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles6.length === 0) { alert("국내 대학생은 [필수] 성적증명서 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles6.length === 0) { alert("국내 대학생은 [필수] 학교장 추천서 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles7.length === 0) { alert("국내 대학생은 [필수] 본인명의 통장사본 1부 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles8.length === 0) { alert("국내 대학생은 [필수] 대회 입상 실적표 1부(진흥원 서식) 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && formData.wr_cate === "jcate2" && jbfiles9.length === 0) { alert("국내 대학생은 [필수] 입상실적 증빙서류 파일을 첨부해야 합니다."); setIsSubmitting(false); return; }
     //--### 국내 대학생 첨부파일(scate2) e ###--//
 
     const data = new FormData();
+    data.append("wr_year", formData.wr_year);
     data.append("wr_cate", formData.wr_cate);
     data.append("wr_name", formData.wr_name);
     data.append("wr_birth", formData.wr_birthy + "-" + formData.wr_birthm + "-" + formData.wr_birthd);
@@ -269,7 +274,7 @@ export default function Jilesjform() {
     jbfiles3.forEach((file) => data.append("jbfiles3", file));// [필수] 주민등록초본 1부(부모)
     jbfiles4.forEach((file) => data.append("jbfiles4", file));// [필수] 가족관계증명서 1부
     jbfiles5.forEach((file) => data.append("jbfiles5", file));// [필수] 재학증명서 1부
-    jbfiles6.forEach((file) => data.append("jbfiles6", file));// [필수] 성적증명서 1부
+    jbfiles6.forEach((file) => data.append("jbfiles6", file));// [필수] 학교장 추천서
     jbfiles7.forEach((file) => data.append("jbfiles7", file));// [필수] 본인명의 통장사본 1부
     jbfiles8.forEach((file) => data.append("jbfiles8", file));// [필수] 대회 입상 실적표 1부(진흥원 서식)
     jbfiles9.forEach((file) => data.append("jbfiles9", file));// [필수] 입상실적 증빙서류
@@ -309,19 +314,17 @@ export default function Jilesjform() {
       },
     }).open();
   };
-  const handleSelectSchool = (schoolName: string, schoolCode: string, schoolAddr: string) => {
+  const handleSelectSchool = (schoolName: string, schoolCode: string) => {
     setFormData(prev => ({
       ...prev,
       wr_school: schoolName,
       wr_schoolcode: schoolCode,
-      wr_schooladdr: schoolAddr,
     }));
   };
-  const handleSelectSchoolmid = (schoolName: string, schoolAddr: string) => {
+  const handleSelectSchoolmid = (schoolName: string) => {
     setFormData(prev => ({
       ...prev,
       wr_school: schoolName,
-      wr_schooladdr: schoolAddr,
     }));
   };
 
@@ -445,6 +448,10 @@ export default function Jilesjform() {
                 <h4 className="text-2xl font-bold mb-6">장학구분</h4>
 
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                  <label className="text-sm font-medium text-gray-700">년도</label>
+                  <div className="md:col-span-3">
+                    <input type="text" name="wr_year" value={formData.wr_year || ''} className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm" onChange={handleChange} />
+                  </div>
                   {/* 장학분야 */}
                   <label className="text-sm font-medium text-gray-700">장학분야</label>
                   <div className="md:col-span-3">
@@ -604,14 +611,6 @@ export default function Jilesjform() {
                         placeholder="학교명"
                         className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                       />
-                      <input
-                        type="text"
-                        name="wr_schooladdr"
-                        value={formData.wr_schooladdr}
-                        onChange={handleChange}
-                        placeholder="학교 주소"
-                        className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                      />
 
                       {showModalmid && (
                         <SchoolSearchModalmid
@@ -644,14 +643,6 @@ export default function Jilesjform() {
                         placeholder="학교명"
                         className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                       />
-                      <input
-                        type="text"
-                        name="wr_schooladdr"
-                        value={formData.wr_schooladdr}
-                        onChange={handleChange}
-                        placeholder="학교 주소"
-                        className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm mt-1"
-                      />
 
                       {showModal && (
                         <SchoolSearchModal
@@ -676,14 +667,14 @@ export default function Jilesjform() {
                   </div>
 
                   {/* 전공 */}
-                  <label className="text-sm font-medium text-gray-700">전공<br />(대학생 경우에만 입력)</label>
+                  <label className="text-sm font-medium text-gray-700">학과<br />(대학생 경우에만 입력)</label>
                   <div className="md:col-span-3">
                     <input
                       type="text"
                       name="wr_major"
                       value={formData.wr_major}
                       onChange={handleChange}
-                      placeholder="전공 입력"
+                      placeholder="학과 입력"
                       className="w-full border border-gray-300 rounded-md px-4 py-2 text-sm"
                     />
                   </div>
@@ -958,8 +949,8 @@ export default function Jilesjform() {
                     />
                   </div>
 
-                  {/* 성적증명서 1부 */}
-                  <label className="text-sm font-medium text-gray-700">[필수] 성적증명서 1부<br />(직전 학기 성적증명서, 군복무 휴학자에 한하여 군복무 직전 학기 성적증명서)</label>
+                  {/* 학교장 추천서 */}
+                  <label className="text-sm font-medium text-gray-700">[필수] 학교장 추천서</label>
                   <div className="md:col-span-3">
                     <FileUploader
                       getRootProps={jbuploader6.getRootProps}
@@ -986,7 +977,7 @@ export default function Jilesjform() {
 
                   {/* 대회 입상 실적표 1부(진흥원 서식) */}
                   <label className="text-sm font-medium text-gray-700">
-                    [필수] 대회 입상 실적표 1부(진흥원 서식)<br />
+                    [필수] 대회 입상 실적표 1부<br />
                     <button
                       type="button"
                       className="btn btn-secondary btn-sm jil_adm_mr_2"
@@ -1007,7 +998,7 @@ export default function Jilesjform() {
                   </div>
 
                   {/* 입상실적 증빙서류 */}
-                  <label className="text-sm font-medium text-gray-700">[필수] 입상실적 증빙서류</label>
+                  <label className="text-sm font-medium text-gray-700">[필수] 입상실적 증빙서류(상장사본, 대회 개최기관 사업자등록증 등)</label>
                   <div className="md:col-span-3">
                     <FileUploader
                       getRootProps={jbuploader9.getRootProps}
