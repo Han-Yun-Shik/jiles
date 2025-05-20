@@ -122,6 +122,7 @@ export default function Slist() {
     const [aafiles6, setAafiles6] = useState<File[]>([]);// [필수] 성적증명서 1부(2025학년도 대학수학능력시험 성적표) 
     const [aafiles7, setAafiles7] = useState<File[]>([]);// [필수] 등록금 납부 영수증 1부(2025학년도 1학기)
     const [aafiles8, setAafiles8] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부 
+    const [aafiles9, setAafiles9] = useState<File[]>([]);// [필수] 중복방지 서약서
 
     const aauploader1 = useFileUploader(setAafiles1);
     const aauploader2 = useFileUploader(setAafiles2);
@@ -131,6 +132,7 @@ export default function Slist() {
     const aauploader6 = useFileUploader(setAafiles6);
     const aauploader7 = useFileUploader(setAafiles7);
     const aauploader8 = useFileUploader(setAafiles8);
+    const aauploader9 = useFileUploader(setAafiles9);
     //--### 대학 신입생 첨부파일(scate1) e ###--//
 
     //--### 대학 재학생 첨부파일(scate2) s ###--//
@@ -143,6 +145,7 @@ export default function Slist() {
     const [abfiles7, setAbfiles7] = useState<File[]>([]);// [필수] 등록금 납부 영수증 1부(2025학년도 1학기) 
     const [abfiles8, setAbfiles8] = useState<File[]>([]);// [필수] 본인명의 통장사본 1부
     const [abfiles9, setAbfiles9] = useState<File[]>([]);// [선택] 대학 학적부 1부(2024학년도 군복무 휴학자)
+    const [abfiles10, setAbfiles10] = useState<File[]>([]);// [필수] 중복방지 서약서
 
     const abuploader1 = useFileUploader(setAbfiles1);
     const abuploader2 = useFileUploader(setAbfiles2);
@@ -153,6 +156,7 @@ export default function Slist() {
     const abuploader7 = useFileUploader(setAbfiles7);
     const abuploader8 = useFileUploader(setAbfiles8);
     const abuploader9 = useFileUploader(setAbfiles9);
+    const abuploader10 = useFileUploader(setAbfiles10);
     //--### 대학 재학생 첨부파일(scate2) e ###--//
 
     //--### 대학원 석사재학생 첨부파일(scate3) s ###--//
@@ -167,6 +171,7 @@ export default function Slist() {
     const [acfiles9, setAcfiles9] = useState<File[]>([]);// [필수] 연구실적표 1부(진흥원 서식, SCI급 논문만 인정) *파일첨부 칸 옆에 연구실적표 서식 다운로드 필요
     const [acfiles10, setAcfiles10] = useState<File[]>([]);// [필수] 연구실적 증빙서류(갯수 제한 없음 셀추가 가능 기능 필요) 
     const [acfiles11, setAcfiles11] = useState<File[]>([]);// [선택] 대학 학적부 1부(2024학년도 군복무 휴학 이력자)
+    const [acfiles12, setAcfiles12] = useState<File[]>([]);// [필수] 중복방지 서약서
 
     const acuploader1 = useFileUploader(setAcfiles1);
     const acuploader2 = useFileUploader(setAcfiles2);
@@ -179,6 +184,7 @@ export default function Slist() {
     const acuploader9 = useFileUploader(setAcfiles9);
     const acuploader10 = useFileUploader(setAcfiles10);
     const acuploader11 = useFileUploader(setAcfiles11);
+    const acuploader12 = useFileUploader(setAcfiles12);
     //--### 대학원 석사재학생 첨부파일(scate3) e ###--//
     //--#################### 파일첨부 State s ####################--//
 
@@ -324,6 +330,7 @@ export default function Slist() {
         aafiles6.forEach((file) => data.append("aafiles6", file));// [필수] 성적증명서 1부
         aafiles7.forEach((file) => data.append("aafiles7", file));// [필수] 등록금 납부 영수증 1부
         aafiles8.forEach((file) => data.append("aafiles8", file));// [필수] 본인명의 통장사본 1부
+        aafiles9.forEach((file) => data.append("aafiles9", file));// [필수] 중복방지 서약서
         //--### 대학 신입생 첨부파일(scate1) e ###--//
 
         //--### 대학 재학생 첨부파일(scate2) s ###--//
@@ -336,6 +343,7 @@ export default function Slist() {
         abfiles7.forEach((file) => data.append("abfiles7", file));// [필수] 등록금 납부 영수증 1부
         abfiles8.forEach((file) => data.append("abfiles8", file));// [필수] 본인명의 통장사본 1부
         abfiles9.forEach((file) => data.append("abfiles9", file));// [선택] 대학 학적부
+        abfiles10.forEach((file) => data.append("abfiles10", file));// [필수] 중복방지 서약서
         //--### 대학 재학생 첨부파일(scate2) e ###--//
 
         //--### 대학원 석사재학생 첨부파일(scate3) s ###--//
@@ -350,6 +358,7 @@ export default function Slist() {
         acfiles9.forEach((file) => data.append("acfiles9", file));// [필수] 연구실적표 1부
         acfiles10.forEach((file) => data.append("acfiles10", file));// [필수] 연구실적 증빙서류
         acfiles11.forEach((file) => data.append("acfiles11", file));// [선택] 대학 학적부 1부
+        acfiles12.forEach((file) => data.append("acfiles12", file));// [필수] 중복방지 서약서
         //--### 대학원 석사재학생 첨부파일(scate3) e ###--//
 
         try {
@@ -486,6 +495,7 @@ export default function Slist() {
         "aafiles6" |
         "aafiles7" |
         "aafiles8" |
+        "aafiles9" |
         "abfiles1" |
         "abfiles2" |
         "abfiles3" |
@@ -495,6 +505,7 @@ export default function Slist() {
         "abfiles7" |
         "abfiles8" |
         "abfiles9" |
+        "abfiles10" |
         "acfiles1" |
         "acfiles2" |
         "acfiles3" |
@@ -505,7 +516,8 @@ export default function Slist() {
         "acfiles8" |
         "acfiles9" |
         "acfiles10" |
-        "acfiles11", index: number) => {
+        "acfiles11" |
+        "acfiles12", index: number) => {
         const setStateMap = {
             aafiles1: setAafiles1,
             aafiles2: setAafiles2,
@@ -515,6 +527,7 @@ export default function Slist() {
             aafiles6: setAafiles6,
             aafiles7: setAafiles7,
             aafiles8: setAafiles8,
+            aafiles9: setAafiles9,
             abfiles1: setAbfiles1,
             abfiles2: setAbfiles2,
             abfiles3: setAbfiles3,
@@ -524,6 +537,7 @@ export default function Slist() {
             abfiles7: setAbfiles7,
             abfiles8: setAbfiles8,
             abfiles9: setAbfiles9,
+            abfiles10: setAbfiles10,
             acfiles1: setAcfiles1,
             acfiles2: setAcfiles2,
             acfiles3: setAcfiles3,
@@ -535,6 +549,7 @@ export default function Slist() {
             acfiles9: setAcfiles9,
             acfiles10: setAcfiles10,
             acfiles11: setAcfiles11,
+            acfiles12: setAcfiles12,
         };
 
         const setFiles = setStateMap[target];
@@ -1068,6 +1083,28 @@ export default function Slist() {
                                         </div>
                                     </div>
 
+                                    {/* 중복방지 서약서 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 중복방지 서약서 </label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={aauploader9.getRootProps}
+                                            getInputProps={aauploader9.getInputProps}
+                                            isDragActive={aauploader9.isDragActive}
+                                            files={aafiles9}
+                                            required={formData.wr_cate === "scate1"}
+                                            onRemoveFile={(index) => handleRemoveFile("aafiles9", index)}
+                                        />
+                                        <div id="aafiles9">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "aafiles9")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -1249,6 +1286,28 @@ export default function Slist() {
                                         <div id="abfiles8">
                                             {formData.files
                                                 ?.filter(file => file.wr_title === "abfiles8")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
+                                    {/* 중복방지 서약서 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 중복방지 서약서</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={abuploader10.getRootProps}
+                                            getInputProps={abuploader10.getInputProps}
+                                            isDragActive={abuploader10.isDragActive}
+                                            files={abfiles10}
+                                            required={formData.wr_cate === "scate2"}
+                                            onRemoveFile={(index) => handleRemoveFile("abfiles10", index)}
+                                        />
+                                        <div id="abfiles10">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "abfiles10")
                                                 .map((file, index) => (
                                                     <div key={index}>
                                                         <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
@@ -1510,6 +1569,28 @@ export default function Slist() {
                                         <div id="acfiles10">
                                             {formData.files
                                                 ?.filter(file => file.wr_title === "acfiles10")
+                                                .map((file, index) => (
+                                                    <div key={index}>
+                                                        <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
+                                                    </div>
+                                                ))}
+                                        </div>
+                                    </div>
+
+                                    {/* 중복방지 서약서 */}
+                                    <label className="text-sm font-medium text-gray-700">[필수] 중복방지 서약서</label>
+                                    <div className="md:col-span-3">
+                                        <FileUploader
+                                            getRootProps={acuploader12.getRootProps}
+                                            getInputProps={acuploader12.getInputProps}
+                                            isDragActive={acuploader12.isDragActive}
+                                            files={acfiles12}
+                                            required={formData.wr_cate === "scate3"}
+                                            onRemoveFile={(index) => handleRemoveFile("acfiles12", index)}
+                                        />
+                                        <div id="acfiles12">
+                                            {formData.files
+                                                ?.filter(file => file.wr_title === "acfiles12")
                                                 .map((file, index) => (
                                                     <div key={index}>
                                                         <button type="button" onClick={() => fileDelete(file.file_seq)} className="jil_state_btn">삭제</button>&nbsp;{file.file_rename}
