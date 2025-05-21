@@ -44,8 +44,8 @@ export default function SchoolSearchModal({ onSelect, onClose }: any) {
               <thead>
                 <tr>
                   <th style={{ width: "70px", textAlign: "center", backgroundColor: "#efefef" }}>선택</th>
+                  <th style={{ textAlign: "center", backgroundColor: "#efefef" }}>코드</th>
                   <th style={{ textAlign: "center", backgroundColor: "#efefef" }}>학교명</th>
-                  <th style={{ textAlign: "center", backgroundColor: "#efefef" }}>주소</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,8 +62,8 @@ export default function SchoolSearchModal({ onSelect, onClose }: any) {
                         선택
                       </button>
                     </td>
+                    <td style={{textAlign:"left"}}>{school.wr_code}</td>
                     <td style={{textAlign:"left"}}>{school.wr_schnm}</td>
-                    <td style={{textAlign:"left"}}>{school.wr_address}</td>
                   </tr>
                 ))}
               </tbody>

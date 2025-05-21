@@ -196,8 +196,8 @@ export default function Jilesjform() {
     if (saveMode !== "temp" && !formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
     
-    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && (!formData.wr_school)) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && (!formData.wr_schoolcode || !formData.wr_school)) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate1" && (!formData.wr_school)) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (saveMode !== "temp" && formData.wr_cate === "jcate2" && (!formData.wr_schoolcode || !formData.wr_school)) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
     
     if (saveMode !== "temp" && !formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
