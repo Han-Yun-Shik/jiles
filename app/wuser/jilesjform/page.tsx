@@ -18,6 +18,7 @@ import SchoolSearchModalmid from "@/components/SchoolSearchModalmid"; // 고등�
 import UserMenu from "@/components/UserMenu";
 import CustomCheckbox from "@/components/ui/checkbox";
 import { GraduationCap } from "lucide-react"; // 아이콘 라이브러리 사용 (lucide-react)
+import { isWithinPeriod, PeriodData } from "@/lib/isWithinPeriod"; // 기간설정
 
 // 여기에 추가
 declare global {
@@ -29,6 +30,7 @@ declare global {
 
 export default function Jilesjform() {
   const router = useRouter();
+  const [showButton, setShowButton] = useState(false); // 기간설정
   const [formData, setFormData] = useState({
     wr_year: getCurrentKoreanYear(),
     wr_cate: "",
@@ -65,6 +67,36 @@ export default function Jilesjform() {
 
   // 임시저장 또는 제출을 구분할 변수
   const [saveMode, setSaveMode] = useState<"temp" | "submit">("submit");
+
+  // 기간설정
+  useEffect(() => {
+    async function periodfetchData() {
+      try {
+        const res = await axios.get(`/api/wroute/period`);
+        if (res.data && res.data.length > 0) {
+          const user = res.data[0];
+          const isValid = isWithinPeriod(user);
+          setShowButton(isValid);
+
+          // 유효하지 않으면 홈으로 리다이렉트
+          if (!isValid) {
+            alert("신청기간이 아닙니다.")
+            router.replace("/");
+          }
+        } else {
+          // 데이터가 없을 경우에도 홈으로 이동
+          alert("신청기간이 아닙니다.")
+          router.replace("/");
+        }
+      } catch (error) {
+        console.error("기간설정 데이터 불러오기 오류:", error);
+        alert("신청기간이 아닙니다.")
+        router.replace("/"); // 에러 발생 시에도 이동
+      }
+    }
+
+    periodfetchData();
+  }, [router]);
 
   //--#################### 파일첨부 State s ####################--//
   //--### 도내 고교생 첨부파일(jcate1) s ###--//

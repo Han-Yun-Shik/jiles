@@ -43,6 +43,7 @@ export default function RootLayout({
           <Link href="/wadm/slist" className="jil_adm_menu_lk jil_adm_mr_2">성취장학금</Link>
           <Link href="/wadm/sjlist" className="jil_adm_menu_lk jil_adm_mr_2">재능장학금</Link>
           <Link href="/wadm/shlist" className="jil_adm_menu_lk jil_adm_mr_2">희망장학금</Link>
+          <Link href="/wadm/period" className="jil_adm_menu_lk jil_adm_mr_2">신청기간 설정</Link>
         </div>
         <div>&nbsp;</div>
       </div>

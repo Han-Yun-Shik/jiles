@@ -4,9 +4,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import UserMenu from "@/components/UserMenu";
+import { isWithinPeriod, PeriodData } from "@/lib/isWithinPeriod"; // 기간설정
 
 
 export default function Jiless() {
+  const [showButton, setShowButton] = useState(false); // 기간설정정
+
+  // 기간설정정
+  useEffect(() => {
+    async function periodfetchData() {
+      try {
+        const res = await axios.get(`/api/wroute/period`); // ✅ 쿼리 파라미터 방식으로 수정
+        if (res.data && res.data.length > 0) {
+          const user = res.data[0];
+          setShowButton(isWithinPeriod(user));
+        }
+      } catch (error) {
+        console.error("기간설정 데이터 불러오기 오류:", error);
+      }
+    }
+
+    periodfetchData();
+  }, []);
 
   return (
     <>
@@ -52,9 +71,22 @@ export default function Jiless() {
 
           {/* 버튼 영역 */}
           <div className="flex justify-center mt-10">
-            <Link href="/wuser/jilessform" className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition">성취장학금</Link>&nbsp;
-            <Link href="/wuser/jilesjform" className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition">재능장학금</Link>&nbsp;
-            <Link href="/wuser/jileshform" className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition">희망장학금</Link>
+            {showButton && (
+              <>
+                <Link href="/wuser/jilessform" className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition">
+                  성취장학금
+                </Link>
+                &nbsp;
+                <Link href="/wuser/jilesjform" className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition">
+                  재능장학금
+                </Link>
+                &nbsp;
+                <Link href="/wuser/jileshform" className="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition">
+                  희망장학금
+                </Link>
+              </>
+            )}
+
           </div>
         </div>
 
