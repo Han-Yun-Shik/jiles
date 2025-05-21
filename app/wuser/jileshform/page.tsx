@@ -274,21 +274,21 @@ export default function Jileshform() {
     if (isSubmitting) return; // 중복 제출 방지
     setIsSubmitting(true);    // 제출 시작
 
-    if (saveMode !== "temp" && !formData.wr_year) { alert("년도를 선택해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && !formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && !formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && !formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && !formData.wr_post || !formData.wr_address) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
-    if (saveMode !== "temp" && !formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && !formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_year) { alert("년도를 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_cate) { alert("장학구분을 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_name.trim()) { alert("신청자 성명을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_birthy || !formData.wr_birthm || !formData.wr_birthd) { alert("생년월일을 모두 선택해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_post || !formData.wr_address) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
+    if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
     
-    if (saveMode !== "temp" && formData.wr_cate === "hcate1" && !formData.wr_school) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate2" && !formData.wr_schoolcode || !formData.wr_school) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate3" && !formData.wr_schoolcode || !formData.wr_school) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
-    if (saveMode !== "temp" && formData.wr_cate === "hcate4" && !formData.wr_school) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (formData.wr_cate === "hcate1" && !formData.wr_school) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (formData.wr_cate === "hcate2" && !formData.wr_schoolcode || !formData.wr_school) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (formData.wr_cate === "hcate3" && !formData.wr_schoolcode || !formData.wr_school) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
+    if (formData.wr_cate === "hcate4" && !formData.wr_school) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
     
     
-    if (saveMode !== "temp" && !formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
+    if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_bank_num) { alert("계좌번호를 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_ptel || formData.wr_ptel.length < 10) { alert("보호자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
