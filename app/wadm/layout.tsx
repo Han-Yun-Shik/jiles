@@ -32,18 +32,18 @@ export default function RootLayout({
         <div style={{ textAlign: "right" }}>
           <Link href="/wadm/slist" className="jil_adm_t_btn jil_adm_mr_2">관리자 홈</Link>
           <Link href="/" className="jil_adm_t_btn_logout jil_adm_mr_2">사용자 홈</Link>
-          <Link href="/wadm/excelupload" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀(대)</Link>
-          <Link href="/wadm/exceluploadmid" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀(고)</Link>
+          {/* <Link href="/wadm/excelupload" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀(대)</Link>
+          <Link href="/wadm/exceluploadmid" className="jil_adm_t_btn_logout jil_adm_mr_2">엑셀(고)</Link> */}
         </div>
       </div>
 
       <div className="jil_adm_hdr_wrap">
         <div>&nbsp;</div>
         <div className="jil_adm_hdr_mid bg-secondary-subtle">
-          <Link href="/wadm/slist" className="jil_adm_menu_lk jil_adm_mr_2">성취장학금</Link>
-          <Link href="/wadm/sjlist" className="jil_adm_menu_lk jil_adm_mr_2">재능장학금</Link>
-          <Link href="/wadm/shlist" className="jil_adm_menu_lk jil_adm_mr_2">희망장학금</Link>
-          <Link href="/wadm/period" className="jil_adm_menu_lk jil_adm_mr_2">신청기간 설정</Link>
+          <Link href="/wadm/slist" className="btn btn-success">성취장학금</Link>&nbsp;
+          <Link href="/wadm/sjlist" className="btn btn-success">재능장학금</Link>&nbsp;
+          <Link href="/wadm/shlist" className="btn btn-success">희망장학금</Link>&nbsp;
+          <Link href="/wadm/period" className="btn btn-secondary">신청기간 설정</Link>
         </div>
         <div>&nbsp;</div>
       </div>
