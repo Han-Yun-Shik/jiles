@@ -235,7 +235,6 @@ export default function Sjlist() {
           <table className="table">
             <thead className="table-secondary">
               <tr>
-                <th>&nbsp;</th>
                 <th style={{ textAlign: "center", width: "50px", }}>번호</th>
                 <th style={{ textAlign: "center", width: "80px", }}>연도</th>
                 <th style={{ textAlign: "center" }}>장학분야</th>
@@ -253,7 +252,6 @@ export default function Sjlist() {
               {data.map((item, index) => {
 
                 return <tr key={index}>
-                  <td style={{ textAlign: "center" }}><input className="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="..." /></td>
                   <td style={{ textAlign: "center", fontSize: "13px" }}>{totalCount - ((currentPage - 1) * itemsPerPage + index)}</td>
                   <td style={{ textAlign: "center" }}>{item.wr_year}</td>
                   <td style={{ textAlign: "center" }}>{WR_ALLCATE_ARR[item.wr_cate]}</td>
