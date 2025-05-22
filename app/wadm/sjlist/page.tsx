@@ -242,7 +242,7 @@ export default function Sjlist() {
                 <th style={{ textAlign: "center" }}>이름</th>
                 <th style={{ textAlign: "center" }}>학교</th>
                 <th style={{ textAlign: "center" }}>학년</th>
-                <th style={{ textAlign: "center" }}>전공</th>
+                <th style={{ textAlign: "center" }}>학과</th>
                 <th style={{ textAlign: "center" }}>연락처</th>
                 <th style={{ textAlign: "center" }}>진행상태</th>
                 <th style={{ textAlign: "center" }}>등록일</th>
