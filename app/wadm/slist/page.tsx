@@ -6,6 +6,7 @@ import Link from "next/link";
 import { REGDATE_YMD_STR, WR_STATE_ARR, WR_SCATE_ARR } from "@/app/utils";
 import { useSearchParams, useRouter } from "next/navigation";
 import Pagination from "@/components/Pagination"; // 추가
+import { downloadExcelFile } from "@/lib/slistexcel";
 
 interface JilesData {
   wr_seq: number;
@@ -25,12 +26,14 @@ interface JilesData {
 export default function Slist() {
   const router = useRouter();
   const [data, setData] = useState<JilesData[]>([]);
+  const [dataexcel, setDataexcel] = useState<JilesData[]>([]);
   const [wyear, setWyear] = useState("");
   const [wcate, setWcate] = useState("");
   const [wname, setWname] = useState("");
   const [wstate, setWstate] = useState("");
 
   const [totalCount, setTotalCount] = useState(0);
+  const [totalCountexcel, setTotalCountexcel] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(20);
 
@@ -65,6 +68,17 @@ export default function Slist() {
       console.error("데이터 불러오기 오류:", error);
     }
   };
+
+  // 엑셀 다운로드
+    const handleDownload = () => {
+      downloadExcelFile({
+        wr_year: wyear,
+        wr_cate: wcate,
+        wr_name: wname,
+        wr_state: wstate,
+      });
+    };
+  
 
   const updateUrl = (newParams: URLSearchParams) => {
     router.replace(`/wadm/slist?${newParams.toString()}`);
@@ -139,13 +153,13 @@ export default function Slist() {
           <div className="jil_adm_c_hdr">
             <div className="jil_adm_c_hdr_left">성취장학금</div>
             <div className="jil_adm_c_hdr_right">
-              <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">모두선택</button>
+              {/* <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">모두선택</button>
               <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">선택해제</button>
               <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">지급 선택</button>
-              <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">미지급 선택</button>
-              <button onClick={handleSearch} className="btn btn-secondary btn-sm jil_adm_mr_2">검색</button>
-              <button onClick={handleReset} className="btn btn-secondary btn-sm jil_adm_mr_2">초기화</button>
-              {/* <button className="btn btn-secondary btn-sm jil_adm_mr_2">엑셀파일 다운로드</button> */}
+              <button className="btn btn-outline-secondary btn-sm jil_adm_mr_2">미지급 선택</button> */}
+              <button type="button" onClick={handleSearch} className="btn btn-secondary btn-sm jil_adm_mr_2">검색</button>
+              <button type="button" onClick={handleReset} className="btn btn-secondary btn-sm jil_adm_mr_2">초기화</button>
+              <button type="button" onClick={handleDownload} className="btn btn-secondary btn-sm jil_adm_mr_2">엑셀파일 다운로드</button>
               {/* <Link href="/wadm/swrite" className="btn btn-secondary btn-sm">신청서 등록</Link> */}
             </div>
           </div>
