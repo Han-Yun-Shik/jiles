@@ -1170,7 +1170,6 @@ export default function Pupdate() {
                                             getInputProps={aauploader9.getInputProps}
                                             isDragActive={aauploader9.isDragActive}
                                             files={aafiles9}
-                                            required={formData.wr_cate === "scate1"}
                                             onRemoveFile={(index) => handleRemoveFile("aafiles9", index)}
                                         />
                                         <div id="aafiles9">
