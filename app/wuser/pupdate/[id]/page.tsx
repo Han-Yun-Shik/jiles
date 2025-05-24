@@ -112,7 +112,7 @@ export default function Pupdate() {
     // 임시저장 또는 제출을 구분할 변수
     const [saveMode, setSaveMode] = useState<"temp" | "submit">("submit");
 
-    //--#################### 파일첨부 State s ####################--//
+    //--##################### 파일첨부 State s #####################--//
     //--### 대학 신입생 첨부파일(scate1) s ###--//
     const [aafiles1, setAafiles1] = useState<File[]>([]);// [필수] 개인정보
     const [aafiles2, setAafiles2] = useState<File[]>([]);// [필수] 주민등록초본 1부(본인)
