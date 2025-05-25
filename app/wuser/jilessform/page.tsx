@@ -381,9 +381,16 @@ export default function Jilessform() {
           "Content-Type": "multipart/form-data",
         },
       });
-      setMessage(response.data.message);
+      //setMessage(response.data.message);
+      //버튼에 따라 wr_state 결정
+      if (saveMode === "temp") {
+        alert('임시저장되었습니다.');  // 임시저장
+      } else if (saveMode === "submit") {
+        alert('신청서 제출 되었습니다.');  // 신청서 제출
+      }
       router.push("/");
     } catch (error) {
+      alert('데이터 전송 실패');
       console.error("데이터 전송 실패:", error);
       setMessage("데이터 전송 실패");
     } finally {

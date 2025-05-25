@@ -281,13 +281,13 @@ export default function Jileshform() {
     if (!formData.wr_post || !formData.wr_address) { alert("주소를 모두 입력해 주세요."); setIsSubmitting(false); return false; }
     if (!formData.wr_phone || formData.wr_phone.length < 10) { alert("신청자 전화번호를 정확히 입력해 주세요."); setIsSubmitting(false); return; }
     if (!formData.wr_email || !formData.wr_email.includes("@")) { alert("유효한 이메일 주소를 입력해 주세요."); setIsSubmitting(false); return; }
-    
+
     if (formData.wr_cate === "hcate1" && !formData.wr_school) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
     if (formData.wr_cate === "hcate2" && !formData.wr_schoolcode || !formData.wr_school) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
     if (formData.wr_cate === "hcate3" && !formData.wr_schoolcode || !formData.wr_school) { alert("대학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
     if (formData.wr_cate === "hcate4" && !formData.wr_school) { alert("고등학교 정보를 모두 입력해 주세요."); setIsSubmitting(false); return; }
-    
-    
+
+
     if (!formData.wr_grade) { alert("학년을 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_bank_nm) { alert("은행명을 입력해 주세요."); setIsSubmitting(false); return; }
     if (saveMode !== "temp" && !formData.wr_bank_num) { alert("계좌번호를 입력해 주세요."); setIsSubmitting(false); return; }
@@ -419,9 +419,16 @@ export default function Jileshform() {
           "Content-Type": "multipart/form-data",
         },
       });
-      setMessage(response.data.message);
+      //setMessage(response.data.message);
+      //버튼에 따라 wr_state 결정
+      if (saveMode === "temp") {
+        alert('임시저장되었습니다.');  // 임시저장
+      } else if (saveMode === "submit") {
+        alert('신청서 제출 되었습니다.');  // 신청서 제출
+      }
       router.push("/");
     } catch (error) {
+      alert('데이터 전송 실패'); 
       console.error("데이터 전송 실패:", error);
       setMessage("데이터 전송 실패");
     } finally {

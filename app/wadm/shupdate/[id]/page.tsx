@@ -398,6 +398,7 @@ export default function Sjupdate() {
             //router.push(backToListUrl);
             window.location.href = updateUrl;
         } catch (error) {
+            alert('데이터 전송 실패');
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
         } finally {

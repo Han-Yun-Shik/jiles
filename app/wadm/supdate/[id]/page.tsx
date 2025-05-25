@@ -373,6 +373,7 @@ export default function Slist() {
             //router.refresh();          // ✅ 데이터 갱신
             window.location.href = updateUrl;
         } catch (error) {
+            alert('데이터 전송 실패');
             console.error("데이터 전송 실패:", error);
             setMessage("데이터 전송 실패");
         } finally {
