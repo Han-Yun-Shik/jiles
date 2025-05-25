@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { REGDATE_YMD_STR, WR_STATE_ARR, WR_ALLCATE_ARR } from "@/app/utils";
+import { REGDATE_YMD_STR, WR_STATE_ARR, WR_ALLCATE_ARR, WR_GUBUN_ARR } from "@/app/utils";
 import UserMenu from "@/components/UserMenu";
 import UserIcon from '@/components/icons/UserIcon';
 
@@ -84,6 +84,7 @@ export default function Plist() {
                         <thead className="bg-gray-100 text-gray-700">
                             <tr>
                                 <th className="py-3 px-2 w-[80px]">연도</th>
+                                <th className="py-3 px-2">장학구분</th>
                                 <th className="py-3 px-2">장학분야</th>
                                 <th className="py-3 px-2">이름</th>
                                 <th className="py-3 px-2">학교</th>
@@ -99,6 +100,7 @@ export default function Plist() {
                             {data.map((item, index) => (
                                 <tr key={index} className="border-b last:border-b-0">
                                     <td className="py-3 px-2">{item.wr_year != 'null' ? item.wr_year : ""}</td>
+                                    <td className="py-3 px-2">{WR_GUBUN_ARR[item.wr_gubun]}</td>
                                     <td className="py-3 px-2">{WR_ALLCATE_ARR[item.wr_cate]}</td>
                                     <td className="py-3 px-2">{item.wr_name}</td>
                                     <td className="py-3 px-2">{item.wr_school}</td>
