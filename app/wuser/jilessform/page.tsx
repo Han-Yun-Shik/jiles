@@ -63,7 +63,7 @@ export default function Jilessform() {
   const [months, setMonths] = useState<string[]>([]);
   const [days, setDays] = useState<string[]>([]);
 
-  //////// 임시저장 또는 제출을 구분할 변수
+  //////// 임시저장 또는 제출을 구분할 변수 ///////
   const [saveMode, setSaveMode] = useState<"temp" | "submit">("submit");
 
   // 기간설정
