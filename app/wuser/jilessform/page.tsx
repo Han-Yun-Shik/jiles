@@ -382,7 +382,7 @@ export default function Jilessform() {
         },
       });
       //setMessage(response.data.message);
-      //버튼에 따라 wr_state 결정
+      ////버튼에 따라 wr_state 결정
       if (saveMode === "temp") {
         alert('임시저장되었습니다.');  // 임시저장
       } else if (saveMode === "submit") {
