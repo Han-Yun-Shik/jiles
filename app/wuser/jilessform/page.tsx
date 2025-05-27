@@ -335,7 +335,7 @@ export default function Jilessform() {
       data.append("wr_state", "1");  // 신청서 제출
     }
 
-    //--### 대학 신입생 첨부파일(scate1) s ###--//
+    //--### 대학 신입생 첨부파일(scate1) ss ###--//
     aafiles1.forEach((file) => data.append("aafiles1", file));// [필수] 개인정보
     aafiles2.forEach((file) => data.append("aafiles2", file));// [필수] 주민등록초본 1부(본인)
     aafiles3.forEach((file) => data.append("aafiles3", file));// [필수] 주민등록초본 1부(부모)
@@ -345,7 +345,7 @@ export default function Jilessform() {
     aafiles7.forEach((file) => data.append("aafiles7", file));// [필수] 등록금 납부 영수증 1부
     aafiles8.forEach((file) => data.append("aafiles8", file));// [필수] 본인명의 통장사본 1부
     aafiles9.forEach((file) => data.append("aafiles9", file));// [필수] 중복방지 서약서
-    //--### 대학 신입생 첨부파일(scate1) e ###--//
+    //--### 대학 신입생 첨부파일(scate1) ee ###--//
 
     //--### 대학 재학생 첨부파일(scate2) s ###--//
     abfiles1.forEach((file) => data.append("abfiles1", file));// [필수] 개인정보
